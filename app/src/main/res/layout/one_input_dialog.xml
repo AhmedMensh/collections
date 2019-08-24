@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/_12sdp"
+        android:id="@+id/dialog_title_tv"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/forget_password"/>
+
+    <EditText
+        android:id="@+id/dialog_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/corner_sharp_rect_gray"
+        android:paddingStart="@dimen/_4sdp"
+        android:hint="@string/email"
+        android:paddingEnd="@dimen/_4sdp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            app:cornerRadius="@dimen/_40sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:backgroundTint="@color/gray"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:text="@string/back"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            app:cornerRadius="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:backgroundTint="@color/orange"
+            android:layout_height="wrap_content"
+            android:text="@string/send"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:srcCompat="@drawable/ic_my_order"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Order Confirmation"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="order ID #32132"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_14sdp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/off_white"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:text="@string/done"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:id="@+id/done_btn"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"/>
+
+</LinearLayout>

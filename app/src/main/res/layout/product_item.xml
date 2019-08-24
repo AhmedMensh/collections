@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_4sdp"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:layout_margin="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/collection_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:gravity="center|start"
+            android:text="New Arrival"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/orange" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:gravity="center|start"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:srcCompat="@drawable/ic_right_arrow" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/brand_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/layout" />
+
+    <!--<ImageView-->
+    <!--android:layout_width="@dimen/_120sdp"-->
+    <!--android:layout_height="@dimen/_160sdp"-->
+    <!--android:src="@mipmap/img"-->
+    <!--android:scaleType="fitXY"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/_14sdp"-->
+    <!--android:layout_marginTop="@dimen/_5sdp"-->
+    <!--android:textColor="@color/orange"-->
+    <!--android:text="LONG DRESS"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/_14sdp"-->
+    <!--android:layout_marginTop="@dimen/_1sdp"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:text="La sim hal"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/_14sdp"-->
+    <!--android:layout_marginTop="@dimen/_1sdp"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:text="$5454"/>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

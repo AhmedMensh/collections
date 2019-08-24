@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.collections">
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activties.cart.CartActivity"></activity>
+        <activity android:name=".ui.activties.notifications.NotificationsActivity" />
+        <activity android:name=".ui.activties.wish_list.WishListActivity" />
+        <activity android:name=".ui.activties.orders.OrdersActivity" />
+        <activity android:name=".ui.activties.collection.CollectionActivity" />
+        <activity
+            android:name=".ui.activties.profile.ProfileActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.activties.product_details.ProductDetailsActivity" />
+        <activity
+            android:name=".ui.activties.home.HomeActivity"
+            android:label="@string/title_activity_home" />
+        <activity android:name=".ui.activties.register.RegisterActivity" />
+        <activity android:name=".ui.activties.login.LoginActivity" />
+        <activity android:name=".ui.activties.start.StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

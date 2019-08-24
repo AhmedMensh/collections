@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activties.product_details.ProductDetailsActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+
+            android:theme="?actionBarTheme">
+
+
+            <TextView
+                android:id="@+id/app_bar_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@string/product_details"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_holder">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_images_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/product_category_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="WEDDING DRESS"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_images_rv" />
+
+            <TextView
+                android:id="@+id/product_code_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="KWD 119"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_category_tv" />
+
+            <TextView
+                android:id="@+id/product_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="Lace High-Neck Halter"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_code_tv" />
+
+            <com.aurelhubert.simpleratingbar.SimpleRatingBar
+                android:id="@+id/simple_rating_bar"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:drawableHeight="@dimen/_10sdp"
+                app:drawablePadding="2dp"
+                app:layout_constraintEnd_toStartOf="@+id/rate_number_tv"
+                app:layout_constraintTop_toBottomOf="@+id/product_images_rv"
+                app:maxRating="5"
+                app:rating="4" />
+
+            <TextView
+                android:id="@+id/rate_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="(230)"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_images_rv" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/size_btn"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:backgroundTint="@color/white"
+                android:text="@string/size"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/color_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/simple_rating_bar" />
+
+            <TextView
+                android:id="@+id/color_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color"
+                android:textStyle="bold"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/color_group"
+                app:layout_constraintTop_toBottomOf="@id/size_btn"/>
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/color_group"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/view1"
+                app:layout_constraintStart_toEndOf="@id/color_label"
+                app:layout_constraintTop_toBottomOf="@id/size_btn">
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:text="Black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yellow"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Green"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blue"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"/>
+
+            </com.google.android.material.chip.ChipGroup>
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/color_group" />
+
+            <TextView
+                android:id="@+id/product_details_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/product_details"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/product_details_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="Because product descriptions need to sell your products. ... Instead they describe each technical detail plus its benefit. 3. "
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/product_details_label" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                app:layout_constraintTop_toBottomOf="@+id/product_details_tv"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_margin="@dimen/_6sdp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/orange"
+            android:text="Add to cart"
+            app:cornerRadius="@dimen/_4sdp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_margin="@dimen/_6sdp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:text="@string/add_to_wish"
+            app:cornerRadius="@dimen/_4sdp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <!--<style name="MyButton" parent="Widget.MaterialComponents.Button.OutlinedButton">-->
+        <!--<item name="shapeAppearance">@style/MyShapeAppearance</item>-->
+    <!--</style>-->
+    <!--<style name="MyShapeAppearance">-->
+        <!--<item name="cornerFamilyTopLeft">rounded</item>-->
+        <!--&lt;!&ndash;<item name="cornerFamilyBottomLeft">cut</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="cornerFamilyTopRight">cut</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="cornerFamilyBottomRight">cut</item>&ndash;&gt;-->
+        <!--<item name="cornerSize">@dimen/_20sdp</item>-->
+        <!--<item name="android:shape">oval</item>-->
+        <!--<item name=""-->
+    <!--</style>-->
+</resources>

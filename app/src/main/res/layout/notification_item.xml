@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/corner_sharp_rect_white"
+    android:layout_margin="@dimen/_10sdp"
+    android:gravity="center"
+    android:paddingTop="@dimen/_6sdp"
+    android:paddingBottom="@dimen/_6sdp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/_50sdp"
+        app:srcCompat="@drawable/ic_my_order"
+
+        />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp"
+        android:text="Your Order #345345 has been shipped"/>
+
+</LinearLayout>

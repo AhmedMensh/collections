@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activties.cart.CartActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+
+            android:theme="?actionBarTheme">
+
+
+            <TextView
+                android:id="@+id/app_bar_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:gravity="center"
+                android:text="@string/cart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_holder">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/cart_rv" />
+
+            <TextView
+                android:id="@+id/sub_total_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="@string/subtotal"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/sub_total_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="14.20$"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/order_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="@string/shipping"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sub_total_label" />
+
+            <TextView
+                android:id="@+id/order_status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="Free"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sub_total_tv" />
+
+
+            <TextView
+                android:id="@+id/total_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="@string/total"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_status_label" />
+
+            <TextView
+                android:id="@+id/total_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="1000$"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_status_tv" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/total_tv" />
+
+            <TextView
+                android:id="@+id/shipping_address_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                android:text="@string/shipping_address"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_address_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shipping_address_label"
+                android:text="Cairo , Egypt"
+                android:layout_margin="@dimen/_10sdp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:id="@id/view3"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/shipping_address_tv"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view3"
+                android:layout_margin="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:id="@+id/contact_label"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone_number_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_label"
+                android:layout_margin="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:text="012845365248"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
+                android:id="@+id/view4"
+                app:layout_constraintTop_toBottomOf="@+id/phone_number_tv"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_may_also_like"
+                android:layout_margin="@dimen/_10sdp"
+                android:textColor="@color/orange"
+                android:id="@+id/may_like_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/may_like_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/may_like_label"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/orange"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+
+            android:text="@string/checkout"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:backgroundTint="@color/orange" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:text="@string/promote_code"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="@dimen/_5sdp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

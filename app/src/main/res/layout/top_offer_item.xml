@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/_4sdp"
+    android:elevation="@dimen/_6sdp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        android:src="@mipmap/img"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/orange"
+        android:text="LONG DRESS"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:textColor="@color/black"
+        android:text="La sim hal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:textColor="@color/black"
+        android:text="$5454"/>
+
+</LinearLayout>
