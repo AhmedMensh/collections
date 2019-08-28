@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.Utilities;
 import com.android.collections.ui.activties.home.HomeActivity;
 import com.android.collections.ui.activties.register.RegisterActivity;
 
@@ -19,11 +21,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf {
 
     //vars
     private static final String TAG = "LoginActivity";
     private Unbinder unbinder;
+    private LoginPresenter presenter;
     //Widgets
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -33,12 +36,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button loginBtn;
     @BindView(R.id.sign_up_tv)
     TextView signUpTv;
+
+    @BindView(R.id.email_et)
+    EditText userEmailEt;
+    @BindView(R.id.password_et)
+    EditText userPasswordEt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         unbinder = ButterKnife.bind(this);
+        presenter = new LoginPresenter(this);
 
         setViewsListener();
 
@@ -59,9 +69,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
-    private void setForgetPasswordDialog(){
+
+    private void setForgetPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.one_input_dialog,null);
+        View view = getLayoutInflater().inflate(R.layout.one_input_dialog, null);
 
         TextView dialogTitle = view.findViewById(R.id.dialog_title_tv);
         dialogTitle.setText(getResources().getString(R.string.forget_password));
@@ -84,14 +95,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.forget_password_tv:
                 setForgetPasswordDialog();
                 break;
 
             case R.id.login_btn:
-                startActivity(new Intent(this , HomeActivity.class));
-                finish();
+                callLoginApi();
                 break;
 
             case R.id.sign_up_tv:
@@ -99,5 +109,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
         }
+    }
+
+    private void callLoginApi(){
+        boolean isEmptyEmail = Utilities.isEmptyText(this,userEmailEt);
+        boolean isEmptyPassword = Utilities.isEmptyText(this,userPasswordEt);
+
+        if (!isEmptyEmail && !isEmptyPassword) return;
+
+        presenter.login(userEmailEt.getText().toString() , userPasswordEt.getText().toString(),"","en");
+    }
+    @Override
+    public void showMessage(String m) {
+
+        Utilities.showToast(this,m);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
     }
 }

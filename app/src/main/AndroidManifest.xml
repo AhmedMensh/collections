@@ -25,7 +25,8 @@
             android:label="@string/title_activity_home" />
         <activity android:name=".ui.activties.register.RegisterActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.activties.login.LoginActivity" />
+        <activity android:name=".ui.activties.login.LoginActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activties.start.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

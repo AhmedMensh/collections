@@ -24,6 +24,13 @@ public interface Service {
                                     @Query("email") String userEmail,
                                     @Query("fmctoken") String fmcToken,
                                     @Query("lang") String language);
+
+    @POST("login.php")
+    Call<RegisterResponse> login(@Query("username") String userName,
+                                 @Query("user_pass") String userPass,
+                                 @Query("fmctoken") String fmcToken,
+                                 @Query("lang") String language);
+
     class Fetcher {
 
         private static final String BASE_URL = "http://cool-lections.com/json_user/";

@@ -1,6 +1,5 @@
-package com.android.collections.ui.activties.register;
+package com.android.collections.ui.activties.login;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.android.collections.helpers.PublicViewInf;
@@ -11,25 +10,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterPresenter {
+public class LoginPresenter {
 
-    private static final String TAG = "RegisterPresenter";
+    private static final String TAG = "LoginPresenter";
     private PublicViewInf publicViewInf;
 
-    public RegisterPresenter(PublicViewInf publicViewInf) {
+    public LoginPresenter(PublicViewInf publicViewInf) {
         this.publicViewInf = publicViewInf;
     }
 
-
-    public void register(String userName,String userMobile,String userPass,String userEmail,String fmcToken,String language){
-        Service.Fetcher.getInstance().register(userName ,userMobile ,userPass , userEmail,fmcToken,language)
+    public void login(String userName, String userPass, String fmcToken, String language){
+        Service.Fetcher.getInstance().login(userName  ,userPass ,fmcToken,language)
                 .enqueue(new Callback<RegisterResponse>() {
                     @Override
                     public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
                         try {
 
-                                publicViewInf.showMessage(response.body().getMessage());
+                            publicViewInf.showMessage(response.body().getMessage());
                         }catch (Exception e){
                             Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                         }
