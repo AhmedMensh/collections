@@ -61,4 +61,6 @@
     <string name="pick_a_size">Pick a size</string>
     <string name="profile">Profile</string>
     <string name="done">Done</string>
+    <string name="mobile">Mobile</string>
+    <string name="all_failed_required">All faileds required</string>
 </resources>
