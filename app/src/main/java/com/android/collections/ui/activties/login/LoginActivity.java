@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.login_btn:
                 callLoginApi();
+                startActivity(new Intent(this,HomeActivity.class));
                 break;
 
             case R.id.sign_up_tv:

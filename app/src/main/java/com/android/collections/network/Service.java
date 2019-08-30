@@ -1,13 +1,17 @@
 package com.android.collections.network;
 
+
+
+import com.android.collections.models.ApiResponse;
+import com.android.collections.models.FlashSale;
+import com.android.collections.models.NewArrival;
+import com.android.collections.models.NewTrend;
 import com.android.collections.models.RegisterResponse;
+import com.android.collections.models.TopOffer;
 
-import java.io.IOException;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -30,6 +34,29 @@ public interface Service {
                                  @Query("user_pass") String userPass,
                                  @Query("fmctoken") String fmcToken,
                                  @Query("lang") String language);
+
+
+    @POST("get_products_top_offers.php")
+    Call<ApiResponse<List<TopOffer>>> getTopOffers(@Query("user_id") int userId,
+                                                   @Query("lang") String language,
+                                                   @Query("currency_id") int currencyId);
+
+    @POST("get_products_flash_sale.php")
+    Call<ApiResponse<List<FlashSale>>> getFlashSale(@Query("user_id") int userId,
+                                                    @Query("lang") String language,
+                                                    @Query("currency_id") int currencyId);
+
+
+
+    @POST("get_products_flash_sale.php")
+    Call<ApiResponse<List<NewTrend>>> getNewTrends(@Query("user_id") int userId,
+                                                   @Query("lang") String language,
+                                                   @Query("currency_id") int currencyId);
+    @POST("get_products_home.php")
+    Call<ApiResponse<List<NewArrival>>> getNewArrivals(@Query("user_id") int userId,
+                                                       @Query("lang") String language,
+                                                       @Query("currency_id") int currencyId);
+
 
     class Fetcher {
 

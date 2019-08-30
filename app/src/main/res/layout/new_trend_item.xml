@@ -12,12 +12,14 @@
 
 
     <ImageView
+        android:id="@+id/product_iv"
         android:layout_width="@dimen/_170sdp"
         android:layout_height="@dimen/_140sdp"
         android:src="@mipmap/img"
         android:scaleType="fitXY"/>
 
     <TextView
+        android:id="@+id/product_category_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_12sdp"
@@ -28,6 +30,7 @@
 
 
     <TextView
+        android:id="@+id/product_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_12sdp"

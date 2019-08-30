@@ -9,16 +9,27 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.android.collections.R;
-import com.android.collections.adapters.FlashSaleAdapter;
-import com.android.collections.adapters.ProductsAdapter;
+import com.android.collections.adapters.FlashSalesAdapter;
+import com.android.collections.adapters.NewArrivalsAdapter;
+import com.android.collections.adapters.NewTrendAdapter;
+import com.android.collections.adapters.TopOffersAdapter;
 import com.android.collections.helpers.Constants;
+import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.Utilities;
+import com.android.collections.models.FlashSale;
+import com.android.collections.models.NewArrival;
+import com.android.collections.models.NewTrend;
+import com.android.collections.models.TopOffer;
 import com.android.collections.ui.activties.collection.CollectionActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,12 +38,17 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener, PublicViewInf,HomeViewInf {
 
 
+    private static final String TAG = "HomeFragment";
     //vars
-    private ProductsAdapter productAdapter;
+    private TopOffersAdapter topOffersAdapter;
+    private FlashSalesAdapter flashSalesAdapter;
+    private NewTrendAdapter newTrendAdapter;
+    private NewArrivalsAdapter newArrivalsAdapter;
     private Unbinder unbinder;
+    private HomePresenter presenter;
     //widgets
     @BindView(R.id.flash_sale_rv) RecyclerView flashSaleRv;
     @BindView(R.id.new_arrival_rv) RecyclerView newArrivalRv;
@@ -56,6 +72,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
        unbinder = ButterKnife.bind(this,view);
 
+       presenter = new HomePresenter(this,this);
+        presenter.getFlashSale(1,"ar",1);
+        presenter.getTopOffers(1,"ar",1);
+        presenter.getNewTrends(1,"ar",1);
+        presenter.getNewArrivals(1,"ar",1);
        setListenerToViews();
         initFlashSaleRv();
         initNewArrivalRv();
@@ -74,17 +95,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void initTpoOfferRv() {
 
-        productAdapter = new ProductsAdapter(getContext(),Constants.TOP_OFFER_LAYOUT);
+        topOffersAdapter = new TopOffersAdapter(getContext());
         topOfferRv.setHasFixedSize(true);
-        topOfferRv.setAdapter(productAdapter);
+        topOfferRv.setAdapter(topOffersAdapter);
 
         topOfferRv.setLayoutManager(new GridLayoutManager(getContext(),2,RecyclerView.VERTICAL,false));
     }
 
     private void initNewTrendRv() {
-        productAdapter = new ProductsAdapter(getContext(),Constants.NEW_TREND_LAYOUT);
+        newTrendAdapter = new NewTrendAdapter(getContext());
         newTrendRv.setHasFixedSize(true);
-        newTrendRv.setAdapter(productAdapter);
+        newTrendRv.setAdapter(newTrendAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         newTrendRv.setLayoutManager(layoutManager);
@@ -92,9 +113,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void initNewArrivalRv() {
 
-        productAdapter = new ProductsAdapter(getContext(),Constants.NEW_ARRIVAL_LAYOUT);
+        newArrivalsAdapter = new NewArrivalsAdapter(getContext());
         newArrivalRv.setHasFixedSize(true);
-        newArrivalRv.setAdapter(productAdapter);
+        newArrivalRv.setAdapter(newArrivalsAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         newArrivalRv.setLayoutManager(layoutManager);
@@ -102,9 +123,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void initFlashSaleRv() {
 
-        productAdapter = new ProductsAdapter(getContext(),Constants.FLASH_SALE_LAYOUT);
+        flashSalesAdapter = new FlashSalesAdapter(getContext());
         flashSaleRv.setHasFixedSize(true);
-        flashSaleRv.setAdapter(productAdapter);
+        flashSaleRv.setAdapter(flashSalesAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         flashSaleRv.setLayoutManager(layoutManager);
@@ -123,5 +144,46 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 getActivity().startActivity(new Intent(getContext(), CollectionActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void showMessage(String m) {
+
+        Utilities.showToast(getContext(),m);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void displayTopOffers(List<TopOffer> topOfferList) {
+
+        Log.e(TAG, "displayTopOffers: "+topOfferList.size() );
+        topOffersAdapter.setTopOffersData(topOfferList);
+    }
+
+    @Override
+    public void displayFlashSale(List<FlashSale> flashSales) {
+        flashSalesAdapter.setFlashSalesData(flashSales);
+
+    }
+
+    @Override
+    public void displayNewTrends(List<NewTrend> newTrendList) {
+
+        newTrendAdapter.setNewTrendsData(newTrendList);
+    }
+
+    @Override
+    public void displayNewArrivals(List<NewArrival> newArrivalList) {
+
+        newArrivalsAdapter.setNewArrivalsData(newArrivalList);
     }
 }
