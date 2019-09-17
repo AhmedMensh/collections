@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf,LoginViewInf {
 
     //vars
     private static final String TAG = "LoginActivity";
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         unbinder = ButterKnife.bind(this);
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this,this);
 
         setViewsListener();
 
@@ -102,7 +102,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.login_btn:
                 callLoginApi();
-                startActivity(new Intent(this,HomeActivity.class));
                 break;
 
             case R.id.sign_up_tv:
@@ -134,5 +133,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void hideProgressBar() {
 
+    }
+
+    @Override
+    public void startHomeActivity() {
+        startActivity(new Intent(this , HomeActivity.class));
+        finish();
     }
 }

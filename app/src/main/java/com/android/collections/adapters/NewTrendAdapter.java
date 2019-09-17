@@ -46,7 +46,7 @@ public class NewTrendAdapter extends RecyclerView.Adapter<NewTrendAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
 
-        RequestOptions requestOptions = new RequestOptions().placeholder(R.mipmap.img).error(R.mipmap.img);
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.place_holder).error(R.drawable.place_holder);
 
 
 

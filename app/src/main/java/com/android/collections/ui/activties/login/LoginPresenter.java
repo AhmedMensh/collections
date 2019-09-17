@@ -14,10 +14,14 @@ public class LoginPresenter {
 
     private static final String TAG = "LoginPresenter";
     private PublicViewInf publicViewInf;
+    private LoginViewInf loginViewInf;
 
-    public LoginPresenter(PublicViewInf publicViewInf) {
+    public LoginPresenter(PublicViewInf publicViewInf, LoginViewInf loginViewInf) {
         this.publicViewInf = publicViewInf;
+        this.loginViewInf = loginViewInf;
     }
+
+
 
     public void login(String userName, String userPass, String fmcToken, String language){
         Service.Fetcher.getInstance().login(userName  ,userPass ,fmcToken,language)
@@ -28,6 +32,9 @@ public class LoginPresenter {
                         try {
 
                             publicViewInf.showMessage(response.body().getMessage());
+                            if (response.body().getStatus()){
+                                loginViewInf.startHomeActivity();
+                            }
                         }catch (Exception e){
                             Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                         }

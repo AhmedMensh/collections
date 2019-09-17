@@ -15,10 +15,13 @@ public class RegisterPresenter {
 
     private static final String TAG = "RegisterPresenter";
     private PublicViewInf publicViewInf;
+    private RegisterViewInf registerViewInf;
 
-    public RegisterPresenter(PublicViewInf publicViewInf) {
+    public RegisterPresenter(PublicViewInf publicViewInf, RegisterViewInf registerViewInf) {
         this.publicViewInf = publicViewInf;
+        this.registerViewInf = registerViewInf;
     }
+
 
 
     public void register(String userName,String userMobile,String userPass,String userEmail,String fmcToken,String language){
@@ -30,6 +33,9 @@ public class RegisterPresenter {
                         try {
 
                                 publicViewInf.showMessage(response.body().getMessage());
+                                if (response.body().getStatus()){
+                                    registerViewInf.startHomeActivity();
+                                }
                         }catch (Exception e){
                             Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                         }

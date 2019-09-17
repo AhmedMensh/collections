@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import android.widget.ExpandableListView;
 
 import com.android.collections.R;
 import com.android.collections.adapters.CategoryParentAdapter;
+import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.Utilities;
+import com.android.collections.models.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +31,12 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoriesFragment extends Fragment {
+public class CategoriesFragment extends Fragment implements PublicViewInf ,CategoryViewInf {
 
     private static final String TAG = "CategoriesFragment";
     private Unbinder unbinder;
+    private CategoryPresenter presenter;
+    private CategoryParentAdapter categoryParentAdapter;
 
     @BindView(R.id.category_parent_lv)
     RecyclerView categoryParentRv;
@@ -48,11 +54,46 @@ public class CategoriesFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this,view);
 
-        categoryParentRv.setAdapter(new CategoryParentAdapter(getContext()));
-        categoryParentRv.setHasFixedSize(true);
-        categoryParentRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        initMainCategoryRv();
+        presenter = new CategoryPresenter(getContext(),this,this);
+
+        presenter.getMainCategories();
         return view;
     }
 
+    private void initMainCategoryRv(){
 
+        categoryParentAdapter = new CategoryParentAdapter(getContext());
+        categoryParentRv.setAdapter(categoryParentAdapter);
+        categoryParentRv.setHasFixedSize(true);
+        categoryParentRv.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void showMessage(String m) {
+        Utilities.showToast(getContext(),m);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void displaycategoryList(List<Category> categoryList) {
+
+        Log.e(TAG, "displaycategoryList: "+categoryList.size());
+        categoryParentAdapter.setCategoryList(categoryList);
+    }
 }

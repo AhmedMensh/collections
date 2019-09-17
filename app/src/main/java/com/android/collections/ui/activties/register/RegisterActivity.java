@@ -13,13 +13,14 @@ import android.widget.TextView;
 import com.android.collections.R;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.Utilities;
+import com.android.collections.ui.activties.home.HomeActivity;
 import com.android.collections.ui.activties.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf,RegisterViewInf {
 
     private static final String TAG = "RegisterActivity";
     private Unbinder unbinder;
@@ -48,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         unbinder = ButterKnife.bind(this);
         loginTv.setOnClickListener(this::onClick);
         registerBtn.setOnClickListener(this::onClick);
-        presenter = new RegisterPresenter(this);
+        presenter = new RegisterPresenter(this,this);
     }
 
     @Override
@@ -102,5 +103,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void hideProgressBar() {
 
+    }
+
+    @Override
+    public void startHomeActivity() {
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 }

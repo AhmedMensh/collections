@@ -204,7 +204,7 @@
             android:textAllCaps="true"
             android:textColor="@color/white" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/code_tv"
             android:layout_width="0dp"
             android:layout_height="match_parent"

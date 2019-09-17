@@ -3,9 +3,11 @@ package com.android.collections.network;
 
 
 import com.android.collections.models.ApiResponse;
+import com.android.collections.models.Category;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
+import com.android.collections.models.Notification;
 import com.android.collections.models.RegisterResponse;
 import com.android.collections.models.TopOffer;
 
@@ -56,6 +58,14 @@ public interface Service {
     Call<ApiResponse<List<NewArrival>>> getNewArrivals(@Query("user_id") int userId,
                                                        @Query("lang") String language,
                                                        @Query("currency_id") int currencyId);
+
+    @POST("notifications.php")
+    Call<List<Notification>> getNotifications(@Query("user_id") int userId,
+                                                           @Query("lang") String language);
+
+
+    @POST("get_categores.php")
+    Call<ApiResponse<List<Category>>> getMainCategories(@Query("lang") String language);
 
 
     class Fetcher {

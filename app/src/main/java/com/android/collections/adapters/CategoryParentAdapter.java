@@ -11,6 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.models.Category;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +24,7 @@ import butterknife.ButterKnife;
 public class CategoryParentAdapter extends RecyclerView.Adapter<CategoryParentAdapter.CategoryParentViewHolder> {
 
     private Context context;
+    private List<Category> mCategoryList = new ArrayList<>();
 
     public CategoryParentAdapter(Context context) {
         this.context = context;
@@ -38,12 +45,23 @@ public class CategoryParentAdapter extends RecyclerView.Adapter<CategoryParentAd
         holder.categoriesChildRv.setHasFixedSize(true);
         holder.categoriesChildRv.setAdapter(new CategoryChildAdapter());
 
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.place_holder).error(R.drawable.place_holder);
+
+
+        Glide.with(context).setDefaultRequestOptions(requestOptions)
+                .load(mCategoryList.get(position).getImg())
+                .into(holder.categoryImage);
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return mCategoryList.size();
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        mCategoryList = categoryList;
+        notifyDataSetChanged();
     }
 
     public class CategoryParentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
