@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CategoryParentAdapter extends RecyclerView.Adapter<CategoryParentAdapter.CategoryParentViewHolder> {
+public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapter.CategoryParentViewHolder> {
 
+    private static final String TAG = "MainCategoryAdapter";
     private Context context;
     private List<Category> mCategoryList = new ArrayList<>();
 
-    public CategoryParentAdapter(Context context) {
+    public MainCategoryAdapter(Context context) {
         this.context = context;
     }
 
@@ -43,7 +45,7 @@ public class CategoryParentAdapter extends RecyclerView.Adapter<CategoryParentAd
 
         holder.categoriesChildRv.setLayoutManager(new LinearLayoutManager(context));
         holder.categoriesChildRv.setHasFixedSize(true);
-        holder.categoriesChildRv.setAdapter(new CategoryChildAdapter());
+        holder.categoriesChildRv.setAdapter(new SubCategoryAdapter(mCategoryList.get(position).getSubCategories()));
 
         RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.place_holder).error(R.drawable.place_holder);
 

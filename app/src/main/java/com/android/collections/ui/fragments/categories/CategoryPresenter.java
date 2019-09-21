@@ -36,6 +36,10 @@ public class CategoryPresenter {
                 if (response.body().getSuccess()){
 
                     categoryViewInf.displaycategoryList(response.body().getData());
+                    for (int i = 0; i <response.body().getData().size() ; i++) {
+
+                        Log.e(TAG, "onResponse: "+response.body().getData().get(i).getSubCategories().get(0) );
+                    }
                 }else {
                     publicViewInf.showMessage(response.body().getMessage());
                 }

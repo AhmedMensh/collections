@@ -3,13 +3,24 @@ package com.android.collections.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.models.SubCat;
 
-public class CategoryChildAdapter extends RecyclerView.Adapter<CategoryChildAdapter.ChildViewHolder> {
+import java.util.List;
+
+public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ChildViewHolder> {
+
+    private List<SubCat> mSubCategories;
+    public SubCategoryAdapter(List<SubCat> subCategories) {
+
+        mSubCategories = subCategories;
+    }
+
     @NonNull
     @Override
     public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -22,16 +33,20 @@ public class CategoryChildAdapter extends RecyclerView.Adapter<CategoryChildAdap
     @Override
     public void onBindViewHolder(@NonNull ChildViewHolder holder, int position) {
 
+        holder.subCategoryName.setText(mSubCategories.get(position).getNameSub());
     }
 
     @Override
     public int getItemCount() {
-        return 12;
+        return mSubCategories.size();
     }
 
     public class ChildViewHolder extends RecyclerView.ViewHolder {
+        TextView subCategoryName;
         public ChildViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            subCategoryName = itemView.findViewById(R.id.sub_category_name);
         }
     }
 }

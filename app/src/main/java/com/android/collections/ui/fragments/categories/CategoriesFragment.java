@@ -11,17 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 
 import com.android.collections.R;
-import com.android.collections.adapters.CategoryParentAdapter;
+import com.android.collections.adapters.MainCategoryAdapter;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.Category;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,7 +32,7 @@ public class CategoriesFragment extends Fragment implements PublicViewInf ,Categ
     private static final String TAG = "CategoriesFragment";
     private Unbinder unbinder;
     private CategoryPresenter presenter;
-    private CategoryParentAdapter categoryParentAdapter;
+    private MainCategoryAdapter categoryParentAdapter;
 
     @BindView(R.id.category_parent_lv)
     RecyclerView categoryParentRv;
@@ -64,7 +60,7 @@ public class CategoriesFragment extends Fragment implements PublicViewInf ,Categ
 
     private void initMainCategoryRv(){
 
-        categoryParentAdapter = new CategoryParentAdapter(getContext());
+        categoryParentAdapter = new MainCategoryAdapter(getContext());
         categoryParentRv.setAdapter(categoryParentAdapter);
         categoryParentRv.setHasFixedSize(true);
         categoryParentRv.setLayoutManager(new LinearLayoutManager(getContext()));

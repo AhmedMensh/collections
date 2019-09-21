@@ -64,7 +64,7 @@ public interface Service {
                                                            @Query("lang") String language);
 
 
-    @POST("get_categores.php")
+    @POST("get_categores_sub.php")
     Call<ApiResponse<List<Category>>> getMainCategories(@Query("lang") String language);
 
 

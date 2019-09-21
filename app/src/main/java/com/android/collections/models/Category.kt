@@ -13,5 +13,8 @@ data class Category(
         var name : String ? = null,
         @SerializedName("img")
         @Expose
-        var img : String ? = null
+        var img : String ? = null,
+        @SerializedName("sub_cat")
+        @Expose
+        var subCategories : List<SubCat> ? = null
 )
