@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.collections.R;
-import com.android.collections.ui.activties.cart.CartActivity;
-import com.android.collections.ui.activties.collection.CollectionActivity;
 import com.android.collections.ui.activties.login.LoginActivity;
-import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.android.collections.ui.activties.register.RegisterActivity;
 
 import butterknife.BindView;

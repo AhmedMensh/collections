@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
 
     <TextView
-        android:id="@+id/order_quality_label"
+        android:id="@+id/order_quantity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_14sdp"
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
         android:text=":"
-        app:layout_constraintStart_toEndOf="@id/order_quality_label"
+        app:layout_constraintStart_toEndOf="@id/order_quantity_label"
         app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
 
 
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@id/order_size_tv" />
 
     <TextView
-        android:id="@+id/order_status_label"
+        android:id="@+id/shipping_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
@@ -155,11 +155,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
         android:text=":"
-        app:layout_constraintStart_toEndOf="@id/order_status_label"
+        app:layout_constraintStart_toEndOf="@id/shipping_label"
         app:layout_constraintTop_toBottomOf="@id/order_color_label" />
 
     <TextView
-        android:id="@+id/order_status_tv"
+        android:id="@+id/shipping_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"

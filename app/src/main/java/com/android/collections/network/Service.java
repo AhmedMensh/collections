@@ -3,6 +3,7 @@ package com.android.collections.network;
 
 
 import com.android.collections.models.ApiResponse;
+import com.android.collections.models.CartItem;
 import com.android.collections.models.Category;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
@@ -66,6 +67,12 @@ public interface Service {
 
     @POST("get_categores_sub.php")
     Call<ApiResponse<List<Category>>> getMainCategories(@Query("lang") String language);
+
+
+    @POST("basket.php")
+    Call<ApiResponse<List<CartItem>>> getCartItems(@Query("user_id") int userId,
+                                                   @Query("lang") String language,
+                                                   @Query("currency_id") int currencyId);
 
 
     class Fetcher {

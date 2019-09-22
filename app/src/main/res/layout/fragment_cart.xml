@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view1" />
 
             <TextView
-                android:id="@+id/order_status_label"
+                android:id="@+id/shipping_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/sub_total_label" />
 
             <TextView
-                android:id="@+id/order_status_tv"
+                android:id="@+id/shipping_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
@@ -87,7 +87,7 @@
                 android:textColor="@color/gray_dark"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/order_status_label" />
+                app:layout_constraintTop_toBottomOf="@+id/shipping_label" />
 
             <TextView
                 android:id="@+id/total_tv"
@@ -98,7 +98,7 @@
                 android:textColor="@color/gray_dark"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/order_status_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/shipping_tv" />
 
             <View
                 android:id="@+id/view2"

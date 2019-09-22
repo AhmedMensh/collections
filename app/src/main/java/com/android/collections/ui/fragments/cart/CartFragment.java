@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,13 @@ import android.widget.TextView;
 import com.android.collections.R;
 import com.android.collections.adapters.CartAdapter;
 import com.android.collections.adapters.MayLikeAdapter;
+import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.Utilities;
+import com.android.collections.models.ApiResponse;
+import com.android.collections.models.CartItem;
 import com.android.collections.ui.activties.home.HomeActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,23 +36,25 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements View.OnClickListener{
+public class CartFragment extends Fragment implements View.OnClickListener, PublicViewInf ,CartViewInf {
 
 
     private static final String TAG = "CartActivity";
     private CartAdapter cartAdapter;
     private Unbinder unbinder;
     private MayLikeAdapter mayLikeAdapter;
+    private CartPresenter presenter;
 
     @BindView(R.id.cart_rv)
     RecyclerView cartRv;
-
     @BindView(R.id.code_tv)
     TextView codeBtn;
     @BindView(R.id.check_out_btn)
     Button checkOutBtn;
-
     @BindView(R.id.may_like_rv) RecyclerView mayLikeRv;
+    @BindView(R.id.sub_total_tv) TextView subTotalTv;
+    @BindView(R.id.shipping_tv) TextView shippingTv;
+    @BindView(R.id.total_tv) TextView totalTv;
 
 
     public CartFragment() {
@@ -63,6 +72,9 @@ public class CartFragment extends Fragment implements View.OnClickListener{
         initViews();
         initCartRv();
         initMayLikeRv();
+
+        presenter = new CartPresenter(this, this);
+        presenter.getCartItems();
         return view;
     }
 
@@ -84,7 +96,7 @@ public class CartFragment extends Fragment implements View.OnClickListener{
 
     private void initCartRv() {
 
-        cartAdapter = new CartAdapter();
+        cartAdapter = new CartAdapter(getContext());
         cartRv.setAdapter(cartAdapter);
         cartRv.setHasFixedSize(true);
         cartRv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -144,5 +156,30 @@ public class CartFragment extends Fragment implements View.OnClickListener{
                 getActivity().finish();
                 break;
         }
+    }
+
+    @Override
+    public void showMessage(String m) {
+
+        Utilities.showToast(getContext() ,m);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void displayCartItems(ApiResponse<List<CartItem>> response) {
+
+        cartAdapter.setCartItemList(response.getData());
+        subTotalTv.setText(response.getSubTotal()+"");
+        shippingTv.setText(response.getShipping()+"");
+        totalTv.setText(response.getTotal()+"");
     }
 }
