@@ -67,9 +67,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         notifyDataSetChanged();
     }
 
-    public class CartViewHolder extends RecyclerView.ViewHolder {
+    private void increaseItemQuantity(int itemPosition){
+        mCartItemList.get(itemPosition).setQuantity(mCartItemList.get(itemPosition).getQuantity()+1);
+        notifyDataSetChanged();
+    }
+
+    private void decrementItemQuantity(int itemPosition){
+
+        if (mCartItemList.get(itemPosition).getQuantity() > 1){
+
+            mCartItemList.get(itemPosition).setQuantity(mCartItemList.get(itemPosition).getQuantity() -1);
+            notifyDataSetChanged();
+        }
+    }
+    public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView orderIv;
-        TextView orderTypeTv , orderDescTv , orderSizeTv , orderQuantityTv , orderColorTv, orderPriceTv;
+        TextView orderTypeTv , orderDescTv , orderSizeTv , orderQuantityTv , orderColorTv, orderPriceTv ,
+                orderIncrementIv,orderDecrementIv;
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -80,6 +94,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             orderQuantityTv = itemView.findViewById(R.id.order_quantity_tv);
             orderColorTv = itemView.findViewById(R.id.order_color_tv);
             orderPriceTv = itemView.findViewById(R.id.order_price_tv);
+            orderIncrementIv =itemView.findViewById(R.id.order_increment_iv);
+            orderDecrementIv = itemView.findViewById(R.id.order_decrement_iv);
+
+            orderIncrementIv.setOnClickListener(this);
+            orderDecrementIv.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getId()){
+                case R.id.order_increment_iv:
+                    increaseItemQuantity(getAdapterPosition());
+                    break;
+
+                case R.id.order_decrement_iv:
+                    decrementItemQuantity(getAdapterPosition());
+            }
         }
     }
 }

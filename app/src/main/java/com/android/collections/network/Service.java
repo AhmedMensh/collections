@@ -5,6 +5,7 @@ package com.android.collections.network;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.CartItem;
 import com.android.collections.models.Category;
+import com.android.collections.models.Favorite;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
@@ -73,6 +74,12 @@ public interface Service {
     Call<ApiResponse<List<CartItem>>> getCartItems(@Query("user_id") int userId,
                                                    @Query("lang") String language,
                                                    @Query("currency_id") int currencyId);
+
+
+
+    @POST("my_favorite.php")
+    Call<ApiResponse<List<Favorite>>> getFavoriteList(@Query("user_id") int userId,
+                                                      @Query("lang") String language);
 
 
     class Fetcher {

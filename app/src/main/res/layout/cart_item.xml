@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:text="-"
             android:id="@+id/order_decrement_iv"
-            android:textSize="@dimen/_18sdp"
+            android:textSize="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             android:textColor="@color/orange"/>
         <TextView
@@ -134,7 +134,7 @@
             android:id="@+id/order_increment_iv"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="+"
-            android:textSize="@dimen/_18sdp"
+            android:textSize="@dimen/_20sdp"
             android:textColor="@color/orange"
             app:layout_constraintStart_toEndOf="@+id/order_quality_tv"
             app:layout_constraintTop_toBottomOf="@+id/order_desc_tv"
