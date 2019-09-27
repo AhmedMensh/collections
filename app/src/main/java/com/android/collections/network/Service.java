@@ -10,8 +10,10 @@ import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
 import com.android.collections.models.Notification;
+import com.android.collections.models.Order;
 import com.android.collections.models.RegisterResponse;
 import com.android.collections.models.TopOffer;
+import com.android.collections.models.User;
 
 
 import java.util.List;
@@ -80,6 +82,17 @@ public interface Service {
     @POST("my_favorite.php")
     Call<ApiResponse<List<Favorite>>> getFavoriteList(@Query("user_id") int userId,
                                                       @Query("lang") String language);
+
+
+    @POST("account_details.php")
+    Call<ApiResponse<User>> getUserProfile(@Query("user_id") int userId,
+                                           @Query("lang") String language);
+
+
+
+    @POST("my_orders.php")
+    Call<ApiResponse<List<Order>>> getMyOrders(@Query("user_id") int userId,
+                                               @Query("lang") String language);
 
 
     class Fetcher {

@@ -6,19 +6,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.collections.R;
 import com.android.collections.adapters.OrdersAdapter;
+import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.Utilities;
+import com.android.collections.models.Order;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class OrdersActivity extends AppCompatActivity {
+public class OrdersActivity extends AppCompatActivity implements PublicViewInf ,OrdersViewInf {
 
     private Unbinder unbinder;
     private static final String TAG = "OrdersActivity";
     private OrdersAdapter ordersAdapter;
+    private OrdersPresenter presenter;
 
     @BindView(R.id.orders_rv)
     RecyclerView ordersRv;
@@ -32,6 +39,9 @@ public class OrdersActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         initOrdersRv();
         initToolbar();
+
+        presenter = new OrdersPresenter(this ,this);
+        presenter.getMyOrders();
     }
 
     private void initToolbar() {
@@ -41,7 +51,7 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
     private void initOrdersRv() {
-        ordersAdapter = new OrdersAdapter();
+        ordersAdapter = new OrdersAdapter(this);
         ordersRv.setAdapter(ordersAdapter);
         ordersRv.setHasFixedSize(true);
         ordersRv.setLayoutManager(new LinearLayoutManager(this));
@@ -51,5 +61,28 @@ public class OrdersActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void showMessage(String m) {
+
+        Utilities.showToast(this ,m);
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void displayOrders(List<Order> orderList) {
+
+        Log.e(TAG, "displayOrders: "+orderList.size());
+//        ordersAdapter.setOrderListData(orderList);
     }
 }

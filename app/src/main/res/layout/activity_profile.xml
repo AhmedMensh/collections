@@ -98,6 +98,7 @@
                                 android:textSize="@dimen/_14sdp" />
 
                             <EditText
+                                android:id="@+id/user_name_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_margin="@dimen/_8sdp"
@@ -127,6 +128,7 @@
                                 android:textSize="@dimen/_14sdp" />
 
                             <EditText
+                                android:id="@+id/user_email_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_margin="@dimen/_8sdp"
@@ -163,6 +165,7 @@
                                 android:textSize="@dimen/_14sdp" />
 
                             <EditText
+                                android:id="@+id/user_password_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_margin="@dimen/_8sdp"
@@ -192,6 +195,7 @@
                                 android:textSize="@dimen/_14sdp" />
 
                             <EditText
+                                android:id="@+id/user_phone_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_margin="@dimen/_8sdp"

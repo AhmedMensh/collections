@@ -44,6 +44,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.notifications_layout)
     LinearLayout notificationsLayout;
 
+
     public MoreFragment() {
         // Required empty public constructor
 
