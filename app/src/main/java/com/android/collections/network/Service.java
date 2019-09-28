@@ -1,7 +1,6 @@
 package com.android.collections.network;
 
 
-
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.CartItem;
 import com.android.collections.models.Category;
@@ -14,6 +13,7 @@ import com.android.collections.models.Order;
 import com.android.collections.models.RegisterResponse;
 import com.android.collections.models.TopOffer;
 import com.android.collections.models.User;
+import com.android.collections.models.product_detalis.ProductDetails;
 
 
 import java.util.List;
@@ -53,11 +53,11 @@ public interface Service {
                                                     @Query("currency_id") int currencyId);
 
 
-
     @POST("get_products_flash_sale.php")
     Call<ApiResponse<List<NewTrend>>> getNewTrends(@Query("user_id") int userId,
                                                    @Query("lang") String language,
                                                    @Query("currency_id") int currencyId);
+
     @POST("get_products_home.php")
     Call<ApiResponse<List<NewArrival>>> getNewArrivals(@Query("user_id") int userId,
                                                        @Query("lang") String language,
@@ -65,7 +65,7 @@ public interface Service {
 
     @POST("notifications.php")
     Call<List<Notification>> getNotifications(@Query("user_id") int userId,
-                                                           @Query("lang") String language);
+                                              @Query("lang") String language);
 
 
     @POST("get_categores_sub.php")
@@ -78,7 +78,6 @@ public interface Service {
                                                    @Query("currency_id") int currencyId);
 
 
-
     @POST("my_favorite.php")
     Call<ApiResponse<List<Favorite>>> getFavoriteList(@Query("user_id") int userId,
                                                       @Query("lang") String language);
@@ -89,10 +88,15 @@ public interface Service {
                                            @Query("lang") String language);
 
 
-
     @POST("my_orders.php")
     Call<ApiResponse<List<Order>>> getMyOrders(@Query("user_id") int userId,
                                                @Query("lang") String language);
+
+
+    @POST("proDetails.php")
+    Call<ProductDetails> getProductDetails(@Query("pro_id") int productId,
+                                           @Query("user_id") int userId,
+                                           @Query("lang") String language);
 
 
     class Fetcher {

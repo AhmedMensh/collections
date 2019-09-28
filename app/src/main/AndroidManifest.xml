@@ -22,12 +22,7 @@
         <activity
             android:name=".ui.activties.home.HomeActivity"
             android:label="@string/title_activity_home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activties.register.RegisterActivity"
@@ -35,7 +30,14 @@
         <activity
             android:name=".ui.activties.login.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.activties.start.StartActivity"></activity>
+        <activity android:name=".ui.activties.start.StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -82,7 +82,7 @@ public class OrdersActivity extends AppCompatActivity implements PublicViewInf ,
     @Override
     public void displayOrders(List<Order> orderList) {
 
-        Log.e(TAG, "displayOrders: "+orderList.size());
-//        ordersAdapter.setOrderListData(orderList);
+        Log.e(TAG, "displayOrders: "+orderList.size() );
+        ordersAdapter.setOrderListData(orderList);
     }
 }

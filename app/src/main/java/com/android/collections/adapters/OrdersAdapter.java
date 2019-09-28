@@ -40,8 +40,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
 
-        holder.orderDescTv.setText(mOrderList.get(position).getProDetails());
-        holder.orderTypeTv.setText(mOrderList.get(position).getProductName());
+        holder.orderDescTv.setText(mOrderList.get(position).getProDetails().trim()   );
+        holder.orderNameTv.setText(mOrderList.get(position).getProductName().trim());
         holder.orderPriceTv.setText(mOrderList.get(position).getPrice()+"");
         holder.orderQualityTv.setText(mOrderList.get(position).getQuantity()+"");
         holder.orderSizeTv.setText(mOrderList.get(position).getSize());
@@ -63,13 +63,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
 
-        TextView orderTypeTv ,orderDescTv ,orderSizeTv ,orderQualityTv ,orderColorTv ,shippingTv ,orderPriceTv;
+        TextView orderNameTv ,orderDescTv ,orderSizeTv ,orderQualityTv ,orderColorTv ,shippingTv ,orderPriceTv;
         ImageView orderIv;
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             orderIv = itemView.findViewById(R.id.order_iv);
 
-            orderTypeTv = itemView.findViewById(R.id.order_type_tv);
+            orderNameTv = itemView.findViewById(R.id.order_name_tv);
             orderDescTv = itemView.findViewById(R.id.order_desc_tv);
             orderSizeTv = itemView.findViewById(R.id.order_size_tv);
             orderQualityTv = itemView.findViewById(R.id.order_quality_tv);
