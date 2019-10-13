@@ -132,6 +132,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_margin="@dimen/_8sdp"
+                                android:maxLines="1"
+                                android:inputType="textEmailAddress"
                                 android:background="@android:color/transparent"
                                 android:padding="@dimen/_6sdp"
                                 android:textColor="@color/black" />

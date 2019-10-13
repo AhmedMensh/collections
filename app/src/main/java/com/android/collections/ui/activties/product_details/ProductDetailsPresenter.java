@@ -1,6 +1,10 @@
 package com.android.collections.ui.activties.product_details;
 
+import android.util.Log;
+
+import com.android.collections.R;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.models.ApiResponse;
 import com.android.collections.models.product_detalis.ProductDetails;
 import com.android.collections.network.Service;
 
@@ -19,6 +23,27 @@ public class ProductDetailsPresenter {
         this.viewInf = viewInf;
     }
 
+
+    public void addToCart(int productId  ,int quantity ,int sizeId ,int colorId){
+
+        Service.Fetcher.getInstance().addToCart(productId,1,quantity,sizeId,colorId)
+                .enqueue(new Callback<ApiResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                        try {
+                            publicViewInf.showMessage(response.body().getMessage());
+                        }catch (Exception e){
+                            Log.e(TAG, "onResponse: "+e.getLocalizedMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+                        Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                    }
+                });
+    }
     public void getProductDetails(){
         Service.Fetcher.getInstance().getProductDetails(27,1,"en").enqueue(new Callback<ProductDetails>() {
             @Override
@@ -34,6 +59,29 @@ public class ProductDetailsPresenter {
             @Override
             public void onFailure(Call<ProductDetails> call, Throwable t) {
 
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                publicViewInf.showMessage("Something went wrong");
+            }
+        });
+    }
+
+    public void addAndToFavorite(int productId){
+
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,1,"like").enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                try {
+                    publicViewInf.showMessage(response.body().getMessage());
+                }catch (Exception e){
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+                publicViewInf.showMessage("Something went wrong");
             }
         });
     }

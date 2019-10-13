@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.android.collections.R;
 import com.android.collections.helpers.Constants;
 import com.android.collections.models.NewTrend;
 import com.android.collections.models.TopOffer;
+import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -73,7 +75,7 @@ public class NewTrendAdapter extends RecyclerView.Adapter<NewTrendAdapter.Produc
     }
 
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView productCategory, productName;
         ImageView productIv;
@@ -86,9 +88,14 @@ public class NewTrendAdapter extends RecyclerView.Adapter<NewTrendAdapter.Produc
 
             productIv = itemView.findViewById(R.id.product_iv);
 
+            itemView.setOnClickListener(this);
 
         }
 
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context , ProductDetailsActivity.class));
+        }
 
     }
 }

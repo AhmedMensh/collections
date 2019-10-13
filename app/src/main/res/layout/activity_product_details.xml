@@ -231,6 +231,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_to_cart_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
             android:layout_margin="@dimen/_6sdp"
@@ -240,6 +241,7 @@
             app:cornerRadius="@dimen/_4sdp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_to_wish_list_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
             android:layout_margin="@dimen/_6sdp"

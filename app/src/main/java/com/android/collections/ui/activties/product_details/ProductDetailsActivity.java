@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.collections.R;
 import com.android.collections.adapters.ImagesAdapter;
+import com.android.collections.adapters.ProductSizesAdapter;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.product_detalis.ProductDetails;
@@ -20,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ProductDetailsActivity extends AppCompatActivity implements View.OnClickListener,
@@ -30,6 +32,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private ImagesAdapter imagesAdapter;
     private Unbinder unbinder;
     private ProductDetailsPresenter presenter;
+    private ProductSizesAdapter productSizesAdapter;
 
     //widgets
     @BindView(R.id.product_images_rv)
@@ -45,6 +48,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private RecyclerView productSizesRv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +61,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         sizeBtn.setOnClickListener(this::onClick);
         initImagesRv();
         initToolbar();
+        productSizesAdapter = new ProductSizesAdapter();
     }
+
 
     private void initToolbar() {
 
@@ -82,6 +89,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet_size, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
 
+        productSizesRv = view.findViewById(R.id.product_sizes_rv);
+        productSizesRv.setAdapter(productSizesAdapter);
+        productSizesRv.setHasFixedSize(true);
+        productSizesRv.setLayoutManager(new LinearLayoutManager(this));
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
     }
@@ -120,5 +131,16 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         productNameTv.setText(productDetails.getData().getName().trim());
         productDetailsTv.setText(productDetails.getData().getDetails().trim());
         productRateNumberTv.setText("("+productDetails.getData().getVoting().getAllVoting()+")");
+        productSizesAdapter.setProductSizedDate(productDetails.getData().getProSizeArabic());
+    }
+
+    @OnClick(R.id.add_to_cart_btn)
+    public void onAddToCartClicked(){
+        presenter.addToCart(27,1,6,21);
+    }
+
+    @OnClick(R.id.add_to_wish_list_btn)
+    public void onAddToWishListClicked(){
+        presenter.addAndToFavorite(1);
     }
 }

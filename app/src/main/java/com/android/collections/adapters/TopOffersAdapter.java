@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.collections.R;
 import com.android.collections.helpers.Constants;
 import com.android.collections.models.TopOffer;
+import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -73,7 +75,7 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
     }
 
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView productCategory, productName, productPrice;
         ImageView productIv;
@@ -87,6 +89,11 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
             productIv = itemView.findViewById(R.id.product_iv);
 
 
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context , ProductDetailsActivity.class));
         }
 
 

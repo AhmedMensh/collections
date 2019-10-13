@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
 import com.android.collections.models.Favorite;
+import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -60,7 +62,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         return mFavoriteList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView productIv;
         TextView productPriceTv;
@@ -68,6 +70,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             super(itemView);
             productIv = itemView.findViewById(R.id.product_iv);
             productPriceTv = itemView.findViewById(R.id.product_price_tv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context , ProductDetailsActivity.class));
         }
     }
 }

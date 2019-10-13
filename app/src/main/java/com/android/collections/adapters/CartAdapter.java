@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
 import com.android.collections.models.CartItem;
+import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -99,6 +101,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
             orderIncrementIv.setOnClickListener(this);
             orderDecrementIv.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -111,6 +114,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
                 case R.id.order_decrement_iv:
                     decrementItemQuantity(getAdapterPosition());
+                    break;
+
+                default:
+                    context.startActivity(new Intent(context , ProductDetailsActivity.class));
+                    break;
+
             }
         }
     }

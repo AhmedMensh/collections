@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
 import com.android.collections.models.NewTrend;
+import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -59,7 +61,7 @@ public class TrendAdapter  extends RecyclerView.Adapter<TrendAdapter.ViewHolder>
         return mNewTrendList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView trendName;
         ImageView trendPic;
         public ViewHolder(@NonNull View itemView) {
@@ -67,6 +69,12 @@ public class TrendAdapter  extends RecyclerView.Adapter<TrendAdapter.ViewHolder>
 
             trendName = itemView.findViewById(R.id.trend_name);
             trendPic = itemView.findViewById(R.id.trend_pic);
+
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context , ProductDetailsActivity.class));
         }
     }
 }

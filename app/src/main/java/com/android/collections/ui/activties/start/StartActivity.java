@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.android.collections.R;
 import com.android.collections.models.product_detalis.ProductDetails;
+import com.android.collections.ui.activties.home.HomeActivity;
 import com.android.collections.ui.activties.login.LoginActivity;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.android.collections.ui.activties.register.RegisterActivity;
@@ -37,7 +38,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         unbinder = ButterKnife.bind(this);
         loginBtn.setOnClickListener(this::onClick);
         registerBtn.setOnClickListener(this::onClick);
-        startActivity(new Intent(this , ProductDetailsActivity.class));
+        startActivity(new Intent(this , HomeActivity.class));
     }
 
     @Override

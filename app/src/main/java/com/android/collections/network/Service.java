@@ -98,6 +98,18 @@ public interface Service {
                                            @Query("user_id") int userId,
                                            @Query("lang") String language);
 
+    @POST("add_basket.php")
+    Call<ApiResponse> addToCart(@Query("pro_id") int productId,
+                                           @Query("user_id") int userId,
+                                           @Query("quantity") int quantity,
+                                           @Query("size_id") int sizeId,
+                                           @Query("color_id") int colorId);
+
+    @POST("add_favorite.php")
+    Call<ApiResponse> addAndDeleteFromFavorite(@Query("pro_id") int productId,
+                                @Query("user_id") int userId,
+                                @Query("type") String type);
+
 
     class Fetcher {
 
