@@ -27,7 +27,7 @@ public class WishListPresenter {
 
     public void getWishList(){
 
-        Service.Fetcher.getInstance().getFavoriteList(2,"en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
+        Service.Fetcher.getInstance().getFavoriteList(1,"en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Favorite>>> call, Response<ApiResponse<List<Favorite>>> response) {
 
@@ -42,6 +42,27 @@ public class WishListPresenter {
             public void onFailure(Call<ApiResponse<List<Favorite>>> call, Throwable t) {
 
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
+            }
+        });
+    }
+
+    public void removeFromFavorite(int productId){
+
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,2,"dislike").enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                try {
+                    publicViewInf.showMessage(response.body().getMessage());
+                }catch (Exception e){
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+                publicViewInf.showMessage("Something went wrong");
             }
         });
     }

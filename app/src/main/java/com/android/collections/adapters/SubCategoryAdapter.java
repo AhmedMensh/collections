@@ -33,7 +33,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull ChildViewHolder holder, int position) {
 
-        holder.subCategoryName.setText(mSubCategories.get(position).getNameSub());
+        holder.subCategoryName.setText("- "+mSubCategories.get(position).getNameSub());
     }
 
     @Override

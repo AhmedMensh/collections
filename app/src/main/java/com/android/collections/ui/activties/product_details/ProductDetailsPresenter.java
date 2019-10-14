@@ -65,7 +65,7 @@ public class ProductDetailsPresenter {
         });
     }
 
-    public void addAndToFavorite(int productId){
+    public void addToFavorite(int productId){
 
         Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,1,"like").enqueue(new Callback<ApiResponse>() {
             @Override

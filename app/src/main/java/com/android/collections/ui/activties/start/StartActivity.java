@@ -38,7 +38,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         unbinder = ButterKnife.bind(this);
         loginBtn.setOnClickListener(this::onClick);
         registerBtn.setOnClickListener(this::onClick);
-        startActivity(new Intent(this , HomeActivity.class));
+//        startActivity(new Intent(this , HomeActivity.class));
     }
 
     @Override

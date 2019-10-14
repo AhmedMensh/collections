@@ -19,6 +19,7 @@ import com.android.collections.R;
 import com.android.collections.adapters.FlashSalesAdapter;
 import com.android.collections.adapters.NewArrivalsAdapter;
 import com.android.collections.adapters.NewTrendAdapter;
+import com.android.collections.adapters.SliderAdapter;
 import com.android.collections.adapters.TopOffersAdapter;
 import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
@@ -26,6 +27,7 @@ import com.android.collections.helpers.Utilities;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
+import com.android.collections.models.Slider;
 import com.android.collections.models.TopOffer;
 import com.android.collections.ui.activties.collection.CollectionActivity;
 
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
     private FlashSalesAdapter flashSalesAdapter;
     private NewTrendAdapter newTrendAdapter;
     private NewArrivalsAdapter newArrivalsAdapter;
+    private SliderAdapter sliderAdapter;
     private Unbinder unbinder;
     private HomePresenter presenter;
     //widgets
@@ -54,6 +57,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
     @BindView(R.id.new_arrival_rv) RecyclerView newArrivalRv;
     @BindView(R.id.new_trend_rv) RecyclerView newTrendRv;
     @BindView(R.id.top_offer_rv) RecyclerView topOfferRv;
+    @BindView(R.id.slider_rv) RecyclerView sliderRv;
     @BindView(R.id.flash_sale_layout) LinearLayout flashSaleLayout;
     @BindView(R.id.new_arrival_layout) LinearLayout newArrivalLayout;
     @BindView(R.id.new_trend_layout) LinearLayout newTrendLayout;
@@ -72,16 +76,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
 
        unbinder = ButterKnife.bind(this,view);
 
-       presenter = new HomePresenter(this,this);
+        presenter = new HomePresenter(this,this);
         presenter.getFlashSale(1,"ar",1);
         presenter.getTopOffers(1,"ar",1);
         presenter.getNewTrends(1,"ar",1);
         presenter.getNewArrivals(1,"ar",1);
-       setListenerToViews();
+        presenter.getSliderImages();
+        setListenerToViews();
         initFlashSaleRv();
         initNewArrivalRv();
         initNewTrendRv();
         initTpoOfferRv();
+        initSliderRv();
 
         return view;
     }
@@ -119,6 +125,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         newArrivalRv.setLayoutManager(layoutManager);
+    }
+
+    private void initSliderRv() {
+
+        sliderAdapter = new SliderAdapter(getContext());
+        sliderRv.setHasFixedSize(true);
+        sliderRv.setAdapter(sliderAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        sliderRv.setLayoutManager(layoutManager);
     }
 
     private void initFlashSaleRv() {
@@ -185,5 +201,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
     public void displayNewArrivals(List<NewArrival> newArrivalList) {
 
         newArrivalsAdapter.setNewArrivalsData(newArrivalList);
+    }
+
+    @Override
+    public void displaySliderImages(List<Slider> sliderList) {
+
+        sliderAdapter.setSliderImages(sliderList);
+        Log.e(TAG, "displaySliderImages: ");
     }
 }

@@ -11,6 +11,7 @@ import com.android.collections.models.NewTrend;
 import com.android.collections.models.Notification;
 import com.android.collections.models.Order;
 import com.android.collections.models.RegisterResponse;
+import com.android.collections.models.Slider;
 import com.android.collections.models.TopOffer;
 import com.android.collections.models.User;
 import com.android.collections.models.product_detalis.ProductDetails;
@@ -109,6 +110,10 @@ public interface Service {
     Call<ApiResponse> addAndDeleteFromFavorite(@Query("pro_id") int productId,
                                 @Query("user_id") int userId,
                                 @Query("type") String type);
+
+
+    @POST("slider.php")
+    Call<ApiResponse<List<Slider>>> getSliderImages(@Query("lang") String language);
 
 
     class Fetcher {

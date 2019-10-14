@@ -122,7 +122,7 @@
                 android:text="@string/size"
                 android:textColor="@color/orange"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/color_group"
+                app:layout_constraintBottom_toTopOf="@+id/hsv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/simple_rating_bar" />
 
@@ -135,56 +135,35 @@
                 android:textSize="@dimen/_14sdp"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/view1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/color_group"
+               android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/size_btn"/>
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/color_group"
 
+            <HorizontalScrollView
+                android:id="@+id/hsv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/view1"
+
                 app:layout_constraintStart_toEndOf="@id/color_label"
                 app:layout_constraintTop_toBottomOf="@id/size_btn">
 
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:text="Black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-
-
-                <com.google.android.material.chip.Chip
+                <com.google.android.material.chip.ChipGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yellow"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"/>
+                    android:id="@+id/product_colors_group"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingEnd="@dimen/_4sdp"
+                    app:chipSpacingHorizontal="@dimen/_4sdp"
+                    app:singleSelection="true">
 
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Green"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"/>
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
 
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Blue"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/black"/>
-
-            </com.google.android.material.chip.ChipGroup>
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
@@ -193,7 +172,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/color_group" />
+                app:layout_constraintTop_toBottomOf="@+id/hsv" />
 
             <TextView
                 android:id="@+id/product_details_label"

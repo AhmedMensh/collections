@@ -7,6 +7,7 @@ import com.android.collections.models.ApiResponse;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
+import com.android.collections.models.Slider;
 import com.android.collections.models.TopOffer;
 import com.android.collections.network.Service;
 
@@ -137,6 +138,27 @@ public class HomePresenter {
                 publicViewInf.hideProgressBar();
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
 
+            }
+        });
+    }
+
+    public void getSliderImages(){
+        Service.Fetcher.getInstance().getSliderImages("en").enqueue(new Callback<ApiResponse<List<Slider>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<Slider>>> call, Response<ApiResponse<List<Slider>>> response) {
+
+                if (response.body().getSuccess()){
+
+                    homeViewInf.displaySliderImages(response.body().getData());
+                }else {
+                    publicViewInf.showMessage(response.body().getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<Slider>>> call, Throwable t) {
+
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
             }
         });
     }

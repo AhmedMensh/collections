@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
 import com.android.collections.models.product_detalis.ProSizeArabic;
+import com.android.collections.models.product_detalis.ProSizeEurope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,19 @@ import java.util.List;
 public class ProductSizesAdapter extends RecyclerView.Adapter<ProductSizesAdapter.ViewHolder> {
 
     private List<ProSizeArabic> mProSizeArabic;
-    public ProductSizesAdapter() {
+
+    public ItemClickListener listener;
+
+    public ProductSizesAdapter(ItemClickListener listener) {
         mProSizeArabic = new ArrayList<>();
+        this.listener = listener;
     }
 
+
+
+    public interface ItemClickListener{
+        void onItemClickListener(ProSizeArabic item);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,12 +55,20 @@ public class ProductSizesAdapter extends RecyclerView.Adapter<ProductSizesAdapte
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView productSizeNameTv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             productSizeNameTv = itemView.findViewById(R.id.product_size_tv);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            listener.onItemClickListener(mProSizeArabic.get(getAdapterPosition()));
         }
     }
 }

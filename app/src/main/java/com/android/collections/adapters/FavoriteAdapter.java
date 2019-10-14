@@ -24,10 +24,15 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     private List<Favorite> mFavoriteList;
     private Context context;
+    public ItemClickListener listener;
 
-    public FavoriteAdapter(Context context) {
+    public interface ItemClickListener{
+        void onItemClickListener(int id);
+        void onLikeIconClickListener(int id);
+    }
+    public FavoriteAdapter(Context context , ItemClickListener listener) {
         this.context = context;
-
+        this.listener = listener;
         mFavoriteList = new ArrayList<>();
     }
 
@@ -64,18 +69,29 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView productIv;
+        ImageView productIv , likeIv;
         TextView productPriceTv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productIv = itemView.findViewById(R.id.product_iv);
             productPriceTv = itemView.findViewById(R.id.product_price_tv);
+            likeIv = itemView.findViewById(R.id.like_iv);
+
+            likeIv.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context , ProductDetailsActivity.class));
+
+            switch (view.getId()){
+                case R.id.like_iv:
+                    listener.onLikeIconClickListener(mFavoriteList.get(getAdapterPosition()).getID());
+                    break;
+
+                    default:listener.onItemClickListener(mFavoriteList.get(getAdapterPosition()).getID());
+            }
+
         }
     }
 }

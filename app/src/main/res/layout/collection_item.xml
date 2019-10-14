@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center"
@@ -10,27 +11,45 @@
     android:layout_height="wrap_content">
 
 
+    <ImageView
+        android:id="@+id/like_iv"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:elevation="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_4sdp"
+        app:srcCompat="@drawable/ic_heart_orang"/>
 
     <ImageView
         android:id="@+id/product_iv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_160sdp"
         android:src="@mipmap/img"
+        app:layout_constraintTop_toTopOf="parent"
         android:scaleType="fitXY"/>
 
     <TextView
+        android:id="@+id/product_category_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_iv"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/orange"
         android:text="LONG DRESS"/>
 
     <TextView
+        android:id="@+id/product_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_1sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_category_tv"
         android:textColor="@color/black"
         android:text="La sim hal"/>
 
@@ -39,8 +58,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_name_tv"
         android:layout_marginTop="@dimen/_1sdp"
         android:textColor="@color/black"
         android:text="$5454"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

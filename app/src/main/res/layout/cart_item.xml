@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_140sdp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/corner_sharp_rect_white"
     android:elevation="@dimen/_6sdp"
     android:layout_margin="@dimen/_8sdp"
@@ -35,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
-        android:text="sdfsdfdsfsd"
+        tools:text="sdfsdfdsfsd"
         android:textSize="@dimen/_14sdp"
         android:textColor="@color/gray_dark"
         app:layout_constraintStart_toEndOf="@id/order_iv"
@@ -82,13 +83,25 @@
             app:layout_constraintStart_toEndOf="@id/dots1"
             app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
 
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@id/layout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@id/order_iv"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/order_quantity_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_14sdp"
 
-            android:layout_marginEnd="@dimen/_6sdp"
+
             android:textSize="@dimen/_14sdp"
             android:text="@string/quality"
             app:layout_constraintStart_toEndOf="@id/order_size_tv"
@@ -143,8 +156,6 @@
     </LinearLayout>
 
 
-
-
     <TextView
         android:id="@+id/order_color_label"
         android:layout_width="wrap_content"
@@ -153,7 +164,7 @@
         android:textSize="@dimen/_14sdp"
         android:text="@string/color"
         app:layout_constraintStart_toEndOf="@id/order_iv"
-        app:layout_constraintTop_toBottomOf="@+id/layout" />
+        app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
     <TextView
         android:id="@+id/dots3"
@@ -162,7 +173,7 @@
         android:layout_margin="@dimen/_8sdp"
         android:text=":"
         app:layout_constraintStart_toEndOf="@id/order_color_label"
-        app:layout_constraintTop_toBottomOf="@id/layout" />
+        app:layout_constraintTop_toBottomOf="@id/layout1" />
 
     <TextView
         android:id="@+id/order_color_tv"
@@ -173,7 +184,7 @@
         android:text="Black"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/dots3"
-        app:layout_constraintTop_toBottomOf="@id/layout" />
+        app:layout_constraintTop_toBottomOf="@id/layout1" />
 
 
     <ImageView
@@ -189,7 +200,7 @@
         android:id="@+id/order_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_margin="@dimen/_4sdp"
         android:text="1000$"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
