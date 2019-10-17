@@ -77,15 +77,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
        unbinder = ButterKnife.bind(this,view);
 
         presenter = new HomePresenter(this,this);
-        presenter.getFlashSale(1,"ar",1);
+//        presenter.getFlashSale(1,"ar",1);
         presenter.getTopOffers(1,"ar",1);
-        presenter.getNewTrends(1,"ar",1);
+//        presenter.getNewTrends(1,"ar",1);
         presenter.getNewArrivals(1,"ar",1);
         presenter.getSliderImages();
         setListenerToViews();
-        initFlashSaleRv();
+//        initFlashSaleRv();
         initNewArrivalRv();
-        initNewTrendRv();
+//        initNewTrendRv();
         initTpoOfferRv();
         initSliderRv();
 

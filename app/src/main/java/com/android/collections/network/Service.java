@@ -37,7 +37,7 @@ public interface Service {
                                     @Query("lang") String language);
 
     @POST("login.php")
-    Call<RegisterResponse> login(@Query("username") String userName,
+    Call<ApiResponse<RegisterResponse>> login(@Query("username") String userName,
                                  @Query("user_pass") String userPass,
                                  @Query("fmctoken") String fmcToken,
                                  @Query("lang") String language);
@@ -54,7 +54,7 @@ public interface Service {
                                                     @Query("currency_id") int currencyId);
 
 
-    @POST("get_products_flash_sale.php")
+    @POST("get_products_trends.php")
     Call<ApiResponse<List<NewTrend>>> getNewTrends(@Query("user_id") int userId,
                                                    @Query("lang") String language,
                                                    @Query("currency_id") int currencyId);
@@ -113,7 +113,10 @@ public interface Service {
 
 
     @POST("slider.php")
-    Call<ApiResponse<List<Slider>>> getSliderImages(@Query("lang") String language);
+    Call<List<Slider>> getSliderImages(@Query("lang") String language,
+                                                    @Query("type") String type,
+                                                    @Query("branch_id") int branchId);
+
 
 
     class Fetcher {

@@ -171,14 +171,6 @@
         app:layout_constraintStart_toEndOf="@+id/dots4"
         app:layout_constraintTop_toBottomOf="@id/order_color_tv" />
 
-    <ImageView
-        android:id="@+id/like_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_heart" />
 
     <TextView
         android:id="@+id/order_price_tv"

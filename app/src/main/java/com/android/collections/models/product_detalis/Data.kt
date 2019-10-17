@@ -17,7 +17,7 @@ data class Data(
     @SerializedName("name")
     var name: String? = null,
     @SerializedName("price")
-    var price: Int? = null,
+    var price: Double? = null,
     @SerializedName("price_offer")
     var priceOffer: Int? = null,
     @SerializedName("pro_size_arabic")

@@ -5,17 +5,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.collections.R;
+import com.android.collections.adapters.SliderAdapter;
 import com.android.collections.adapters.TrendAdapter;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.NewTrend;
+import com.android.collections.models.Slider;
 
 import java.util.List;
 
@@ -33,9 +37,11 @@ public class TrendFragment extends Fragment implements PublicViewInf ,TrendViewI
     private Unbinder unbinder;
     private TrendAdapter trendAdapter;
     private TrendPresenter presenter;
+    private SliderAdapter sliderAdapter;
 
     @BindView(R.id.trend_rv)
     RecyclerView trendRv;
+    @BindView(R.id.trend_slider_rv) RecyclerView sliderRv;
 
     public TrendFragment() {
         // Required empty public constructor
@@ -51,10 +57,22 @@ public class TrendFragment extends Fragment implements PublicViewInf ,TrendViewI
         unbinder = ButterKnife.bind(this,view);
         presenter = new TrendPresenter(this ,this);
         presenter.getTrends();
+        presenter.getSliderImages();
         initTrendRv();
+        initSliderRv();
         return view;
     }
 
+
+    private void initSliderRv() {
+
+        sliderAdapter = new SliderAdapter(getContext());
+        sliderRv.setHasFixedSize(true);
+        sliderRv.setAdapter(sliderAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        sliderRv.setLayoutManager(layoutManager);
+    }
     private void initTrendRv(){
         trendAdapter = new TrendAdapter(getContext());
         trendRv.setLayoutManager(new GridLayoutManager(getContext(),2,RecyclerView.VERTICAL,false));
@@ -86,6 +104,13 @@ public class TrendFragment extends Fragment implements PublicViewInf ,TrendViewI
     @Override
     public void displayNewTrends(List<NewTrend> newTrendList) {
         trendAdapter.setNewTrendList(newTrendList);
+        Log.e(TAG, "displayNewTrends: "+newTrendList.size() );
 
+    }
+
+    @Override
+    public void displaySliderImages(List<Slider> data) {
+
+        sliderAdapter.setSliderImages(data);
     }
 }

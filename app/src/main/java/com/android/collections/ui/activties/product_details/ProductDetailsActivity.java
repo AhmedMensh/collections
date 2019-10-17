@@ -63,7 +63,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_product_details);
 
         unbinder = ButterKnife.bind(this);
-        presenter = new ProductDetailsPresenter(this ,this);
+        presenter = new ProductDetailsPresenter(this ,this,this);
         presenter.getProductDetails();
         sizeBtn.setOnClickListener(this::onClick);
         initImagesRv();
@@ -152,6 +152,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         productNameTv.setText(productDetails.getData().getName().trim());
         productDetailsTv.setText(productDetails.getData().getDetails().trim());
         productRateNumberTv.setText("("+productDetails.getData().getVoting().getAllVoting()+")");
+        if (productDetails.getData().getProSizeArabic() != null)
         productSizesAdapter.setProductSizedDate(productDetails.getData().getProSizeArabic());
     }
 

@@ -1,9 +1,12 @@
 package com.android.collections.ui.activties.product_details;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.product_detalis.ProductDetails;
 import com.android.collections.network.Service;
@@ -17,16 +20,19 @@ public class ProductDetailsPresenter {
     private static final String TAG = "ProductDetailsPresenter";
     private PublicViewInf publicViewInf;
     private ProductDetailsViewInf viewInf;
+    private Context context;
 
-    public ProductDetailsPresenter(PublicViewInf publicViewInf, ProductDetailsViewInf viewInf) {
+    public ProductDetailsPresenter(PublicViewInf publicViewInf, ProductDetailsViewInf viewInf,Context context) {
         this.publicViewInf = publicViewInf;
         this.viewInf = viewInf;
+        this.context = context;
     }
 
 
     public void addToCart(int productId  ,int quantity ,int sizeId ,int colorId){
 
-        Service.Fetcher.getInstance().addToCart(productId,1,quantity,sizeId,colorId)
+        Service.Fetcher.getInstance().addToCart(productId, SharedPreferencesManager.getIntValue(context, Constants.USER_ID)
+                ,quantity,sizeId,colorId)
                 .enqueue(new Callback<ApiResponse>() {
                     @Override
                     public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {

@@ -1,8 +1,12 @@
 package com.android.collections.ui.activties.login;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
+import com.android.collections.models.ApiResponse;
 import com.android.collections.models.RegisterResponse;
 import com.android.collections.network.Service;
 
@@ -15,26 +19,30 @@ public class LoginPresenter {
     private static final String TAG = "LoginPresenter";
     private PublicViewInf publicViewInf;
     private LoginViewInf loginViewInf;
+    private Context context;
 
-    public LoginPresenter(PublicViewInf publicViewInf, LoginViewInf loginViewInf) {
+    public LoginPresenter(PublicViewInf publicViewInf, LoginViewInf loginViewInf,Context context) {
         this.publicViewInf = publicViewInf;
         this.loginViewInf = loginViewInf;
+        this.context = context;
     }
 
 
 
     public void login(String userName, String userPass, String fmcToken, String language){
         Service.Fetcher.getInstance().login(userName  ,userPass ,fmcToken,language)
-                .enqueue(new Callback<RegisterResponse>() {
+                .enqueue(new Callback<ApiResponse<RegisterResponse>>() {
                     @Override
-                    public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                    public void onResponse(Call<ApiResponse<RegisterResponse>> call, Response<ApiResponse<RegisterResponse>> response) {
 
                         try {
 
-                            publicViewInf.showMessage(response.body().getMessage());
-                            if (response.body().getStatus()){
+
+                            Log.e(TAG, "onResponse: "+response.body().getData().getId() );
+                            if (response.body().getSuccess()){
+                                SharedPreferencesManager.setIntValue(context, Constants.USER_ID,response.body().getData().getId());
                                 loginViewInf.startHomeActivity();
-                            }
+                            }else   publicViewInf.showMessage(response.body().getMessage());
                         }catch (Exception e){
                             Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                         }
@@ -42,7 +50,7 @@ public class LoginPresenter {
                     }
 
                     @Override
-                    public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                    public void onFailure(Call<ApiResponse<RegisterResponse>> call, Throwable t) {
 
                         Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
                     }

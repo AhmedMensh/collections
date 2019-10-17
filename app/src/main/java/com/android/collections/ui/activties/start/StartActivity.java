@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.product_detalis.ProductDetails;
 import com.android.collections.ui.activties.home.HomeActivity;
 import com.android.collections.ui.activties.login.LoginActivity;
@@ -39,6 +41,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         loginBtn.setOnClickListener(this::onClick);
         registerBtn.setOnClickListener(this::onClick);
 //        startActivity(new Intent(this , HomeActivity.class));
+
+        if (SharedPreferencesManager.getIntValue(this, Constants.USER_ID) != 0){
+            startActivity(new Intent(this,HomeActivity.class));
+            finish();
+        }
     }
 
     @Override

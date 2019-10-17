@@ -143,22 +143,22 @@ public class HomePresenter {
     }
 
     public void getSliderImages(){
-        Service.Fetcher.getInstance().getSliderImages("en").enqueue(new Callback<ApiResponse<List<Slider>>>() {
+        Service.Fetcher.getInstance().getSliderImages("en","home",0).enqueue(new Callback<List<Slider>>() {
             @Override
-            public void onResponse(Call<ApiResponse<List<Slider>>> call, Response<ApiResponse<List<Slider>>> response) {
+            public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {
+                try{
 
-                if (response.body().getSuccess()){
-
-                    homeViewInf.displaySliderImages(response.body().getData());
-                }else {
-                    publicViewInf.showMessage(response.body().getMessage());
+                    homeViewInf.displaySliderImages(response.body());
+                }catch (Exception e){
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                 }
+
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<List<Slider>>> call, Throwable t) {
+            public void onFailure(Call<List<Slider>> call, Throwable t) {
 
-                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
             }
         });
     }

@@ -78,14 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.app_bar_menu,menu);
 
-        menu.findItem(R.id.heart_action).setVisible(false);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     protected void onDestroy() {

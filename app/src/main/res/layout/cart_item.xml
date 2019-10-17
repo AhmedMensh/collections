@@ -24,12 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_14sdp"
         android:text="Wedding Dress"
         android:textColor="@color/orange"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintStart_toEndOf="@id/order_iv"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/delet_iv" />
 
     <TextView
         android:id="@+id/order_desc_tv"
@@ -188,13 +187,15 @@
 
 
     <ImageView
-        android:id="@+id/like_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:id="@+id/delet_iv"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintBottom_toTopOf="@+id/order_type_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_heart" />
+        app:srcCompat="@drawable/ic_delete" />
 
     <TextView
         android:id="@+id/order_price_tv"
