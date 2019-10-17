@@ -8,7 +8,7 @@
         android:title="@string/cart"
         app:showAsAction="always"
         android:iconTint="@color/orange"
-        android:icon="@drawable/ic_heart_orang"/>
+        android:icon="@drawable/ic_heart_red"/>
     <item
         android:id="@+id/cart_action"
         android:title="@string/cart"

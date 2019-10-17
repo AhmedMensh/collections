@@ -113,11 +113,14 @@ public interface Service {
 
 
     @POST("slider.php")
-    Call<List<Slider>> getSliderImages(@Query("lang") String language,
+    Call<ApiResponse<List<Slider>>> getSliderImages(@Query("lang") String language,
                                                     @Query("type") String type,
                                                     @Query("branch_id") int branchId);
 
-
+    @POST("get_products_likes_me.php")
+    Call<ApiResponse<List<TopOffer>>> getProductsLikeMe(@Query("lang") String language,
+                                                    @Query("user_id") int userIdd,
+                                                    @Query("branch_id") int branchId);
 
     class Fetcher {
 

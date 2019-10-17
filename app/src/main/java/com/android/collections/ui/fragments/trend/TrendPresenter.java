@@ -28,24 +28,28 @@ public class TrendPresenter {
 
 
     public void getSliderImages(){
-        Service.Fetcher.getInstance().getSliderImages("en","trends",0).enqueue(new Callback<List<Slider>>() {
+        Service.Fetcher.getInstance().getSliderImages("en","home",0).enqueue(new Callback<ApiResponse<List<Slider>>>() {
             @Override
-            public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {
+            public void onResponse(Call<ApiResponse<List<Slider>>> call, Response<ApiResponse<List<Slider>>> response) {
                 try{
 
-                    viewInf.displaySliderImages(response.body());
+                    viewInf.displaySliderImages(response.body().getData());
                 }catch (Exception e){
                     Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                 }
+
             }
 
             @Override
-            public void onFailure(Call<List<Slider>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<List<Slider>>> call, Throwable t) {
 
-                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
             }
         });
+
     }
+
+
     public void getTrends(){
 
         Service.Fetcher.getInstance().getNewTrends(1,"en",0).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
