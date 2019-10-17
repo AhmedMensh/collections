@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.collections.R;
 import com.android.collections.adapters.ImagesAdapter;
 import com.android.collections.adapters.ProductSizesAdapter;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.product_detalis.ProSizeArabic;
@@ -35,6 +36,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private static final String TAG = "ProductDetailsActivity";
     private ImagesAdapter imagesAdapter;
     private Unbinder unbinder;
+    private int productId;
     private ProductDetailsPresenter presenter;
     private ProductSizesAdapter productSizesAdapter;
     BottomSheetDialog productSizeBottomSheetDialog;
@@ -63,8 +65,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_product_details);
 
         unbinder = ButterKnife.bind(this);
+        productId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
         presenter = new ProductDetailsPresenter(this ,this,this);
-        presenter.getProductDetails();
+        presenter.getProductDetails(productId);
         sizeBtn.setOnClickListener(this::onClick);
         initImagesRv();
         initToolbar();
@@ -152,13 +155,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         productNameTv.setText(productDetails.getData().getName().trim());
         productDetailsTv.setText(productDetails.getData().getDetails().trim());
         productRateNumberTv.setText("("+productDetails.getData().getVoting().getAllVoting()+")");
+
         if (productDetails.getData().getProSizeArabic() != null)
         productSizesAdapter.setProductSizedDate(productDetails.getData().getProSizeArabic());
     }
 
     @OnClick(R.id.add_to_cart_btn)
     public void onAddToCartClicked(){
-        presenter.addToCart(27,1,6,21);
+        presenter.addToCart(productId,1,1,1);
     }
 
     @OnClick(R.id.add_to_wish_list_btn)

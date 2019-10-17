@@ -2,6 +2,7 @@ package com.android.collections.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.ProductViewHolder> {
+
+    private static final String TAG = "TopOffersAdapter";
 
 
     private Context context;
@@ -57,6 +60,7 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
             holder.productName.setText(mTopOfferList.get(position).getName());
             holder.productCategory.setText(mTopOfferList.get(position).getCatName());
 
+        Log.e(TAG, "onBindViewHolder: "+mTopOfferList.get(position).getId());
 
 
     }
@@ -93,7 +97,10 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         }
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context , ProductDetailsActivity.class));
+
+            Intent i = new Intent(context , ProductDetailsActivity.class);
+            i.putExtra(Constants.PRODUCT_ID,mTopOfferList.get(getAdapterPosition()).getId());
+            context.startActivity(i);
         }
 
 

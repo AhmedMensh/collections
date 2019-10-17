@@ -50,8 +50,9 @@ public class ProductDetailsPresenter {
                     }
                 });
     }
-    public void getProductDetails(){
-        Service.Fetcher.getInstance().getProductDetails(27,1,"en").enqueue(new Callback<ProductDetails>() {
+    public void getProductDetails(int productId){
+        Service.Fetcher.getInstance().getProductDetails(productId,
+                SharedPreferencesManager.getIntValue(context,Constants.USER_ID),"en").enqueue(new Callback<ProductDetails>() {
             @Override
             public void onResponse(Call<ProductDetails> call, Response<ProductDetails> response) {
 
@@ -73,7 +74,8 @@ public class ProductDetailsPresenter {
 
     public void addToFavorite(int productId){
 
-        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,1,"like").enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,SharedPreferencesManager.getIntValue(context,Constants.USER_ID)
+                ,"like").enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 

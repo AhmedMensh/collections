@@ -72,7 +72,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ProductVie
     }
 
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ProductViewHolder extends RecyclerView.ViewHolder {
 
         ImageView productIv;
 
@@ -81,14 +81,10 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ProductVie
 
             productIv = itemView.findViewById(R.id.product_iv);
 
-            itemView.setOnClickListener(this);
+
 
         }
 
-        @Override
-        public void onClick(View view) {
-            context.startActivity(new Intent(context , ProductDetailsActivity.class));
-        }
 
     }
 }

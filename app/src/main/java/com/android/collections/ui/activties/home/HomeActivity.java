@@ -3,6 +3,7 @@ package com.android.collections.ui.activties.home;
 import android.os.Bundle;
 
 import com.android.collections.R;
+import com.android.collections.models.UserCounts;
 import com.android.collections.ui.fragments.cart.CartFragment;
 import com.android.collections.ui.fragments.categories.CategoriesFragment;
 import com.android.collections.ui.fragments.home.HomeFragment;
@@ -71,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
 
         initToolbar();
         attachHomeFragment();
+        UserCounts u = new UserCounts();
     }
 
     private void initToolbar() {

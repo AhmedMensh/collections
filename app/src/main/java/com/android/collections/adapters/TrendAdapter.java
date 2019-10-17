@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.models.NewTrend;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
@@ -74,7 +75,9 @@ public class TrendAdapter  extends RecyclerView.Adapter<TrendAdapter.ViewHolder>
         }
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context , ProductDetailsActivity.class));
+            Intent i = new Intent(context , ProductDetailsActivity.class);
+            i.putExtra(Constants.PRODUCT_ID,mNewTrendList.get(getAdapterPosition()).getId());
+            context.startActivity(i);
         }
     }
 }

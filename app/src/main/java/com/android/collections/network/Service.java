@@ -14,6 +14,7 @@ import com.android.collections.models.RegisterResponse;
 import com.android.collections.models.Slider;
 import com.android.collections.models.TopOffer;
 import com.android.collections.models.User;
+import com.android.collections.models.UserCounts;
 import com.android.collections.models.product_detalis.ProductDetails;
 
 
@@ -121,6 +122,9 @@ public interface Service {
     Call<ApiResponse<List<TopOffer>>> getProductsLikeMe(@Query("lang") String language,
                                                     @Query("user_id") int userIdd,
                                                     @Query("branch_id") int branchId);
+
+    @POST("basket_count.php")
+    Call<ApiResponse<UserCounts>> getUserCounts(@Query("user_id") int userId);
 
     class Fetcher {
 

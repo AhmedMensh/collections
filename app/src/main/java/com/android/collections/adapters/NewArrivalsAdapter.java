@@ -96,7 +96,9 @@ public class NewArrivalsAdapter extends RecyclerView.Adapter<NewArrivalsAdapter.
 
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context , ProductDetailsActivity.class));
+            Intent i = new Intent(context , ProductDetailsActivity.class);
+            i.putExtra(Constants.PRODUCT_ID,mNewArrivalList.get(getAdapterPosition()).getId());
+            context.startActivity(i);
         }
 
 

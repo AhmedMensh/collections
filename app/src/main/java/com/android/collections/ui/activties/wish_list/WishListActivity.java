@@ -11,6 +11,7 @@ import android.util.Log;
 import com.android.collections.R;
 import com.android.collections.adapters.CollectionAdapter;
 import com.android.collections.adapters.FavoriteAdapter;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.models.Favorite;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
@@ -78,7 +79,9 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
     @Override
     public void onItemClickListener(int id) {
 
-        startActivity(new Intent(this , ProductDetailsActivity.class));
+        Intent i = new Intent(this , ProductDetailsActivity.class);
+        i.putExtra(Constants.PRODUCT_ID,id);
+        startActivity(i);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.collections.R;
+import com.android.collections.models.UserCounts;
 import com.android.collections.ui.activties.notifications.NotificationsActivity;
 import com.android.collections.ui.activties.orders.OrdersActivity;
 import com.android.collections.ui.activties.profile.ProfileActivity;
@@ -25,10 +27,12 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class MoreFragment extends Fragment implements View.OnClickListener {
+public class MoreFragment extends Fragment implements View.OnClickListener ,MoreViewInf{
 
+    private static final String TAG = "MoreFragment";
 
     private Unbinder unbinder;
+    private MorePresenter presenter;
 
 
     @BindView(R.id.my_profile_layout)
@@ -59,6 +63,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
 
         unbinder = ButterKnife.bind(this, view);
         setViewsListener();
+        presenter = new MorePresenter(this,getContext());
+        presenter.getUserCounts();
         return view;
     }
 
@@ -124,5 +130,10 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void displayUserCounts(UserCounts userCounts) {
+
     }
 }
