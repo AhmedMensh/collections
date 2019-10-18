@@ -126,6 +126,9 @@ public interface Service {
     @POST("basket_count.php")
     Call<ApiResponse<UserCounts>> getUserCounts(@Query("user_id") int userId);
 
+    @POST("delete_from_basket.php")
+    Call<ApiResponse> deleteFromCart(@Query("cart_id") int cartId);
+
     class Fetcher {
 
         private static final String BASE_URL = "http://cool-lections.com/json_user/";

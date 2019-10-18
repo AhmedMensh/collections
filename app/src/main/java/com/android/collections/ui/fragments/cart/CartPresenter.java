@@ -22,23 +22,25 @@ public class CartPresenter {
     private static final String TAG = "CartPresenter";
     private PublicViewInf publicViewInf;
     private CartViewInf viewInf;
-    private Context context;
 
-    public CartPresenter(PublicViewInf publicViewInf, CartViewInf viewInf ,Context context) {
+
+    public CartPresenter(PublicViewInf publicViewInf, CartViewInf viewInf) {
         this.publicViewInf = publicViewInf;
         this.viewInf = viewInf;
-        this.context = context;
+
     }
 
 
-    public void getCartItems(){
+    public void getCartItems(int userId){
 
-        Service.Fetcher.getInstance().getCartItems(2,"en",2).enqueue(new Callback<ApiResponse<List<CartItem>>>() {
+        Service.Fetcher.getInstance().getCartItems(userId,"en",2).enqueue(new Callback<ApiResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<CartItem>>> call, Response<ApiResponse<List<CartItem>>> response) {
 
+                Log.e(TAG, "onResponse: "+response.message());
                 if (response.body().getSuccess()){
                     viewInf.displayCartItems(response.body());
+                    Log.e(TAG, "onResponse: "+response.body().getSuccess());
                 }else {
                     publicViewInf.showMessage(response.message());
                 }
@@ -53,9 +55,8 @@ public class CartPresenter {
     }
 
 
-    public void getProductsLikeMe(){
-        Service.Fetcher.getInstance().getProductsLikeMe("en",
-                SharedPreferencesManager.getIntValue(context, Constants.USER_ID),1).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
+    public void getProductsLikeMe(int userId){
+        Service.Fetcher.getInstance().getProductsLikeMe("en", userId,1).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<TopOffer>>> call, Response<ApiResponse<List<TopOffer>>> response) {
 
@@ -71,6 +72,31 @@ public class CartPresenter {
             public void onFailure(Call<ApiResponse<List<TopOffer>>> call, Throwable t) {
 
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
+            }
+        });
+    }
+
+    public void removeItemFromCart(int cartId ,int userId) {
+
+
+        Service.Fetcher.getInstance().deleteFromCart(cartId).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                try {
+                    if (response.body().getSuccess()){
+                        getCartItems(userId);
+                    }
+                    publicViewInf.showMessage(response.body().getMessage());
+                }catch (Exception e){
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
             }
         });
     }

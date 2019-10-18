@@ -23,6 +23,7 @@ import com.android.collections.adapters.SliderAdapter;
 import com.android.collections.adapters.TopOffersAdapter;
 import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
@@ -78,9 +79,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
 
         presenter = new HomePresenter(this,this);
 //        presenter.getFlashSale(1,"ar",1);
-        presenter.getTopOffers(1,"ar",1);
+        presenter.getTopOffers(SharedPreferencesManager.getIntValue(getContext(),Constants.USER_ID),"ar",1);
 //        presenter.getNewTrends(1,"ar",1);
-        presenter.getNewArrivals(1,"ar",1);
+        presenter.getNewArrivals(SharedPreferencesManager.getIntValue(getContext(),Constants.USER_ID),"ar",1);
         presenter.getSliderImages();
         setListenerToViews();
 //        initFlashSaleRv();
@@ -153,10 +154,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
         int id = view.getId();
 
         switch (id){
-            case R.id.flash_sale_layout:
+//            case R.id.flash_sale_layout:
             case R.id.new_arrival_layout:
-            case R.id.new_trend_layout:
-            case R.id.top_offer_layout:
+//            case R.id.new_trend_layout:
+//            case R.id.top_offer_layout:
                 getActivity().startActivity(new Intent(getContext(), CollectionActivity.class));
                 break;
         }
@@ -207,6 +208,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
     public void displaySliderImages(List<Slider> sliderList) {
 
         sliderAdapter.setSliderImages(sliderList);
-        Log.e(TAG, "displaySliderImages: ");
+
     }
 }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.models.CartItem;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
@@ -24,9 +25,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     private List<CartItem> mCartItemList;
     private Context context;
+    private ItemClickListener listener;
 
-    public CartAdapter(Context context) {
-
+    public interface ItemClickListener{
+        void onDeleteIconClicked(int id);
+    }
+    public CartAdapter(Context context,ItemClickListener listener) {
+        this.listener =listener;
         this.context = context;
         mCartItemList = new ArrayList<>();
     }
@@ -82,8 +87,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             notifyDataSetChanged();
         }
     }
+
     public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView orderIv;
+        ImageView orderIv , deleteIv;
         TextView orderTypeTv , orderDescTv , orderSizeTv , orderQuantityTv , orderColorTv, orderPriceTv ,
                 orderIncrementIv,orderDecrementIv;
         public CartViewHolder(@NonNull View itemView) {
@@ -98,10 +104,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             orderPriceTv = itemView.findViewById(R.id.order_price_tv);
             orderIncrementIv =itemView.findViewById(R.id.order_increment_iv);
             orderDecrementIv = itemView.findViewById(R.id.order_decrement_iv);
+            deleteIv = itemView.findViewById(R.id.delete_iv);
 
             orderIncrementIv.setOnClickListener(this);
             orderDecrementIv.setOnClickListener(this);
+            deleteIv.setOnClickListener(this);
             itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -116,8 +125,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     decrementItemQuantity(getAdapterPosition());
                     break;
 
+                case R.id.delete_iv:
+
+                    listener.onDeleteIconClicked(mCartItemList.get(getAdapterPosition()).getCartId());
+                    break;
                 default:
-                    context.startActivity(new Intent(context , ProductDetailsActivity.class));
+                    Intent i = new Intent(context , ProductDetailsActivity.class);
+                    i.putExtra(Constants.PRODUCT_ID,mCartItemList.get(getAdapterPosition()).getID());
+                    context.startActivity(i);
                     break;
 
             }

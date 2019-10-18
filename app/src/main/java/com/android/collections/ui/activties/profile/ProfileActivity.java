@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.User;
 import com.bumptech.glide.Glide;
@@ -42,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity  implements ProfileViewIn
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presenter = new ProfilePresenter(this ,this);
-        presenter.getUserProfile();
+        presenter.getUserProfile(SharedPreferencesManager.getIntValue(this, Constants.USER_ID));
     }
 
 

@@ -28,7 +28,7 @@
         android:textColor="@color/orange"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintStart_toEndOf="@id/order_iv"
-        app:layout_constraintTop_toBottomOf="@+id/delet_iv" />
+        app:layout_constraintTop_toBottomOf="@+id/delete_iv" />
 
     <TextView
         android:id="@+id/order_desc_tv"
@@ -192,7 +192,7 @@
 
 
     <ImageView
-        android:id="@+id/delet_iv"
+        android:id="@+id/delete_iv"
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_margin="@dimen/_5sdp"

@@ -61,7 +61,7 @@
                     android:id="@+id/cart_items_cl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -191,23 +191,89 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/view3" />
 
+
                     <TextView
-                        android:id="@+id/phone_number_tv"
+                        android:id="@+id/user_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text="Ahmed Mensh"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/contact_label" />
+
+                    <TextView
+                        android:id="@+id/user_phone_number_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
                         android:text="012845365248"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/contact_label" />
+                        app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Choose Payment"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/orange"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@id/user_phone_number_tv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/payment_method_label"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Online Payment"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@id/payment_method_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/online_label"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cash on delivery"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_19sdp"
+                        app:layout_constraintTop_toBottomOf="@id/online_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/cash_label"/>
+                    <RadioGroup
+                        android:id="@+id/payment_method_rg"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintStart_toEndOf="@id/online_label"
+                        app:layout_constraintTop_toBottomOf="@id/payment_method_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </RadioGroup>
                     <View
                         android:id="@+id/view4"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@color/off_white"
-                        app:layout_constraintTop_toBottomOf="@+id/phone_number_tv" />
+                        app:layout_constraintTop_toBottomOf="@+id/user_phone_number_tv" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

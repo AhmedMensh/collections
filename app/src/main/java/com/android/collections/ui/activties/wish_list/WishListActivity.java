@@ -13,6 +13,7 @@ import com.android.collections.adapters.CollectionAdapter;
 import com.android.collections.adapters.FavoriteAdapter;
 import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.Favorite;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 
@@ -29,6 +30,7 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
     private Unbinder unbinder;
     private FavoriteAdapter favoriteAdapter;
     private WishListPresenter presenter;
+    private int userId;
 
     @BindView(R.id.wish_list_rv)
     RecyclerView wishListRv;
@@ -39,8 +41,9 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
         unbinder = ButterKnife.bind(this);
         initCollectionRv();
 
+        userId = SharedPreferencesManager.getIntValue(this,Constants.USER_ID);
         presenter = new WishListPresenter(this ,this);
-        presenter.getWishList();
+        presenter.getWishList(userId);
     }
 
     private void initCollectionRv(){
@@ -86,7 +89,7 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
 
     @Override
     public void onLikeIconClickListener(int id) {
-        presenter.removeFromFavorite(id);
-        Log.e(TAG, "onLikeIconClickListener: "+id);
+        presenter.removeFromFavorite(id,userId);
+
     }
 }

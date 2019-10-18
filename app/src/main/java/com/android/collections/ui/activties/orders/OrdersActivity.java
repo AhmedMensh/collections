@@ -10,7 +10,9 @@ import android.util.Log;
 
 import com.android.collections.R;
 import com.android.collections.adapters.OrdersAdapter;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.Order;
 
@@ -41,7 +43,7 @@ public class OrdersActivity extends AppCompatActivity implements PublicViewInf ,
         initToolbar();
 
         presenter = new OrdersPresenter(this ,this);
-        presenter.getMyOrders();
+        presenter.getMyOrders(SharedPreferencesManager.getIntValue(this, Constants.USER_ID));
     }
 
     private void initToolbar() {

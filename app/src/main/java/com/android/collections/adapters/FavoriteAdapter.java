@@ -34,6 +34,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         this.context = context;
         this.listener = listener;
         mFavoriteList = new ArrayList<>();
+
     }
 
     @NonNull
@@ -62,6 +63,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    private void removeItemFromWishList(int position){
+        mFavoriteList.remove(position);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return mFavoriteList.size();
@@ -87,6 +92,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             switch (view.getId()){
                 case R.id.like_iv:
                     listener.onLikeIconClickListener(mFavoriteList.get(getAdapterPosition()).getID());
+                    removeItemFromWishList(getAdapterPosition());
                     break;
 
                     default:listener.onItemClickListener(mFavoriteList.get(getAdapterPosition()).getID());

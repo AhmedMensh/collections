@@ -14,6 +14,7 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
     @Override
     public CollectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.collection_item,parent,false);
+       view.findViewById(R.id.like_iv).setVisibility(View.INVISIBLE);
        return  new CollectionViewHolder(view);
     }
 

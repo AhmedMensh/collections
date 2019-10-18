@@ -17,6 +17,7 @@ import com.android.collections.adapters.ImagesAdapter;
 import com.android.collections.adapters.ProductSizesAdapter;
 import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.product_detalis.ProSizeArabic;
 import com.android.collections.models.product_detalis.ProductDetails;
@@ -36,7 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private static final String TAG = "ProductDetailsActivity";
     private ImagesAdapter imagesAdapter;
     private Unbinder unbinder;
-    private int productId;
+    private int productId ,userId;
     private ProductDetailsPresenter presenter;
     private ProductSizesAdapter productSizesAdapter;
     BottomSheetDialog productSizeBottomSheetDialog;
@@ -65,9 +66,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_product_details);
 
         unbinder = ButterKnife.bind(this);
+        userId = SharedPreferencesManager.getIntValue(this,Constants.USER_ID);
         productId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
-        presenter = new ProductDetailsPresenter(this ,this,this);
-        presenter.getProductDetails(productId);
+        presenter = new ProductDetailsPresenter(this ,this);
+        presenter.getProductDetails(productId,userId);
         sizeBtn.setOnClickListener(this::onClick);
         initImagesRv();
         initToolbar();
@@ -162,12 +164,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
     @OnClick(R.id.add_to_cart_btn)
     public void onAddToCartClicked(){
-        presenter.addToCart(productId,1,1,1);
+        presenter.addToCart(userId,productId,1,1,1);
     }
 
     @OnClick(R.id.add_to_wish_list_btn)
     public void onAddToWishListClicked(){
-        presenter.addToFavorite(1);
+        presenter.addToFavorite(1,userId);
     }
 
     @Override

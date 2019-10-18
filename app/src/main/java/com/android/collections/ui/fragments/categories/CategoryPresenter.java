@@ -18,12 +18,10 @@ import retrofit2.Response;
 public class CategoryPresenter {
 
     private static final String TAG = "CategoryPresenter";
-    private Context context;
     private PublicViewInf publicViewInf;
     private CategoryViewInf categoryViewInf;
 
-    public CategoryPresenter(Context context, PublicViewInf publicViewInf, CategoryViewInf categoryViewInf) {
-        this.context = context;
+    public CategoryPresenter(PublicViewInf publicViewInf, CategoryViewInf categoryViewInf) {
         this.publicViewInf = publicViewInf;
         this.categoryViewInf = categoryViewInf;
     }

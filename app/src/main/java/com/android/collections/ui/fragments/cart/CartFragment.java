@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.android.collections.R;
 import com.android.collections.adapters.CartAdapter;
 import com.android.collections.adapters.MayLikeAdapter;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.CartItem;
@@ -38,7 +40,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements View.OnClickListener, PublicViewInf ,CartViewInf {
+public class CartFragment extends Fragment implements View.OnClickListener, PublicViewInf ,CartViewInf,CartAdapter.ItemClickListener {
 
 
     private static final String TAG = "CartActivity";
@@ -46,6 +48,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     private Unbinder unbinder;
     private MayLikeAdapter mayLikeAdapter;
     private CartPresenter presenter;
+    private int userId;
 
     @BindView(R.id.cart_rv)
     RecyclerView cartRv;
@@ -60,6 +63,8 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @BindView(R.id.no_cart_items_cl)
     ConstraintLayout noItemsCl;
     @BindView(R.id.cart_items_cl) ConstraintLayout cartItemsCl;
+    @BindView(R.id.user_name_tv) TextView userNameTv;
+    @BindView(R.id.user_phone_number_tv) TextView userPhoneNumberTv;
 
 
     public CartFragment() {
@@ -78,9 +83,11 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         initCartRv();
         initMayLikeRv();
 
-        presenter = new CartPresenter(this, this,getContext());
-        presenter.getCartItems();
-        presenter.getProductsLikeMe();
+        userId = SharedPreferencesManager.getIntValue(getContext(), Constants.USER_ID);
+
+        presenter = new CartPresenter(this, this);
+        presenter.getCartItems(userId);
+        presenter.getProductsLikeMe(userId);
         return view;
     }
 
@@ -102,7 +109,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
     private void initCartRv() {
 
-        cartAdapter = new CartAdapter(getContext());
+        cartAdapter = new CartAdapter(getContext(),this);
         cartRv.setAdapter(cartAdapter);
         cartRv.setHasFixedSize(true);
         cartRv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -182,21 +189,32 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
     @Override
     public void displayCartItems(ApiResponse<List<CartItem>> response) {
-        Log.e(TAG, "displayCartItems: "+response.getData().size() );
 
-        if (response.getData().size() > 0){
-            cartItemsCl.setVisibility(View.VISIBLE);
-            noItemsCl.setVisibility(View.INVISIBLE);
+
             cartAdapter.setCartItemList(response.getData());
-            subTotalTv.setText(response.getSubTotal()+"");
-            shippingTv.setText(response.getShipping()+"");
-            totalTv.setText(response.getTotal()+"");
-        }
+        subTotalTv.setText(response.getSubTotal()+"");
+        shippingTv.setText(response.getShipping()+"");
+        totalTv.setText(response.getTotal()+"");
+            if (response.getData().size() > 0){
+                cartItemsCl.setVisibility(View.VISIBLE);
+                noItemsCl.setVisibility(View.INVISIBLE);
+            }
+            else {
+                cartItemsCl.setVisibility(View.INVISIBLE);
+                noItemsCl.setVisibility(View.VISIBLE);
+            }
 
     }
 
     @Override
     public void displayProductsLikeMe(List<TopOffer> data) {
         mayLikeAdapter.setData(data);
+    }
+
+    @Override
+    public void onDeleteIconClicked(int cartId) {
+
+        presenter.removeItemFromCart(cartId,userId);
+
     }
 }

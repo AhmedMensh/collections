@@ -1,6 +1,10 @@
 package com.android.collections.ui.activties.profile;
 
+import android.content.Context;
+
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.User;
 import com.android.collections.network.Service;
@@ -15,13 +19,14 @@ public class ProfilePresenter {
     private PublicViewInf publicViewInf;
     private ProfileViewInf viewInf;
 
+
     public ProfilePresenter(PublicViewInf publicViewInf, ProfileViewInf viewInf) {
         this.publicViewInf = publicViewInf;
         this.viewInf = viewInf;
     }
 
-    public void getUserProfile(){
-        Service.Fetcher.getInstance().getUserProfile(1,"en").enqueue(new Callback<ApiResponse<User>>() {
+    public void getUserProfile(int userId){
+        Service.Fetcher.getInstance().getUserProfile(userId,"en").enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 

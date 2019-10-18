@@ -1,8 +1,11 @@
 package com.android.collections.ui.activties.wish_list;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.Favorite;
 import com.android.collections.network.Service;
@@ -20,14 +23,16 @@ public class WishListPresenter {
     private PublicViewInf publicViewInf;
     private WishListViewInf wishListViewInf;
 
+
     public WishListPresenter(PublicViewInf publicViewInf, WishListViewInf wishListViewInf) {
         this.publicViewInf = publicViewInf;
         this.wishListViewInf = wishListViewInf;
+
     }
 
-    public void getWishList(){
+    public void getWishList(int userId){
 
-        Service.Fetcher.getInstance().getFavoriteList(1,"en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
+        Service.Fetcher.getInstance().getFavoriteList(userId,"en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Favorite>>> call, Response<ApiResponse<List<Favorite>>> response) {
 
@@ -46,9 +51,9 @@ public class WishListPresenter {
         });
     }
 
-    public void removeFromFavorite(int productId){
+    public void removeFromFavorite(int productId, int userId){
 
-        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,2,"dislike").enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,userId,"dislike").enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 

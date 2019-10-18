@@ -47,6 +47,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
     LinearLayout wishListLayout;
     @BindView(R.id.notifications_layout)
     LinearLayout notificationsLayout;
+    @BindView(R.id.order_counts_tv) TextView orderCountsTv;
+    @BindView(R.id.wish_list_counts_tv) TextView wishListCountsTv;
 
 
     public MoreFragment() {
@@ -64,7 +66,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
         unbinder = ButterKnife.bind(this, view);
         setViewsListener();
         presenter = new MorePresenter(this,getContext());
-        presenter.getUserCounts();
+
         return view;
     }
 
@@ -78,6 +80,12 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
         notificationsLayout.setOnClickListener(this::onClick);
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getUserCounts();
+    }
 
     @Override
     public void onDestroy() {
@@ -135,5 +143,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
     @Override
     public void displayUserCounts(UserCounts userCounts) {
 
+        orderCountsTv.setText(userCounts.getOrders().getOrdersCount()+"");
+        wishListCountsTv.setText(userCounts.getWishList().getWishListCount()+"");
     }
 }

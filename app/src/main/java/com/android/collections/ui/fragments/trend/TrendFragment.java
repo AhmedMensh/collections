@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import com.android.collections.R;
 import com.android.collections.adapters.SliderAdapter;
 import com.android.collections.adapters.TrendAdapter;
+import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
 import com.android.collections.models.NewTrend;
 import com.android.collections.models.Slider;
@@ -56,7 +58,7 @@ public class TrendFragment extends Fragment implements PublicViewInf ,TrendViewI
 
         unbinder = ButterKnife.bind(this,view);
         presenter = new TrendPresenter(this ,this);
-        presenter.getTrends();
+        presenter.getTrends(SharedPreferencesManager.getIntValue(getContext(), Constants.USER_ID));
         presenter.getSliderImages();
         initTrendRv();
         initSliderRv();

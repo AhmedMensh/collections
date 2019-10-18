@@ -52,7 +52,7 @@ public class CategoriesFragment extends Fragment implements PublicViewInf ,Categ
 
 
         initMainCategoryRv();
-        presenter = new CategoryPresenter(getContext(),this,this);
+        presenter = new CategoryPresenter(this,this);
 
         presenter.getMainCategories();
         return view;
