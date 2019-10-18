@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -71,6 +73,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @BindView(R.id.user_phone_number_tv) TextView userPhoneNumberTv;
     @BindView(R.id.payment_method_rg)
     RadioGroup paymentMethodRg;
+    @BindView(R.id.webview) WebView webView;
 
 
     public CartFragment() {
@@ -95,9 +98,18 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         presenter.getCartItems(userId);
         presenter.getProductsLikeMe(userId);
 
-        paymentMethodRg.setOnCheckedChangeListener((radioGroup, i) -> paymentType = i);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+
+        paymentMethodRg.setOnCheckedChangeListener((radioGroup, i) -> {paymentType = i;
+            if (i%2 == 0) paymentType =2;
+            else paymentType =1;
+        });
         return view;
     }
+
+
 
     private void initViews() {
 
@@ -147,18 +159,18 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         alertDialog.show();
     }
 
-    private void setCheckOutDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.check_out_order_dialog,null);
-
-        Button doneBtn = view.findViewById(R.id.done_btn);
-        doneBtn.setOnClickListener(this::onClick);
-        builder.setView(view);
-
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
+//    private void setCheckOutDialog(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        View view = getLayoutInflater().inflate(R.layout.check_out_order_dialog,null);
+//
+//        Button doneBtn = view.findViewById(R.id.done_btn);
+//        doneBtn.setOnClickListener(this::onClick);
+//        builder.setView(view);
+//
+//
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//    }
 
     @Override
     public void onClick(View view) {
@@ -172,10 +184,13 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
             case R.id.check_out_btn:
                 if (paymentType ==0){
-                    Toast.makeText(getContext(),"Please select payment",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext()
+                            ,"Please select payment",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 presenter.paymentCheckout(userId,paymentType,promoCode);
+
                 break;
 
             case R.id.done_btn:
@@ -228,6 +243,11 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @Override
     public void checkoutResponse(ApiResponse<PaymentResponse> response) {
 
+        if (!response.getPaymentUrl().equals("")){
+
+            webView.loadUrl(response.getPaymentUrl());
+            webView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

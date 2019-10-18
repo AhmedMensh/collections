@@ -26,6 +26,6 @@ data class ApiResponse<T>(
         var total: Int? = null,
         //case check payment only
         @SerializedName("url_payment")
-        var paymentUrl: String? = null
+        var paymentUrl: String  = ""
 
 )

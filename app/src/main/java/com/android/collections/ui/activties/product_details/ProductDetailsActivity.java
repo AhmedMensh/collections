@@ -190,12 +190,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             Toast.makeText(this, "Please select color", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        Log.e(TAG, "onAddToCartClicked: "+selectedColorId );
-        Log.e(TAG, "onAddToCartClicked: "+selectedSizeId );
-        Log.e(TAG, "onAddToCartClicked: "+productQuantity );
-        Log.e(TAG, "onAddToCartClicked: "+userId );
-        Log.e(TAG, "onAddToCartClicked: "+productId );
         presenter.addToCart(userId,productId,productQuantity,selectedSizeId,selectedColorId);
     }
 
