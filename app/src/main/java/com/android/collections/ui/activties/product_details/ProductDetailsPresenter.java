@@ -8,7 +8,7 @@ import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.ApiResponse;
-import com.android.collections.models.product_detalis.ProductDetails;
+import com.android.collections.models.ProductDetails;
 import com.android.collections.network.Service;
 
 import retrofit2.Call;
@@ -54,9 +54,10 @@ public class ProductDetailsPresenter {
             @Override
             public void onResponse(Call<ProductDetails> call, Response<ProductDetails> response) {
 
-                if (response.body().getStatus()){
+                try{
                     viewInf.displayProductDetails(response.body());
-                }else {
+                    Log.e(TAG, "onResponse: "+response.body().getCatName());
+                }catch (Exception e){
                     publicViewInf.showMessage("Something went wrong");
                 }
             }

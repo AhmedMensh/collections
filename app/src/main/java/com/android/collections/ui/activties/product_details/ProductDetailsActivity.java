@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.collections.R;
 import com.android.collections.adapters.ImagesAdapter;
@@ -19,11 +20,12 @@ import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.helpers.Utilities;
-import com.android.collections.models.product_detalis.ProSizeArabic;
-import com.android.collections.models.product_detalis.ProductDetails;
+import com.android.collections.models.ProductDetails;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +43,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private ProductDetailsPresenter presenter;
     private ProductSizesAdapter productSizesAdapter;
     BottomSheetDialog productSizeBottomSheetDialog;
+    private ProductDetails mProductDetails;
+    int selectedColorId =0 , selectedSizeId , productQuantity =0;
 
     //widgets
     @BindView(R.id.product_images_rv)
@@ -58,6 +62,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @BindView(R.id.product_colors_group)
     ChipGroup productColorsCg;
 
+
     private RecyclerView productSizesRv;
 
     @Override
@@ -74,15 +79,23 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         initImagesRv();
         initToolbar();
         productSizesAdapter = new ProductSizesAdapter(this);
-        addToChipGroup();
+
+
+        Log.e(TAG, "onCreate: "+productId );
+
+
+        productColorsCg.setOnCheckedChangeListener((group, checkedId) -> selectedColorId =group.getCheckedChipId());
+
     }
 
-    private void addToChipGroup(){
+    private void addProductColorsToChipGroup(List<ProductDetails.Data.Size.Color> productColors){
 
-        for (int i =0 ; i < 10 ;i++){
+        productColorsCg.removeAllViews();
+        for (int i =0 ; i < productColors.size() ;i++){
             Chip chip = new Chip(productColorsCg.getContext());
-            chip.setText("Blue");
+            chip.setText(productColors.get(i).getColorName());
             chip.setChipMinHeight(120f);
+            chip.setId(productColors.get(i).getColorId());
 //            chip.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.orange)));
             chip.setClickable(true);
             chip.setCheckable(true);
@@ -152,30 +165,53 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @Override
     public void displayProductDetails(ProductDetails productDetails) {
 
+        mProductDetails =productDetails;
         imagesAdapter.setProductImages(productDetails.getData().getImages());
         productCatTv.setText(productDetails.getCatName().trim());
         productNameTv.setText(productDetails.getData().getName().trim());
         productDetailsTv.setText(productDetails.getData().getDetails().trim());
         productRateNumberTv.setText("("+productDetails.getData().getVoting().getAllVoting()+")");
 
-        if (productDetails.getData().getProSizeArabic() != null)
-        productSizesAdapter.setProductSizedDate(productDetails.getData().getProSizeArabic());
+        productSizesAdapter.setProductSizedDate(productDetails.getData().getSize());
+//        if (productDetails.getData().getSize().size() > 0){
+//            mProductAvailableSizes = productDetails.getData().getSize().get(0);
+//            addProductColorsToChipGroup(mProductAvailableSizes.getColor());
+//        }
+
     }
 
     @OnClick(R.id.add_to_cart_btn)
     public void onAddToCartClicked(){
-        presenter.addToCart(userId,productId,1,1,1);
+        if (selectedSizeId == 0){
+            Toast.makeText(this, "Please select size", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (selectedColorId == 0){
+            Toast.makeText(this, "Please select color", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Log.e(TAG, "onAddToCartClicked: "+selectedColorId );
+        Log.e(TAG, "onAddToCartClicked: "+selectedSizeId );
+        Log.e(TAG, "onAddToCartClicked: "+productQuantity );
+        Log.e(TAG, "onAddToCartClicked: "+userId );
+        Log.e(TAG, "onAddToCartClicked: "+productId );
+        presenter.addToCart(userId,productId,productQuantity,selectedSizeId,selectedColorId);
     }
 
     @OnClick(R.id.add_to_wish_list_btn)
     public void onAddToWishListClicked(){
-        presenter.addToFavorite(1,userId);
+        presenter.addToFavorite(productId,userId);
     }
 
     @Override
-    public void onItemClickListener(ProSizeArabic item) {
+    public void onItemSizeClickListener(ProductDetails.Data.Size item) {
         sizeBtn.setText(item.getSizeName());
         productSizeBottomSheetDialog.dismiss();
+
+        addProductColorsToChipGroup(item.getColor());
+        selectedSizeId = item.getSizeId();
+        productQuantity = item.getQuantity();
 
     }
 }

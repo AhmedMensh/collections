@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
-import com.android.collections.models.product_detalis.Image;
+import com.android.collections.models.ProductDetails;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewHolder> {
 
-    private List<Image> mImageList;
+    private List<ProductDetails.Data.Image> mImageList;
     private Context context;
     public ImagesAdapter(Context context) {
         mImageList = new ArrayList<>();
@@ -49,10 +49,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
         return mImageList.size();
     }
 
-    public void setProductImages(List<Image> images) {
+    public void setProductImages(List<ProductDetails.Data.Image> images) {
+
         mImageList = images;
         notifyDataSetChanged();
     }
+
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView productImage;

@@ -4,18 +4,20 @@ package com.android.collections.network;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.CartItem;
 import com.android.collections.models.Category;
+import com.android.collections.models.Collection;
 import com.android.collections.models.Favorite;
 import com.android.collections.models.FlashSale;
 import com.android.collections.models.NewArrival;
 import com.android.collections.models.NewTrend;
 import com.android.collections.models.Notification;
 import com.android.collections.models.Order;
+import com.android.collections.models.PaymentResponse;
+import com.android.collections.models.ProductDetails;
 import com.android.collections.models.RegisterResponse;
 import com.android.collections.models.Slider;
 import com.android.collections.models.TopOffer;
 import com.android.collections.models.User;
 import com.android.collections.models.UserCounts;
-import com.android.collections.models.product_detalis.ProductDetails;
 
 
 import java.util.List;
@@ -97,8 +99,8 @@ public interface Service {
 
     @POST("proDetails.php")
     Call<ProductDetails> getProductDetails(@Query("pro_id") int productId,
-                                           @Query("user_id") int userId,
-                                           @Query("lang") String language);
+                                                        @Query("user_id") int userId,
+                                                        @Query("lang") String language);
 
     @POST("add_basket.php")
     Call<ApiResponse> addToCart(@Query("pro_id") int productId,
@@ -128,6 +130,31 @@ public interface Service {
 
     @POST("delete_from_basket.php")
     Call<ApiResponse> deleteFromCart(@Query("cart_id") int cartId);
+
+    @POST("basket_update_quantity.php")
+    Call<ApiResponse> updateItemQuantity(@Query("user_id") int userId,
+                                         @Query("pro_id") int productId,
+                                         @Query("quantity") int quantity,
+                                         @Query("size_id") int sizeId,
+                                         @Query("color_id") int colorId);
+
+    @POST("get_products.php")
+    Call<ApiResponse<Collection>> getProductsByCategory(@Query("user_id") int userId,
+                                                 @Query("branch_id") int branchId,
+                                                 @Query("lang") String language);
+
+
+
+    @POST("payment.php")
+    Call<ApiResponse<PaymentResponse>> paymentCheckout(@Query("user_id") int userId,
+                                                       @Query("payment_type") int paymentType,
+                                                       @Query("lang") String language,
+                                                       @Query("delivery") Boolean delivery,
+                                                       @Query("promo_code") int promoCode,
+                                                       @Query("currency_id") int currencyId);
+
+
+
 
     class Fetcher {
 

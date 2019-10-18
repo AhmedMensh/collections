@@ -45,7 +45,7 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
 
         holder.categoriesChildRv.setLayoutManager(new LinearLayoutManager(context));
         holder.categoriesChildRv.setHasFixedSize(true);
-        holder.categoriesChildRv.setAdapter(new SubCategoryAdapter(mCategoryList.get(position).getSubCategories()));
+        holder.categoriesChildRv.setAdapter(new SubCategoryAdapter(mCategoryList.get(position).getSubCategories(),context));
 
         RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.place_holder).error(R.drawable.place_holder);
 

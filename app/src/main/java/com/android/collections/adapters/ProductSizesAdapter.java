@@ -9,27 +9,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
-import com.android.collections.models.product_detalis.ProSizeArabic;
-import com.android.collections.models.product_detalis.ProSizeEurope;
+import com.android.collections.models.ProductDetails;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSizesAdapter extends RecyclerView.Adapter<ProductSizesAdapter.ViewHolder> {
 
-    private List<ProSizeArabic> mProSizeArabic;
+    private List<ProductDetails.Data.Size> mProSize;
 
     public ItemClickListener listener;
 
     public ProductSizesAdapter(ItemClickListener listener) {
-        mProSizeArabic = new ArrayList<>();
+        mProSize = new ArrayList<>();
         this.listener = listener;
     }
 
 
 
     public interface ItemClickListener{
-        void onItemClickListener(ProSizeArabic item);
+        void onItemSizeClickListener(ProductDetails.Data.Size item);
     }
     @NonNull
     @Override
@@ -41,17 +41,17 @@ public class ProductSizesAdapter extends RecyclerView.Adapter<ProductSizesAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.productSizeNameTv.setText(mProSizeArabic.get(position).getSizeName());
+        holder.productSizeNameTv.setText(mProSize.get(position).getSizeName());
     }
 
     @Override
     public int getItemCount() {
-        return mProSizeArabic.size();
+        return mProSize.size();
     }
 
-    public void setProductSizedDate(List<ProSizeArabic> proSizeArabic) {
+    public void setProductSizedDate(List<ProductDetails.Data.Size> productSizedDate) {
 
-        mProSizeArabic = proSizeArabic;
+        mProSize = productSizedDate;
         notifyDataSetChanged();
     }
 
@@ -68,7 +68,7 @@ public class ProductSizesAdapter extends RecyclerView.Adapter<ProductSizesAdapte
         @Override
         public void onClick(View view) {
 
-            listener.onItemClickListener(mProSizeArabic.get(getAdapterPosition()));
+            listener.onItemSizeClickListener(mProSize.get(getAdapterPosition()));
         }
     }
 }

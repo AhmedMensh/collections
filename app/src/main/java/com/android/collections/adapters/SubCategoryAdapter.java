@@ -1,5 +1,7 @@
 package com.android.collections.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.models.SubCat;
+import com.android.collections.ui.activties.collection.CollectionActivity;
 
 import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ChildViewHolder> {
 
     private List<SubCat> mSubCategories;
-    public SubCategoryAdapter(List<SubCat> subCategories) {
-
+    private Context context;
+    public SubCategoryAdapter(List<SubCat> subCategories , Context context) {
+        this.context = context;
         mSubCategories = subCategories;
     }
 
@@ -41,12 +46,22 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         return mSubCategories.size();
     }
 
-    public class ChildViewHolder extends RecyclerView.ViewHolder {
+    public class ChildViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView subCategoryName;
         public ChildViewHolder(@NonNull View itemView) {
             super(itemView);
 
             subCategoryName = itemView.findViewById(R.id.sub_category_name);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            Intent i = new Intent(context, CollectionActivity.class);
+            i.putExtra(Constants.PRODUCT_ID,mSubCategories.get(getAdapterPosition()).getIDSub());
+            i.putExtra(Constants.PRODUCT_NAME,mSubCategories.get(getAdapterPosition()).getNameSub());
+            context.startActivity(i);
         }
     }
 }

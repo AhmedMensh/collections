@@ -30,6 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/orange"
             android:text="LONG DRESS"/>
@@ -39,6 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/_1sdp"
             android:textColor="@color/black"
             android:text="La sim hal"/>
@@ -48,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_1sdp"
             android:textColor="@color/black"
             android:text="$5454"/>

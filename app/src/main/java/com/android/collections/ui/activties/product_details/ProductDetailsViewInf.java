@@ -1,6 +1,7 @@
 package com.android.collections.ui.activties.product_details;
 
-import com.android.collections.models.product_detalis.ProductDetails;
+
+import com.android.collections.models.ProductDetails;
 
 public interface ProductDetailsViewInf {
 

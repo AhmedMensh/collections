@@ -3,7 +3,7 @@ package com.android.collections.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ApiResponse <T>(
+data class ApiResponse<T>(
         @SerializedName("message")
         @Expose
         val message: String? = null,
@@ -17,12 +17,15 @@ data class ApiResponse <T>(
         //case of cart items only
         @SerializedName("sub_total")
         @Expose
-        var subTotal : Int ? = null,
+        var subTotal: Int? = null,
         @SerializedName("shipping")
         @Expose
-        var shipping : Int ? = null,
+        var shipping: Int? = null,
         @SerializedName("total")
         @Expose
-        var total : Int ? = null
+        var total: Int? = null,
+        //case check payment only
+        @SerializedName("url_payment")
+        var paymentUrl: String? = null
 
 )

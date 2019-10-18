@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.collections.R;
 import com.android.collections.helpers.Constants;
 import com.android.collections.models.CartItem;
+import com.android.collections.models.UserCounts;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -29,6 +30,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public interface ItemClickListener{
         void onDeleteIconClicked(int id);
+        void updateItemQuantity(CartItem item);
     }
     public CartAdapter(Context context,ItemClickListener listener) {
         this.listener =listener;
@@ -76,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     private void increaseItemQuantity(int itemPosition){
         mCartItemList.get(itemPosition).setQuantity(mCartItemList.get(itemPosition).getQuantity()+1);
-        notifyDataSetChanged();
+        listener.updateItemQuantity(mCartItemList.get(itemPosition));
     }
 
     private void decrementItemQuantity(int itemPosition){
@@ -84,7 +86,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         if (mCartItemList.get(itemPosition).getQuantity() > 1){
 
             mCartItemList.get(itemPosition).setQuantity(mCartItemList.get(itemPosition).getQuantity() -1);
-            notifyDataSetChanged();
+            listener.updateItemQuantity(mCartItemList.get(itemPosition));
         }
     }
 

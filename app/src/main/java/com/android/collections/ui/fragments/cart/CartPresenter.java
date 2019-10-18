@@ -8,6 +8,8 @@ import com.android.collections.helpers.PublicViewInf;
 import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.ApiResponse;
 import com.android.collections.models.CartItem;
+import com.android.collections.models.Collection;
+import com.android.collections.models.PaymentResponse;
 import com.android.collections.models.TopOffer;
 import com.android.collections.network.Service;
 
@@ -37,10 +39,9 @@ public class CartPresenter {
             @Override
             public void onResponse(Call<ApiResponse<List<CartItem>>> call, Response<ApiResponse<List<CartItem>>> response) {
 
-                Log.e(TAG, "onResponse: "+response.message());
+
                 if (response.body().getSuccess()){
                     viewInf.displayCartItems(response.body());
-                    Log.e(TAG, "onResponse: "+response.body().getSuccess());
                 }else {
                     publicViewInf.showMessage(response.message());
                 }
@@ -99,5 +100,64 @@ public class CartPresenter {
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
             }
         });
+
     }
+
+    public void updateItemQuantity(int userId , int productId ,int quantity,int sizeId ,int colorId){
+
+        Service.Fetcher.getInstance().updateItemQuantity(userId,productId,quantity,sizeId,colorId).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                try{
+
+
+                    publicViewInf.showMessage(response.body().getMessage());
+                    if (response.body().getSuccess()){
+
+                        getCartItems(userId);
+                    }
+                }catch (Exception e){
+
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+
+    }
+
+    public void paymentCheckout(int userId , int paymentType,int promoCode){
+        Service.Fetcher.getInstance().paymentCheckout(userId,paymentType,"en",true,promoCode,1)
+                .enqueue(new Callback<ApiResponse<PaymentResponse>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<PaymentResponse>> call, Response<ApiResponse<PaymentResponse>> response) {
+
+                        try{
+                            if (!response.body().getMessage().equals("")){
+                                viewInf.checkoutResponse(response.body());
+                                publicViewInf.showMessage(response.body().getMessage());
+                        }
+                        }catch (Exception e){
+
+                            Log.e(TAG, "onFailure: "+e.getLocalizedMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<PaymentResponse>> call, Throwable t) {
+
+
+                        Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                    }
+                });
+    }
+
 }

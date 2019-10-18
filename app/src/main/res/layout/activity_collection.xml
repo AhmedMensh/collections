@@ -32,6 +32,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -40,6 +41,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_18sdp"
         android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@color/white"
         android:id="@+id/collection_name_tv"
@@ -49,6 +51,18 @@
         android:id="@+id/collection_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/collection_name_tv"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/new_arrival_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

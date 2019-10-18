@@ -10,4 +10,5 @@ public class  Constants {
     public final static int TOP_OFFER_LAYOUT =  R.layout.top_offer_item;
     public static final String USER_ID ="userId" ;
     public static final String PRODUCT_ID = "product_id";
+    public static final String PRODUCT_NAME = "product_name";
 }

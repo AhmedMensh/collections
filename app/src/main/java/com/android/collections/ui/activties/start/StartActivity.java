@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.android.collections.R;
 import com.android.collections.helpers.Constants;
 import com.android.collections.helpers.SharedPreferencesManager;
-import com.android.collections.models.product_detalis.ProductDetails;
+
 import com.android.collections.ui.activties.home.HomeActivity;
 import com.android.collections.ui.activties.login.LoginActivity;
 import com.android.collections.ui.activties.product_details.ProductDetailsActivity;
