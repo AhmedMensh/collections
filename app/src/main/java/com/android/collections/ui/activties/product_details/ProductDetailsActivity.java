@@ -44,7 +44,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private ProductSizesAdapter productSizesAdapter;
     BottomSheetDialog productSizeBottomSheetDialog;
     private ProductDetails mProductDetails;
-    int selectedColorId =0 , selectedSizeId , productQuantity =0;
+    int selectedColorId =-1 , selectedSizeId , productQuantity =0;
 
     //widgets
     @BindView(R.id.product_images_rv)
@@ -80,8 +80,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         initToolbar();
         productSizesAdapter = new ProductSizesAdapter(this);
 
-
-        Log.e(TAG, "onCreate: "+productId );
 
 
         productColorsCg.setOnCheckedChangeListener((group, checkedId) -> selectedColorId =group.getCheckedChipId());
@@ -186,7 +184,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             Toast.makeText(this, "Please select size", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (selectedColorId == 0){
+        if (selectedColorId == -1){
             Toast.makeText(this, "Please select color", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -19,7 +19,6 @@
             android:id="@+id/trend_pic"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_120sdp"
-            android:src="@mipmap/download"
             android:scaleType="fitXY"/>
 
         <TextView

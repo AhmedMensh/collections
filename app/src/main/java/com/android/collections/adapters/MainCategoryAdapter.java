@@ -1,6 +1,7 @@
 package com.android.collections.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
 import com.android.collections.models.Category;
+import com.android.collections.ui.activties.collection.CollectionActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -66,7 +69,7 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
         notifyDataSetChanged();
     }
 
-    public class CategoryParentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CategoryParentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.category_child_lv)
         RecyclerView categoriesChildRv;
@@ -86,12 +89,10 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
 
             switch (view.getId()) {
                 case R.id.category_iv:
-
-                    if (categoriesChildRv.getVisibility() == View.GONE) {
-                        categoriesChildRv.setVisibility(View.VISIBLE);
-                    } else {
-                        categoriesChildRv.setVisibility(View.GONE);
-                    }
+                    Intent i = new Intent(context, CollectionActivity.class);
+                    i.putExtra(Constants.PRODUCT_ID,mCategoryList.get(getAdapterPosition()).getId());
+                    i.putExtra(Constants.PRODUCT_NAME,mCategoryList.get(getAdapterPosition()).getName());
+                    context.startActivity(i);
                     break;
 
             }

@@ -34,7 +34,7 @@ public class CollectionPresenter {
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 
                 try {
-                    viewInf.displayNewArrivalsData((response.body().getData()));
+                    viewInf.displayData((response.body().getData()));
                 }catch (Exception e){
                     Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
                 }
@@ -52,19 +52,19 @@ public class CollectionPresenter {
     }
     public void getProductsByCategory(int branchId,int userId){
 
-        Service.Fetcher.getInstance().getProductsByCategory(userId ,branchId ,"en").enqueue(new Callback<ApiResponse<Collection>>() {
+        Service.Fetcher.getInstance().getProductsByCategory(userId ,branchId ,"en").enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
-            public void onResponse(Call<ApiResponse<Collection>> call, Response<ApiResponse<Collection>> response) {
+            public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 
-                try {
-                    viewInf.displayCategoryProducts(response.body().getData());
+                try{
+                    viewInf.displayData(response.body().getData());
                 }catch (Exception e){
-                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage() );
+                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage());
                 }
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<Collection>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<List<NewArrival>>> call, Throwable t) {
 
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
             }

@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.collections.R;
+import com.android.collections.helpers.Constants;
+import com.android.collections.helpers.SharedPreferencesManager;
 import com.android.collections.models.UserCounts;
 import com.android.collections.ui.activties.notifications.NotificationsActivity;
 import com.android.collections.ui.activties.orders.OrdersActivity;
@@ -119,6 +121,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
 
             case R.id.log_out_layout:
                 startActivity(new Intent(getContext(), StartActivity.class));
+                SharedPreferencesManager.setIntValue(getContext(), Constants.USER_ID,0);
                 getActivity().finish();
                 break;
 

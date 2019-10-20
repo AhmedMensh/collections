@@ -139,7 +139,7 @@ public interface Service {
                                          @Query("color_id") int colorId);
 
     @POST("get_products.php")
-    Call<ApiResponse<Collection>> getProductsByCategory(@Query("user_id") int userId,
+    Call<ApiResponse<List<NewArrival>>> getProductsByCategory(@Query("user_id") int userId,
                                                  @Query("branch_id") int branchId,
                                                  @Query("lang") String language);
 

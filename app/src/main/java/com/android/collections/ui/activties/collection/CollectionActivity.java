@@ -37,8 +37,6 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
     private NewArrivalsAdapter newArrivalsAdapter;
     @BindView(R.id.new_arrival_rv) RecyclerView newArrivalRv;
 
-    @BindView(R.id.collection_rv)
-    RecyclerView collectionRv;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collection_name_tv)
@@ -61,7 +59,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
             collectionNameTv.setText(getIntent().getStringExtra(Constants.PRODUCT_NAME));
 
         }
-        initCollectionRv();
+
         initNewArrivalRv();
         initToolbar();
     }
@@ -80,12 +78,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
         newArrivalRv.setAdapter(newArrivalsAdapter);
         newArrivalRv.setLayoutManager(new GridLayoutManager(this,2,RecyclerView.VERTICAL,false));
     }
-    private void initCollectionRv(){
-        collectionRv.setHasFixedSize(true);
-        collectionRv.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL,false));
-        collectionAdapter = new CollectionAdapter(this);
-        collectionRv.setAdapter(collectionAdapter);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,17 +94,12 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
     }
 
     @Override
-    public void displayNewArrivalsData(List<NewArrival> newArrivalList) {
+    public void displayData(List<NewArrival> newArrivalList) {
 
 
         newArrivalRv.setVisibility(View.VISIBLE);
         newArrivalsAdapter.setNewArrivalsData(newArrivalList);
     }
 
-    @Override
-    public void displayCategoryProducts(Collection collectionList) {
 
-        collectionAdapter.setCollectionData(collectionList.getProducts());
-        collectionRv.setVisibility(View.VISIBLE);
-    }
 }

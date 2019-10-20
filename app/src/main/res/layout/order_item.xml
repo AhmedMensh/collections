@@ -15,7 +15,6 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@mipmap/download"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

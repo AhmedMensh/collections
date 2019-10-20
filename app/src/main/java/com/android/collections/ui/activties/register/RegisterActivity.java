@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.collections.R;
@@ -40,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText userPasswordConfirmEt;
     @BindView(R.id.Sign_up_btn)
     Button registerBtn;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +101,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void showProgressBar() {
 
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
 
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

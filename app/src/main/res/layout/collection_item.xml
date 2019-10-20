@@ -25,7 +25,7 @@
         android:id="@+id/product_iv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_160sdp"
-        android:src="@mipmap/img"
+
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="fitXY"/>
 

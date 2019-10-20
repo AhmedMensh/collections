@@ -25,11 +25,14 @@ public class RegisterPresenter {
 
 
     public void register(String userName,String userMobile,String userPass,String userEmail,String fmcToken,String language){
+
+        publicViewInf.showProgressBar();
         Service.Fetcher.getInstance().register(userName ,userMobile ,userPass , userEmail,fmcToken,language)
                 .enqueue(new Callback<RegisterResponse>() {
                     @Override
                     public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
+                        publicViewInf.hideProgressBar();
                         try {
 
                                 publicViewInf.showMessage(response.body().getMessage());
@@ -45,6 +48,7 @@ public class RegisterPresenter {
                     @Override
                     public void onFailure(Call<RegisterResponse> call, Throwable t) {
 
+                        publicViewInf.hideProgressBar();
                         Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
                     }
                 });

@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface CollectionViewInf {
 
-    void displayNewArrivalsData(List<NewArrival> newArrivalList);
-    void displayCategoryProducts(Collection collectionList);
+    void displayData(List<NewArrival> newArrivalList);
 }

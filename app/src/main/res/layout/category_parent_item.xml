@@ -17,13 +17,10 @@
         android:id="@+id/category_iv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_240sdp"
-        android:scaleType="fitXY"
-
-        android:src="@mipmap/download" />
+        android:scaleType="fitXY" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:id="@+id/category_child_lv"/>
 </LinearLayout>

@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.collections.R;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText userEmailEt;
     @BindView(R.id.password_et)
     EditText userPasswordEt;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setViewsListener();
 
         initToolbar();
+
     }
 
     private void setViewsListener() {
@@ -128,11 +133,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void showProgressBar() {
 
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
 
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
