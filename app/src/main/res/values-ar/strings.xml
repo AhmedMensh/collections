@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">collections</string>
+
+
+    <string name="shop">تسوق \nأحدث صيحات\n الموضة\n الحديثة</string>
+    <string name="device_lang">English</string>
+
+    <string name="register">انشاء حساب</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forget_password">هل نسيت كلمة المرور؟</string>
+    <string name="login_with">تسجيل الدخول باستخدام</string>
+    <string name="you_don_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="back">عودة</string>
+    <string name="send">إرسال</string>
+    <string name="name">اسم</string>
+    <string name="confirm_password">تاكيد كلمة المرور</string>
+    <string name="sign_up">التسجيل</string>
+    <string name="have_a_account">لديك حساب ؟</string>
+
+
+    <string name="title_home">الرئيسة</string>
+    <string name="notifications">إخطارات</string>
+    <string name="trend">الشائع</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="categories">الاقسام</string>
+    <string name="more">المزيد</string>
+
+
+    <string name="collections">Collections</string>
+    <string name="my_order">طلباتي</string>
+    <string name="wishlist">الامنيات</string>
+    <string name="my_information">معلوماتي</string>
+
+    <string name="refer_friend">Refer Friend</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="language_country">Language Country</string>
+    <string name="language_amp_country"><![CDATA[Language & Country]]></string>
+    <string name="product_details">تفاصيل المنتج</string>
+    <string name="add_to_wish">أضف إلى قائمة الامنيات</string>
+    <string name="my_profile">الملف الشخصي</string>
+    <string name="language">اللغه</string>
+    <string name="log_out">الخروج</string>
+    <string name="phone_number">رقم الجوال</string>
+    <string name="delivery_address">عنوان التسليم</string>
+    <string name="country">البلد</string>
+    <string name="city">المدينة</string>
+    <string name="apartment">رقم الشقة</string>
+    <string name="floor">رقم الطابق</string>
+    <string name="edit">تعديل</string>
+    <string name="message">Message</string>
+    <string name="size">الحجم</string>
+    <string name="quantity">الكميه</string>
+    <string name="color">اللون</string>
+    <string name="status">الحالة</string>
+    <string name="subtotal">المجموع الكلي</string>
+    <string name="shipping">الشحن</string>
+    <string name="total">المجموع</string>
+    <string name="shipping_address">عنوان الشحن</string>
+    <string name="contact">Contact</string>
+    <string name="you_may_also_like">ربما يعجبك أيضا </string>
+    <string name="checkout">الدفع</string>
+    <string name="promote_code">رمز ترويجي</string>
+    <string name="pick_a_size">اختيار الحجم</string>
+    <string name="profile">Profile</string>
+    <string name="done">تم</string>
+    <string name="mobile">رقم الهاتف</string>
+    <string name="all_failed_required">جميع المدخلات مطلوبه</string>
+    <string name="something_went_wrong">خطأ في الإتصال</string>
+    <string name="new_arrival">المضاف حديثا</string>
+    <string name="add_to_cart">أضف إلى السلة</string>
+    <string name="no_items_in_your_cart">لا توجد عناصر في سلة التسوق الخاصة بك</string>
+    <string name="choose_payment">اختر وسيلة الدفع </string>
+    <string name="online_payment">الدفع عبر الإنترنت </string>
+    <string name="cash_on_delivery">الدفع عند الاستلام</string>
+    <string name="top_offer">أفضل العروض</string>
+    <string name="change_language">تغير اللغه</string>
+</resources>

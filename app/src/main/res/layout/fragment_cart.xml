@@ -56,7 +56,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No items in your cart"
+                        android:text="@string/no_items_in_your_cart"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
                         app:layout_constraintVertical_bias=".8"
@@ -102,7 +102,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
-                        android:text="14.20$"
                         android:textColor="@color/gray_dark"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
-                        android:text="Free"
+
                         android:textColor="@color/gray_dark"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +146,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_8sdp"
-                        android:text="1000$"
                         android:textColor="@color/gray_dark"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +174,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
-                        android:text="Cairo , Egypt"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/shipping_address_label" />
 
@@ -205,7 +202,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
-                        android:text="Ahmed Mensh"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/contact_label" />
@@ -215,7 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
-                        android:text="012845365248"
+
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
@@ -223,7 +219,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Choose Payment"
+                        android:text="@string/choose_payment"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/orange"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -235,7 +231,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Online Payment"
+                        android:text="@string/online_payment"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/black"
@@ -248,7 +244,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cash on delivery"
+                        android:text="@string/cash_on_delivery"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/black"
@@ -313,6 +309,7 @@
         android:layout_height="@dimen/_42sdp"
         android:background="@color/orange"
 
+        android:layoutDirection="ltr"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 

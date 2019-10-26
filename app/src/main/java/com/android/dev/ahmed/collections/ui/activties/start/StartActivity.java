@@ -1,0 +1,78 @@
+package com.android.dev.ahmed.collections.ui.activties.start;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.dev.ahmed.collections.R;
+import com.android.dev.ahmed.collections.helpers.Constants;
+import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
+
+import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
+import com.android.dev.ahmed.collections.ui.activties.login.LoginActivity;
+import com.android.dev.ahmed.collections.ui.activties.register.RegisterActivity;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+public class StartActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //vars
+    private static final String TAG = "StartActivity";
+    private Unbinder unbinder;
+    //widgets
+    @BindView(R.id.login_btn)
+    Button loginBtn;
+
+    @BindView(R.id.register_btn)
+    Button registerBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start);
+
+        unbinder = ButterKnife.bind(this);
+        loginBtn.setOnClickListener(this::onClick);
+        registerBtn.setOnClickListener(this::onClick);
+//        startActivity(new Intent(this , HomeActivity.class));
+
+        if (SharedPreferencesManager.getIntValue(this, Constants.USER_ID) != 0) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
+
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.login_btn:
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+            case R.id.register_btn:
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
+        }
+    }
+}

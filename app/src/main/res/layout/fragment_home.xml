@@ -83,7 +83,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_weight="8"
                     android:gravity="center|start"
-                    android:text="New Arrival"
+                    android:text="@string/new_arrival"
                     android:textAllCaps="true"
                     android:textColor="@color/orange"
                     android:textStyle="bold" />
@@ -164,7 +164,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_weight="8"
                     android:gravity="center|start"
-                    android:text="Top Offer"
+                    android:text="@string/top_offer"
                     android:textAllCaps="true"
                     android:textColor="@color/orange"
                     android:textStyle="bold" />

@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:text="@string/collections"
+                android:text="@string/title_home"
                 android:textStyle="bold"
                 android:textSize="@dimen/_16sdp"/>
         </androidx.appcompat.widget.Toolbar>

@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:text="Wedding Dress"
+        tools:text="Wedding Dress"
         android:textColor="@color/orange"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintStart_toEndOf="@id/order_iv"
@@ -102,7 +102,7 @@
 
 
             android:textSize="@dimen/_14sdp"
-            android:text="@string/quality"
+            android:text="@string/quantity"
             app:layout_constraintStart_toEndOf="@id/order_size_tv"
 
             app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />

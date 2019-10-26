@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
 
     android:background="@color/gray"
-    android:layoutDirection="ltr"
-
     tools:context=".ui.activties.login.LoginActivity">
 
 
@@ -54,12 +52,14 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:gravity="start|center"
                 android:paddingStart="@dimen/_4sdp"
                 android:paddingEnd="@dimen/_4sdp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_label" />
 
             <ImageView
-                android:id="@+id/facebook_logo"
+                android:id="@+id/facebook_login_button"
 
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
@@ -75,6 +75,9 @@
                 app:srcCompat="@drawable/ic_facebook" />
 
 
+
+
+
             <ImageView
                 android:id="@+id/twitter_logo"
                 android:layout_width="@dimen/_50sdp"
@@ -86,9 +89,9 @@
                 android:elevation="@dimen/_6sdp"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/facebook_logo"
+                app:layout_constraintStart_toEndOf="@+id/facebook_login_button"
                 app:layout_constraintTop_toBottomOf="@+id/login_with_label"
-                app:srcCompat="@drawable/ic_twitter" />
+                app:srcCompat="@drawable/ic_instagram" />
 
             <TextView
                 android:id="@+id/email_label"
@@ -134,15 +137,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
 
-            <!--<View-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_marginEnd="@dimen/_10sdp"-->
-            <!--android:layout_marginTop="@dimen/_5sdp"-->
-            <!--android:layout_height="@dimen/_1sdp"-->
-            <!--app:layout_constraintEnd_toStartOf="@+id/login_with_label"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/login_btn"-->
-            <!--android:background="@color/gray"/>-->
+
             <TextView
                 android:id="@+id/no_account_label"
                 android:layout_width="wrap_content"
@@ -241,7 +236,7 @@
                 android:id="@+id/app_bar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
                 android:gravity="center"
                 android:text="@string/login"
                 android:textColor="@color/black"
