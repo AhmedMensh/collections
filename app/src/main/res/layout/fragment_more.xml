@@ -160,13 +160,58 @@
                 android:background="@color/gray"
                 app:layout_constraintTop_toBottomOf="@+id/my_profile_layout" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/shipping_address_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/view1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:gravity="center"
+
+                        android:drawableStart="@drawable/ic_address"
+                        android:drawablePadding="@dimen/_4sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/shipping_address"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_weight="1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/ic_right_arrow" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/shipping_address_layout" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/my_order_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/view1">
+                app:layout_constraintTop_toBottomOf="@+id/view8">
 
                 <TextView
                     android:layout_width="0dp"

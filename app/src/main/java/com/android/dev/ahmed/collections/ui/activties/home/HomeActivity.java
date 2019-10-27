@@ -1,9 +1,14 @@
 package com.android.dev.ahmed.collections.ui.activties.home;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
+import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
@@ -25,6 +30,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setLocale(Locale.getDefault());
         setContentView(R.layout.activity_home);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -89,6 +97,22 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
+    public static void setLocale(Locale locale){
+        Context context = MyApp.getContext();
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        Locale.setDefault(locale);
+        configuration.setLocale(locale);
+
+        if (Build.VERSION.SDK_INT >= 25) {
+            context = context.getApplicationContext().createConfigurationContext(configuration);
+            context = context.createConfigurationContext(configuration);
+        }
+
+        context.getResources().updateConfiguration(configuration,
+                resources.getDisplayMetrics());
+    }
 
     @Override
     protected void onDestroy() {

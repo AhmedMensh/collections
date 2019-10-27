@@ -1,5 +1,6 @@
 package com.android.dev.ahmed.collections.ui.activties.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,37 +21,46 @@ import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.helpers.Utilities;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
 import com.android.dev.ahmed.collections.ui.activties.register.RegisterActivity;
+import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.internal.ImageRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.logging.LogManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static android.provider.ContactsContract.Intents.Insert.EMAIL;
-
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PublicViewInf,LoginViewInf {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener,
+        PublicViewInf, LoginViewInf, GoogleApiClient.OnConnectionFailedListener {
 
     //vars
     private static final String TAG = "LoginActivity";
     private static final String EMAIL = "email";
+    private static final int RC_SIGN_IN = 58;
     private Unbinder unbinder;
     private LoginPresenter presenter;
     private CallbackManager callbackManager;
+    private GoogleApiClient mGoogleApiClient;
+
+
+    @BindView(R.id.gmail_login_btn)
+    ImageView gmailLoginBtn;
     //Widgets
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -77,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         unbinder = ButterKnife.bind(this);
         facebookLoginButton.setOnClickListener(this);
-        presenter = new LoginPresenter(this,this,this);
+        presenter = new LoginPresenter(this, this, this);
 
         setViewsListener();
 
@@ -85,7 +95,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         LoginManager.getInstance().logOut();
         callbackManager = CallbackManager.Factory.create();
-
 
 
         // Callback registration
@@ -111,7 +120,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-    }private void setFacebookData(final LoginResult loginResult) {
+
+        //Gmail Login
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+    }
+
+
+    private void googleSignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+
+    private void googleSignOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
+    }
+
+    private void setFacebookData(final LoginResult loginResult) {
         GraphRequest request = GraphRequest.newMeRequest(
                 loginResult.getAccessToken(),
                 (object, response) -> {
@@ -119,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         Log.i("Response", response.toString());
 
-                        Log.e(TAG, "setFacebookData: "+loginResult.getAccessToken().getToken() );
+                        Log.e(TAG, "setFacebookData: " + loginResult.getAccessToken().getToken());
                         String email = response.getJSONObject().getString("email");
                         String firstName = response.getJSONObject().getString("first_name");
                         String lastName = response.getJSONObject().getString("last_name");
@@ -127,13 +161,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        if (Profile.getCurrentProfile() != null) {
 //                            profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400).toString();
 //                        }
-                        String name= firstName + " "+lastName;
-                        presenter.loginWithFacebook(name,email,loginResult.getAccessToken().getToken(),"");
+                        String name = firstName + " " + lastName;
+                        presenter.loginWithFacebook(name, email, loginResult.getAccessToken().getToken(), "");
 
                         //TODO put your code here
                     } catch (JSONException e) {
-                        Log.e(TAG, "setFacebookData: "+e.getLocalizedMessage() );
-                        Toast.makeText(LoginActivity.this, "Something went rong", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "setFacebookData: " + e.getLocalizedMessage());
+                        Toast.makeText(LoginActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
                     }
                 });
         Bundle parameters = new Bundle();
@@ -144,12 +178,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
     private void setViewsListener() {
 
-        forgetPassword.setOnClickListener(this::onClick);
-        loginBtn.setOnClickListener(this::onClick);
-        signUpTv.setOnClickListener(this::onClick);
+        forgetPassword.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
+        signUpTv.setOnClickListener(this);
+        gmailLoginBtn.setOnClickListener(this);
     }
 
     private void initToolbar() {
@@ -164,7 +198,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(TAG, "onActivityResult:");
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleGmailSignInResult(result);
+        }
+    }
+
+
+    private void handleGmailSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            Log.e(TAG, "display name: " + acct.getDisplayName());
+
+            String personName = acct.getDisplayName();
+            String personPhotoUrl = acct.getPhotoUrl().toString();
+            String email = acct.getEmail();
+
+            Log.e(TAG, "Name: " + personName + ", email: " + email
+                    + ", Image: " + personPhotoUrl);
+
+
+        } else {
+            // Signed out, show unauthenticated UI.
+        }
     }
     private void setForgetPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -200,27 +261,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 callLoginApi();
                 break;
 
+            case R.id.gmail_login_btn:
+                googleSignOut();
+                googleSignIn();
+                break;
+
             case R.id.sign_up_tv:
                 startActivity(new Intent(this, RegisterActivity.class));
                 finish();
                 break;
             case R.id.facebook_login_button:
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile","email"));
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email"));
         }
     }
 
-    private void callLoginApi(){
-        boolean isEmptyEmail = Utilities.isEmptyText(this,userEmailEt);
-        boolean isEmptyPassword = Utilities.isEmptyText(this,userPasswordEt);
+    private void callLoginApi() {
+        boolean isEmptyEmail = Utilities.isEmptyText(this, userEmailEt);
+        boolean isEmptyPassword = Utilities.isEmptyText(this, userPasswordEt);
 
         if (!isEmptyEmail && !isEmptyPassword) return;
 
-        presenter.login(userEmailEt.getText().toString() , userPasswordEt.getText().toString(),"","en");
+        presenter.login(userEmailEt.getText().toString(), userPasswordEt.getText().toString(), "", "en");
     }
+
     @Override
     public void showMessage(String m) {
 
-        Utilities.showToast(this,m);
+        Utilities.showToast(this, m);
     }
 
     @Override
@@ -237,7 +304,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void startHomeActivity() {
-        startActivity(new Intent(this , HomeActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
         finish();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

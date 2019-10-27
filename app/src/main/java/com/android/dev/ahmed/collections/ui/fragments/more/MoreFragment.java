@@ -27,6 +27,7 @@ import com.android.dev.ahmed.collections.models.UserCounts;
 import com.android.dev.ahmed.collections.ui.activties.notifications.NotificationsActivity;
 import com.android.dev.ahmed.collections.ui.activties.orders.OrdersActivity;
 import com.android.dev.ahmed.collections.ui.activties.profile.ProfileActivity;
+import com.android.dev.ahmed.collections.ui.activties.shipping_address.ShippingAddressActivity;
 import com.android.dev.ahmed.collections.ui.activties.start.StartActivity;
 import com.android.dev.ahmed.collections.ui.activties.wish_list.WishListActivity;
 import com.facebook.login.LoginManager;
@@ -38,7 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class MoreFragment extends Fragment implements View.OnClickListener ,MoreViewInf{
+public class MoreFragment extends Fragment implements View.OnClickListener, MoreViewInf {
 
     private static final String TAG = "MoreFragment";
 
@@ -59,9 +60,13 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
     ConstraintLayout wishListLayout;
     @BindView(R.id.notifications_layout)
     ConstraintLayout notificationsLayout;
-    @BindView(R.id.language_layout) ConstraintLayout languageLayout;
-    @BindView(R.id.order_counts_tv) TextView orderCountsTv;
-    @BindView(R.id.wish_list_counts_tv) TextView wishListCountsTv;
+    @BindView(R.id.language_layout)
+    ConstraintLayout languageLayout;
+    @BindView(R.id.shipping_address_layout) ConstraintLayout shippingAddressLayout;
+    @BindView(R.id.order_counts_tv)
+    TextView orderCountsTv;
+    @BindView(R.id.wish_list_counts_tv)
+    TextView wishListCountsTv;
 
 
     public MoreFragment() {
@@ -78,7 +83,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
 
         unbinder = ButterKnife.bind(this, view);
         setViewsListener();
-        presenter = new MorePresenter(this,getContext());
+        presenter = new MorePresenter(this, getContext());
 
         return view;
     }
@@ -92,6 +97,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
         wishListLayout.setOnClickListener(this);
         notificationsLayout.setOnClickListener(this);
         languageLayout.setOnClickListener(this);
+        shippingAddressLayout.setOnClickListener(this);
     }
 
 
@@ -132,17 +138,17 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
         builder.setView(view);
 
 
-        languageDialog= builder.create();
+        languageDialog = builder.create();
         languageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         languageDialog.show();
     }
 
     private void changeAppLanguage() {
 
-        if (SharedPreferencesManager.getStringValue(getContext(), Constants.LANGUAGE).equals(Constants.ENGLISH)){
-            SharedPreferencesManager.setStringValue(getContext() , Constants.LANGUAGE, Constants.ARABIC);
+        if (SharedPreferencesManager.getStringValue(getContext(), Constants.LANGUAGE).equals(Constants.ENGLISH)) {
+            SharedPreferencesManager.setStringValue(getContext(), Constants.LANGUAGE, Constants.ARABIC);
             setLocale(Constants.ARABIC);
-        }else {
+        } else {
             SharedPreferencesManager.setStringValue(getContext(), Constants.LANGUAGE, Constants.ENGLISH);
             setLocale(Constants.ENGLISH);
         }
@@ -158,7 +164,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
 
             case R.id.log_out_layout:
                 startActivity(new Intent(getContext(), StartActivity.class));
-                SharedPreferencesManager.setIntValue(getContext(), Constants.USER_ID,0);
+                SharedPreferencesManager.setIntValue(getContext(), Constants.USER_ID, 0);
                 LoginManager.getInstance().logOut();
                 getActivity().finish();
                 break;
@@ -169,6 +175,10 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
 
             case R.id.my_order_layout:
                 startActivity(new Intent(getContext(), OrdersActivity.class));
+                break;
+
+                case R.id.shipping_address_layout:
+                startActivity(new Intent(getContext(), ShippingAddressActivity.class));
                 break;
 
             case R.id.wish_list_layout:
@@ -197,10 +207,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener ,More
         startActivity(refresh);
 
     }
+
     @Override
     public void displayUserCounts(UserCounts userCounts) {
 
-        orderCountsTv.setText(userCounts.getOrders().getOrdersCount()+"");
-        wishListCountsTv.setText(userCounts.getWishList().getWishListCount()+"");
+        orderCountsTv.setText(userCounts.getOrders().getOrdersCount() + "");
+        wishListCountsTv.setText(userCounts.getWishList().getWishListCount() + "");
     }
 }

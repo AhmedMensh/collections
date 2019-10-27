@@ -2,7 +2,11 @@
 package com.android.dev.ahmed.collections.ui.fragments.cart;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -12,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +28,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.adapters.CartAdapter;
 import com.android.dev.ahmed.collections.adapters.MayLikeAdapter;
@@ -37,6 +43,7 @@ import com.android.dev.ahmed.collections.models.TopOffer;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +52,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements View.OnClickListener, PublicViewInf ,CartViewInf,CartAdapter.ItemClickListener {
+public class CartFragment extends Fragment implements View.OnClickListener, PublicViewInf, CartViewInf, CartAdapter.ItemClickListener {
 
 
     private static final String TAG = "CartActivity";
@@ -53,7 +60,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     private Unbinder unbinder;
     private MayLikeAdapter mayLikeAdapter;
     private CartPresenter presenter;
-    private int userId , paymentType = 0 , promoCode;
+    private int userId, paymentType = 0, promoCode;
 
     @BindView(R.id.cart_rv)
     RecyclerView cartRv;
@@ -61,18 +68,26 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     TextView codeBtn;
     @BindView(R.id.check_out_btn)
     Button checkOutBtn;
-    @BindView(R.id.products_like_me_rv) RecyclerView mayLikeRv;
-    @BindView(R.id.sub_total_tv) TextView subTotalTv;
-    @BindView(R.id.shipping_tv) TextView shippingTv;
-    @BindView(R.id.total_tv) TextView totalTv;
+    @BindView(R.id.products_like_me_rv)
+    RecyclerView mayLikeRv;
+    @BindView(R.id.sub_total_tv)
+    TextView subTotalTv;
+    @BindView(R.id.shipping_tv)
+    TextView shippingTv;
+    @BindView(R.id.total_tv)
+    TextView totalTv;
     @BindView(R.id.no_cart_items_cl)
     ConstraintLayout noItemsCl;
-    @BindView(R.id.cart_items_cl) ConstraintLayout cartItemsCl;
-    @BindView(R.id.user_name_tv) TextView userNameTv;
-    @BindView(R.id.user_phone_number_tv) TextView userPhoneNumberTv;
+    @BindView(R.id.cart_items_cl)
+    ConstraintLayout cartItemsCl;
+    @BindView(R.id.user_name_tv)
+    TextView userNameTv;
+    @BindView(R.id.user_phone_number_tv)
+    TextView userPhoneNumberTv;
     @BindView(R.id.payment_method_rg)
     RadioGroup paymentMethodRg;
-    @BindView(R.id.webview) WebView webView;
+    @BindView(R.id.webview)
+    WebView webView;
 
 
     public CartFragment() {
@@ -84,9 +99,9 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        unbinder = ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         initViews();
         initCartRv();
         initMayLikeRv();
@@ -101,13 +116,13 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         webSettings.setJavaScriptEnabled(true);
 
 
-        paymentMethodRg.setOnCheckedChangeListener((radioGroup, i) -> {paymentType = i;
-            if (i%2 == 0) paymentType =2;
-            else paymentType =1;
+        paymentMethodRg.setOnCheckedChangeListener((radioGroup, i) -> {
+            paymentType = i;
+            if (i % 2 == 0) paymentType = 2;
+            else paymentType = 1;
         });
         return view;
     }
-
 
 
     private void initViews() {
@@ -128,7 +143,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
     private void initCartRv() {
 
-        cartAdapter = new CartAdapter(getContext(),this);
+        cartAdapter = new CartAdapter(getContext(), this);
         cartRv.setAdapter(cartAdapter);
         cartRv.setHasFixedSize(true);
         cartRv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -140,9 +155,9 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         unbinder.unbind();
     }
 
-    private void setPromoteCodeDialog(){
+    private void setPromoteCodeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.one_input_dialog,null);
+        View view = getLayoutInflater().inflate(R.layout.one_input_dialog, null);
 
         TextView dialogTitle = view.findViewById(R.id.dialog_title_tv);
         dialogTitle.setText(getResources().getString(R.string.promote_code));
@@ -176,19 +191,19 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
         int id = view.getId();
 
-        switch (id){
+        switch (id) {
             case R.id.code_tv:
                 setPromoteCodeDialog();
                 break;
 
             case R.id.check_out_btn:
-                if (paymentType ==0){
+                if (paymentType == 0) {
                     Toast.makeText(getContext()
-                            ,"Please select payment",Toast.LENGTH_SHORT).show();
+                            , "Please select payment", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                presenter.paymentCheckout(userId,paymentType,promoCode);
+                presenter.paymentCheckout(userId, paymentType, promoCode);
 
                 break;
 
@@ -202,7 +217,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @Override
     public void showMessage(String m) {
 
-        Utilities.showToast(getContext() ,m);
+        Utilities.showToast(getContext(), m);
     }
 
     @Override
@@ -219,18 +234,20 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     public void displayCartItems(ApiResponse<List<CartItem>> response) {
 
 
-            cartAdapter.setCartItemList(response.getData());
-        subTotalTv.setText(response.getSubTotal()+"");
-        shippingTv.setText(response.getShipping()+"");
-        totalTv.setText(response.getTotal()+"");
-            if (response.getData().size() > 0){
-                cartItemsCl.setVisibility(View.VISIBLE);
-                noItemsCl.setVisibility(View.INVISIBLE);
-            }
-            else {
-                cartItemsCl.setVisibility(View.INVISIBLE);
-                noItemsCl.setVisibility(View.VISIBLE);
-            }
+        cartAdapter.setCartItemList(response.getData());
+        try {
+            subTotalTv.setText(response.getSubTotal() + "");
+            shippingTv.setText(response.getShipping() + "");
+            totalTv.setText(response.getTotal() + "");
+        }catch (Exception e){}
+
+        if (response.getData().size() > 0) {
+            cartItemsCl.setVisibility(View.VISIBLE);
+            noItemsCl.setVisibility(View.INVISIBLE);
+        } else {
+            cartItemsCl.setVisibility(View.INVISIBLE);
+            noItemsCl.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -242,7 +259,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @Override
     public void checkoutResponse(ApiResponse<PaymentResponse> response) {
 
-        if (!response.getPaymentUrl().equals("")){
+        if (!response.getPaymentUrl().equals("")) {
 
             webView.loadUrl(response.getPaymentUrl());
             webView.setVisibility(View.VISIBLE);
@@ -252,12 +269,12 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @Override
     public void onDeleteIconClicked(int cartId) {
 
-        presenter.removeItemFromCart(cartId,userId);
+        presenter.removeItemFromCart(cartId, userId);
 
     }
 
     @Override
     public void updateItemQuantity(CartItem item) {
-        presenter.updateItemQuantity(userId,item.getID(),item.getQuantity(),item.getSizeId(),item.getColorId());
+        presenter.updateItemQuantity(userId, item.getID(), item.getQuantity(), item.getSizeId(), item.getColorId());
     }
 }

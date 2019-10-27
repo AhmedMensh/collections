@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,7 @@ import com.android.dev.ahmed.collections.ui.activties.register.RegisterActivity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +37,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     //vars
     private static final String TAG = "StartActivity";
     private Unbinder unbinder;
+    private String language;
     //widgets
     @BindView(R.id.login_btn)
     Button loginBtn;
@@ -50,10 +55,24 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         registerBtn.setOnClickListener(this::onClick);
 //        startActivity(new Intent(this , HomeActivity.class));
 
+        language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE);
+
+
+
+
+        if (language.equals(Constants.ENGLISH)) {
+            setLanguage(Constants.ENGLISH);
+//                Constants.WEBSERVICE_LANGUAGE = Constants.ENGLISH;
+        } else {
+            setLanguage(Constants.ARABIC);
+//                Constants.WEBSERVICE_LANGUAGE = Constants.ARABIC;
+        }
+
         if (SharedPreferencesManager.getIntValue(this, Constants.USER_ID) != 0) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
+
 
 
     }
@@ -63,6 +82,15 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         unbinder.unbind();
     }
 
+    public void setLanguage(String language){
+        Log.e(TAG, "setLanguage: "+language );
+        Locale myLocale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.setLocale(myLocale);
+        res.updateConfiguration(conf, dm);
+    }
     @Override
     public void onClick(View view) {
 

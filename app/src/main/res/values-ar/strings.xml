@@ -77,4 +77,5 @@
     <string name="cash_on_delivery">الدفع عند الاستلام</string>
     <string name="top_offer">أفضل العروض</string>
     <string name="change_language">تغير اللغه</string>
+    <string name="address_details">تفاصيل العنوان</string>
 </resources>
