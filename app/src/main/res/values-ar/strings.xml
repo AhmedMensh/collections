@@ -4,8 +4,8 @@
 
 
     <string name="shop">تسوق \nأحدث صيحات\n الموضة\n الحديثة</string>
-    <string name="device_lang">English</string>
 
+    <string name="device_language">English</string>
     <string name="register">انشاء حساب</string>
     <string name="login">تسجيل الدخول</string>
     <string name="email">البريد الإلكتروني</string>
@@ -39,7 +39,7 @@
     <string name="language_country">Language Country</string>
     <string name="language_amp_country"><![CDATA[Language & Country]]></string>
     <string name="product_details">تفاصيل المنتج</string>
-    <string name="add_to_wish">أضف إلى قائمة الامنيات</string>
+    <string name="add_to_wish">أضف إلى الامنيات</string>
     <string name="my_profile">الملف الشخصي</string>
     <string name="language">اللغه</string>
     <string name="log_out">الخروج</string>
@@ -76,6 +76,7 @@
     <string name="online_payment">الدفع عبر الإنترنت </string>
     <string name="cash_on_delivery">الدفع عند الاستلام</string>
     <string name="top_offer">أفضل العروض</string>
-    <string name="change_language">تغير اللغه</string>
+    <string name="change_language">تغير اللغه الى</string>
     <string name="address_details">تفاصيل العنوان</string>
+    <string name="save">save</string>
 </resources>

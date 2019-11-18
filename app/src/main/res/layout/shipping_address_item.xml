@@ -36,7 +36,7 @@
 
 
             <TextView
-                android:id="@+id/person_name_tv"
+                android:id="@+id/address_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -79,48 +79,16 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@color/gray"/>
-            <TextView
-                android:id="@+id/city_tv"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:background="@color/gray"/>
-            <TextView
-                android:id="@+id/apartment_tv"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                />
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:background="@color/gray"/>
-            <TextView
-                android:id="@+id/floor_tv"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                />
         </LinearLayout>
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/default_address_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+
             app:layout_constraintTop_toBottomOf="@+id/layout"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -128,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_14sdp"
-            android:text="@string/device_lang"
             android:textColor="@color/black"
 
             android:layout_marginTop="@dimen/_5sdp"

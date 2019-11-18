@@ -40,6 +40,7 @@ public class Utilities {
         return true;
     }
 
+
     public static String getRealPathFromURIForCameraImage(Uri contentURI, Activity context) {
         String[] projection = {MediaStore.Images.Media.DATA};
         @SuppressWarnings("deprecation")

@@ -37,7 +37,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     //vars
     private static final String TAG = "StartActivity";
     private Unbinder unbinder;
-    private String language;
+
     //widgets
     @BindView(R.id.login_btn)
     Button loginBtn;
@@ -53,20 +53,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         unbinder = ButterKnife.bind(this);
         loginBtn.setOnClickListener(this::onClick);
         registerBtn.setOnClickListener(this::onClick);
-//        startActivity(new Intent(this , HomeActivity.class));
 
-        language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE);
-
-
-
-
-        if (language.equals(Constants.ENGLISH)) {
-            setLanguage(Constants.ENGLISH);
-//                Constants.WEBSERVICE_LANGUAGE = Constants.ENGLISH;
-        } else {
-            setLanguage(Constants.ARABIC);
-//                Constants.WEBSERVICE_LANGUAGE = Constants.ARABIC;
-        }
 
         if (SharedPreferencesManager.getIntValue(this, Constants.USER_ID) != 0) {
             startActivity(new Intent(this, HomeActivity.class));
@@ -75,22 +62,20 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
+
     }
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
     }
 
-    public void setLanguage(String language){
-        Log.e(TAG, "setLanguage: "+language );
-        Locale myLocale = new Locale(language);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.setLocale(myLocale);
-        res.updateConfiguration(conf, dm);
-    }
+
     @Override
     public void onClick(View view) {
 

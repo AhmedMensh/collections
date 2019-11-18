@@ -116,7 +116,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onError(FacebookException exception) {
 
                 // App code
-                Toast.makeText(LoginActivity.this, "Exception", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onError: "+exception.getLocalizedMessage() );
+                Toast.makeText(LoginActivity.this, "Something went wrong please try again later", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -224,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         } else {
-            // Signed out, show unauthenticated UI.
+            // Signed out, show unauthenticated UI
         }
     }
     private void setForgetPasswordDialog() {

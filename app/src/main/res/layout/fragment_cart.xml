@@ -54,11 +54,14 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/no_items_in_your_cart"
                         android:textColor="@color/black"
+                        android:gravity="center"
                         android:textSize="@dimen/_18sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
                         app:layout_constraintVertical_bias=".8"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"

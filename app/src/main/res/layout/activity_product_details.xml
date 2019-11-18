@@ -204,23 +204,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_cart_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
-            android:layout_margin="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
             android:layout_weight="1"
             android:backgroundTint="@color/orange"
             android:text="@string/add_to_cart"
             app:cornerRadius="@dimen/_4sdp" />
 
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_wish_list_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
-            android:layout_margin="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
             android:text="@string/add_to_wish"

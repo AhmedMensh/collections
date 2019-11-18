@@ -9,12 +9,32 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shipping_address_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_45sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addNewAddressBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_42sdp"
+        android:minWidth="@dimen/_200sdp"
+        app:cornerRadius="@dimen/_15sdp"
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/white"
+        android:text="Add New Address"
+        android:textStyle="bold"
+        android:backgroundTint="@color/orange"
+        android:layout_marginBottom="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

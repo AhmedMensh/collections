@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
@@ -139,7 +141,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
 
 
         languageDialog = builder.create();
-        languageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        languageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         languageDialog.show();
     }
 
@@ -196,11 +198,15 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
 
     private void setLocale(String lang) {
         languageDialog.dismiss();
-        Locale myLocale = new Locale(lang);
+//        Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
-        conf.setLocale(myLocale);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            conf.setLocale(new Locale(lang)); // API 17+ only.
+        } else {
+            conf.locale = new Locale(lang);
+        }
         res.updateConfiguration(conf, dm);
         Intent refresh = new Intent(getActivity(), StartActivity.class);
         getActivity().finish();
