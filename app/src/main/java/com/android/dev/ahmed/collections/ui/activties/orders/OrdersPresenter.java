@@ -26,9 +26,9 @@ public class OrdersPresenter {
 
     }
 
-    public void getMyOrders(int userId){
+    public void getMyOrders(){
 
-        Service.Fetcher.getInstance().getMyOrders(userId,"en").enqueue(new Callback<ApiResponse<List<Order>>>() {
+        Service.Fetcher.getInstance().getMyOrders("en").enqueue(new Callback<ApiResponse<List<Order>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Order>>> call, Response<ApiResponse<List<Order>>> response) {
 

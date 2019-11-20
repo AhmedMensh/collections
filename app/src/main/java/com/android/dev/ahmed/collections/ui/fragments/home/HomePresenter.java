@@ -28,10 +28,10 @@ public class HomePresenter {
         this.homeViewInf = homeViewInf;
     }
 
-    public void getTopOffers(int userId , String lang , int currencyId){
+    public void getTopOffers( String lang , int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getTopOffers(userId,lang,currencyId).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
+        Service.Fetcher.getInstance().getTopOffers(lang,currencyId).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<TopOffer>>> call, Response<ApiResponse<List<TopOffer>>> response) {
 
@@ -57,10 +57,10 @@ public class HomePresenter {
     }
 
 
-    public void getFlashSale(int userId , String lang , int currencyId){
+    public void getFlashSale(String lang , int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getFlashSale(userId,lang,currencyId).enqueue(new Callback<ApiResponse<List<FlashSale>>>() {
+        Service.Fetcher.getInstance().getFlashSale(lang,currencyId).enqueue(new Callback<ApiResponse<List<FlashSale>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<FlashSale>>> call, Response<ApiResponse<List<FlashSale>>> response) {
 
@@ -86,10 +86,10 @@ public class HomePresenter {
     }
 
 
-    public void getNewTrends(int userId , String lang , int currencyId){
+    public void getNewTrends(String lang , int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getNewTrends(userId,lang,currencyId).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
+        Service.Fetcher.getInstance().getNewTrends(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewTrend>>> call, Response<ApiResponse<List<NewTrend>>> response) {
 
@@ -114,10 +114,10 @@ public class HomePresenter {
         });
     }
 
-    public void getNewArrivals(int userId , String lang , int currencyId){
+    public void getNewArrivals(String lang , int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getNewArrivals(userId,lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getNewArrivals(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 

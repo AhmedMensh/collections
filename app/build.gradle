@@ -14,7 +14,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
         vectorDrawables.useSupportLibrary = true
-        resConfigs "en", "ar"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -66,5 +66,8 @@ dependencies {
     //MapBox
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.5.0'
 
+    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+
 
 }
+apply plugin: 'com.google.gms.google-services'

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.helpers.Constants;
-import com.android.dev.ahmed.collections.models.CartItem;
+import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.ui.activties.product_details.ProductDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,13 +23,13 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    private List<CartItem> mCartItemList;
+    private List<CartItems.CartItem> mCartItemList;
     private Context context;
     private ItemClickListener listener;
 
     public interface ItemClickListener{
         void onDeleteIconClicked(int id);
-        void updateItemQuantity(CartItem item);
+        void updateItemQuantity(CartItems.CartItem item);
     }
     public CartAdapter(Context context,ItemClickListener listener) {
         this.listener =listener;
@@ -69,7 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return mCartItemList.size();
     }
 
-    public void setCartItemList(List<CartItem> cartItemList) {
+    public void setCartItemList(List<CartItems.CartItem> cartItemList) {
 
         mCartItemList = cartItemList;
         notifyDataSetChanged();

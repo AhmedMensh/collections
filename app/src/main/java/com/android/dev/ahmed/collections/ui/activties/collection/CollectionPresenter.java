@@ -24,10 +24,10 @@ public class CollectionPresenter {
 
 
 
-    public void getNewArrivals(int userId , String lang , int currencyId){
+    public void getNewArrivals(String lang , int currencyId){
 
 
-        Service.Fetcher.getInstance().getNewArrivals(userId,lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getNewArrivals(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 
@@ -48,9 +48,9 @@ public class CollectionPresenter {
             }
         });
     }
-    public void getProductsByCategory(int branchId,int userId){
+    public void getProductsByCategory(int branchId){
 
-        Service.Fetcher.getInstance().getProductsByCategory(userId ,branchId ,"en").enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getProductsByCategory(branchId ,"en").enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 

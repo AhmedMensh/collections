@@ -58,7 +58,7 @@ public class TrendFragment extends Fragment implements PublicViewInf ,TrendViewI
 
         unbinder = ButterKnife.bind(this,view);
         presenter = new TrendPresenter(this ,this);
-        presenter.getTrends(SharedPreferencesManager.getIntValue(getContext(), Constants.USER_ID));
+        presenter.getTrends();
         presenter.getSliderImages();
         initTrendRv();
         initSliderRv();

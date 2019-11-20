@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +38,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private static final String TAG = "ProductDetailsActivity";
     private ImagesAdapter imagesAdapter;
     private Unbinder unbinder;
-    private int productId ,userId;
+    private int productId;
     private ProductDetailsPresenter presenter;
     private ProductSizesAdapter productSizesAdapter;
     BottomSheetDialog productSizeBottomSheetDialog;
     private ProductDetails mProductDetails;
-    int selectedColorId =-1 , selectedSizeId , productQuantity =0;
+    int selectedColorId =-1 , selectedSizeId , productQuantity =1;
 
     //widgets
     @BindView(R.id.product_images_rv)
@@ -59,7 +60,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     Toolbar toolbar;
     @BindView(R.id.product_colors_group)
     ChipGroup productColorsCg;
-
+    @BindView(R.id.order_increment_iv)
+    ImageView incrementQuantityIV;
+    @BindView(R.id.order_decrement_iv) ImageView decrementQuantityIV;
+    @BindView(R.id.order_quantity_tv) TextView orderQuantityTV;
 
     private RecyclerView productSizesRv;
 
@@ -69,16 +73,16 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_product_details);
 
         unbinder = ButterKnife.bind(this);
-        userId = SharedPreferencesManager.getIntValue(this,Constants.USER_ID);
         productId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
         presenter = new ProductDetailsPresenter(this ,this);
-        presenter.getProductDetails(productId,userId);
+        presenter.getProductDetails(productId);
         sizeBtn.setOnClickListener(this::onClick);
         initImagesRv();
         initToolbar();
         productSizesAdapter = new ProductSizesAdapter(this);
 
-
+        incrementQuantityIV.setOnClickListener(this);
+        decrementQuantityIV.setOnClickListener(this);
 
         productColorsCg.setOnCheckedChangeListener((group, checkedId) -> selectedColorId =group.getCheckedChipId());
 
@@ -139,6 +143,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             case R.id.size_btn:
                 setSizeBottomSheet();
                 break;
+            case R.id.order_increment_iv:
+                productQuantity++;
+                orderQuantityTV.setText(productQuantity+"");
+                break;
+
+            case R.id.order_decrement_iv:
+                productQuantity--;
+                orderQuantityTV.setText(productQuantity+"");
+                break;
         }
     }
 
@@ -186,12 +199,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             Toast.makeText(this, "Please select color", Toast.LENGTH_SHORT).show();
             return;
         }
-        presenter.addToCart(userId,productId,productQuantity,selectedSizeId,selectedColorId);
+        presenter.addToCart(productId,productQuantity,selectedSizeId,selectedColorId);
     }
 
     @OnClick(R.id.add_to_wish_list_btn)
     public void onAddToWishListClicked(){
-        presenter.addToFavorite(productId,userId);
+        presenter.addToFavorite(productId);
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dev.ahmed.collections.R;
+import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.models.TopOffer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,7 +24,7 @@ public class MayLikeAdapter extends RecyclerView.Adapter<MayLikeAdapter.ViewHold
 
     private Context context;
 
-    private List<TopOffer> mDataList = new ArrayList<>();
+    private List<CartItems.DataLiked> mDataList = new ArrayList<>();
 
 
 
@@ -59,9 +60,9 @@ public class MayLikeAdapter extends RecyclerView.Adapter<MayLikeAdapter.ViewHold
         return  mDataList.size();
     }
 
-    public void setData(List<TopOffer> topOfferList) {
+    public void setData(List<CartItems.DataLiked> dataLikeds) {
 
-        mDataList = topOfferList;
+        mDataList = dataLikeds;
         notifyDataSetChanged();
     }
 

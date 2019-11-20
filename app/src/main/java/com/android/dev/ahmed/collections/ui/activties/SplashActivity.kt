@@ -1,12 +1,15 @@
 package com.android.dev.ahmed.collections.ui.activties
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.dev.ahmed.collections.R
 import com.android.dev.ahmed.collections.helpers.Constants
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager
+import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity
 import com.android.dev.ahmed.collections.ui.activties.start.StartActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.*
@@ -16,8 +19,19 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE)
-        if (language == Constants.ENGLISH || language == "") setLanguage(Constants.ENGLISH)
-        else setLanguage(Constants.ARABIC)
+
+        if (language == Constants.ENGLISH) setLanguage(Constants.ENGLISH)
+        else if(language == Constants.ARABIC) setLanguage(Constants.ARABIC)
+        else {
+            SharedPreferencesManager.setStringValue(this,Constants.LANGUAGE,"en")
+            setLanguage(Constants.ENGLISH)
+        }
+
+        var wifiManager = getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
+        var wInfo = wifiManager.connectionInfo
+        var macAddress = wInfo.macAddress
+
+        SharedPreferencesManager.setStringValue(this,Constants.MAC_ADDRESS,macAddress)
 
         startVideo()
 
@@ -46,7 +60,13 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun jump(){
-        startActivity(Intent(this, StartActivity::class.java))
+
+        if (SharedPreferencesManager.getIntValue(this, Constants.USER_ID) != 0) {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }else {
+            startActivity(Intent(this, StartActivity::class.java))
+
+        }
         finish()
     }
 }

@@ -28,7 +28,7 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
     private Unbinder unbinder;
     private FavoriteAdapter favoriteAdapter;
     private WishListPresenter presenter;
-    private int userId;
+
 
     @BindView(R.id.wish_list_rv)
     RecyclerView wishListRv;
@@ -39,9 +39,8 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
         unbinder = ButterKnife.bind(this);
         initCollectionRv();
 
-        userId = SharedPreferencesManager.getIntValue(this,Constants.USER_ID);
         presenter = new WishListPresenter(this ,this);
-        presenter.getWishList(userId);
+        presenter.getWishList();
     }
 
     private void initCollectionRv(){
@@ -87,7 +86,7 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
 
     @Override
     public void onLikeIconClickListener(int id) {
-        presenter.removeFromFavorite(id,userId);
+        presenter.removeFromFavorite(id);
 
     }
 }

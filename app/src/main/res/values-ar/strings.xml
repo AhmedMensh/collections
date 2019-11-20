@@ -79,4 +79,5 @@
     <string name="change_language">تغير اللغه الى</string>
     <string name="address_details">تفاصيل العنوان</string>
     <string name="save">save</string>
+    <string name="skip_login">Skip Login</string>
 </resources>

@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity  implements ProfileViewIn
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presenter = new ProfilePresenter(this ,this);
-        presenter.getUserProfile(SharedPreferencesManager.getIntValue(this, Constants.USER_ID));
+        presenter.getUserProfile();
     }
 
 

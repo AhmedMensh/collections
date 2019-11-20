@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
+import com.google.firebase.FirebaseApp;
 
 import java.util.Locale;
 
@@ -28,7 +29,7 @@ public class MyApp extends Application {
 
         new WebView(this).destroy();
         context = this;
-
+//        FirebaseApp.initializeApp(getApplicationContext());
 
         language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE);
 

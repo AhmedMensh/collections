@@ -1,12 +1,14 @@
 package com.android.dev.ahmed.collections.ui.fragments.cart;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
+import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.models.ApiResponse;
-import com.android.dev.ahmed.collections.models.CartItem;
+import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.models.PaymentResponse;
-import com.android.dev.ahmed.collections.models.TopOffer;
 import com.android.dev.ahmed.collections.network.Service;
 
 import java.util.List;
@@ -20,31 +22,37 @@ public class CartPresenter {
     private static final String TAG = "CartPresenter";
     private PublicViewInf publicViewInf;
     private CartViewInf viewInf;
+    private Context context;
 
 
-    public CartPresenter(PublicViewInf publicViewInf, CartViewInf viewInf) {
+    public CartPresenter(PublicViewInf publicViewInf, CartViewInf viewInf ,Context context) {
         this.publicViewInf = publicViewInf;
         this.viewInf = viewInf;
+        this.context = context;
 
     }
 
 
-    public void getCartItems(int userId){
+    public void getCartItems(){
 
-        Service.Fetcher.getInstance().getCartItems(userId,"en",2).enqueue(new Callback<ApiResponse<List<CartItem>>>() {
+        Service.Fetcher.getInstance().getCartItems("en",
+                SharedPreferencesManager.getStringValue(context, Constants.MAC_ADDRESS),1)
+                .enqueue(new Callback<CartItems>() {
             @Override
-            public void onResponse(Call<ApiResponse<List<CartItem>>> call, Response<ApiResponse<List<CartItem>>> response) {
+            public void onResponse(Call<CartItems> call, Response<CartItems> response) {
 
 
-                if (response.body().getSuccess()){
+                if (response.body().getStatus()){
+                    Log.e(TAG, "onResponse: ");
                     viewInf.displayCartItems(response.body());
                 }else {
+                    Log.e(TAG, "onResponse: else" );
                     publicViewInf.showMessage(response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<List<CartItem>>> call, Throwable t) {
+            public void onFailure(Call<CartItems> call, Throwable t) {
 
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
             }
@@ -52,28 +60,8 @@ public class CartPresenter {
     }
 
 
-    public void getProductsLikeMe(int userId){
-        Service.Fetcher.getInstance().getProductsLikeMe("en", userId,1).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<List<TopOffer>>> call, Response<ApiResponse<List<TopOffer>>> response) {
 
-                try {
-                    viewInf.displayProductsLikeMe(response.body().getData());
-
-                }catch (Exception e){
-                    Log.e(TAG, "onResponse: "+e.getLocalizedMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse<List<TopOffer>>> call, Throwable t) {
-
-                Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
-            }
-        });
-    }
-
-    public void removeItemFromCart(int cartId ,int userId) {
+    public void removeItemFromCart(int cartId) {
 
 
         Service.Fetcher.getInstance().deleteFromCart(cartId).enqueue(new Callback<ApiResponse>() {
@@ -82,7 +70,7 @@ public class CartPresenter {
 
                 try {
                     if (response.body().getSuccess()){
-                        getCartItems(userId);
+                        getCartItems();
                     }
                     publicViewInf.showMessage(response.body().getMessage());
                 }catch (Exception e){
@@ -99,9 +87,9 @@ public class CartPresenter {
 
     }
 
-    public void updateItemQuantity(int userId , int productId ,int quantity,int sizeId ,int colorId){
+    public void updateItemQuantity( int productId ,int quantity,int sizeId ,int colorId){
 
-        Service.Fetcher.getInstance().updateItemQuantity(userId,productId,quantity,sizeId,colorId).enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().updateItemQuantity(productId,quantity,sizeId,colorId).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 
@@ -111,7 +99,7 @@ public class CartPresenter {
                     publicViewInf.showMessage(response.body().getMessage());
                     if (response.body().getSuccess()){
 
-                        getCartItems(userId);
+                        getCartItems();
                     }
                 }catch (Exception e){
 
@@ -129,8 +117,8 @@ public class CartPresenter {
 
     }
 
-    public void paymentCheckout(int userId , int paymentType,int promoCode){
-        Service.Fetcher.getInstance().paymentCheckout(userId,paymentType,"en",true,promoCode,1)
+    public void paymentCheckout(int paymentType,int promoCode){
+        Service.Fetcher.getInstance().paymentCheckout(paymentType,"en",true,promoCode,1)
                 .enqueue(new Callback<ApiResponse<PaymentResponse>>() {
                     @Override
                     public void onResponse(Call<ApiResponse<PaymentResponse>> call, Response<ApiResponse<PaymentResponse>> response) {

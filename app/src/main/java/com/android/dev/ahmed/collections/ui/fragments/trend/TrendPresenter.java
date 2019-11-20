@@ -50,9 +50,9 @@ public class TrendPresenter {
     }
 
 
-    public void getTrends(int userId){
+    public void getTrends(){
 
-        Service.Fetcher.getInstance().getNewTrends(userId,"en",0).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
+        Service.Fetcher.getInstance().getNewTrends("en",0).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewTrend>>> call, Response<ApiResponse<List<NewTrend>>> response) {
 

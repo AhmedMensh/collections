@@ -8,11 +8,13 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.dev.ahmed.collections.R;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class Utilities {

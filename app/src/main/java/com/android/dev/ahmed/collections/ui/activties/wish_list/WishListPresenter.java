@@ -26,9 +26,9 @@ public class WishListPresenter {
 
     }
 
-    public void getWishList(int userId){
+    public void getWishList(){
 
-        Service.Fetcher.getInstance().getFavoriteList(userId,"en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
+        Service.Fetcher.getInstance().getFavoriteList("en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Favorite>>> call, Response<ApiResponse<List<Favorite>>> response) {
 
@@ -47,9 +47,9 @@ public class WishListPresenter {
         });
     }
 
-    public void removeFromFavorite(int productId, int userId){
+    public void removeFromFavorite(int productId){
 
-        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,userId,"dislike").enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,"dislike").enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 

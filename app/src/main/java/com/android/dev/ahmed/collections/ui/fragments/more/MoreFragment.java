@@ -26,6 +26,7 @@ import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.models.UserCounts;
+import com.android.dev.ahmed.collections.ui.activties.login.LoginActivity;
 import com.android.dev.ahmed.collections.ui.activties.notifications.NotificationsActivity;
 import com.android.dev.ahmed.collections.ui.activties.orders.OrdersActivity;
 import com.android.dev.ahmed.collections.ui.activties.profile.ProfileActivity;
@@ -33,6 +34,7 @@ import com.android.dev.ahmed.collections.ui.activties.shipping_address.ShippingA
 import com.android.dev.ahmed.collections.ui.activties.start.StartActivity;
 import com.android.dev.ahmed.collections.ui.activties.wish_list.WishListActivity;
 import com.facebook.login.LoginManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
 
@@ -48,6 +50,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
     private Unbinder unbinder;
     private MorePresenter presenter;
     AlertDialog languageDialog;
+    private int userID;
 
 
     @BindView(R.id.my_profile_layout)
@@ -86,7 +89,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
         unbinder = ButterKnife.bind(this, view);
         setViewsListener();
         presenter = new MorePresenter(this, getContext());
-
+        userID = SharedPreferencesManager.getIntValue(getContext(),Constants.USER_ID);
         return view;
     }
 
@@ -161,6 +164,9 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
 
         switch (view.getId()) {
             case R.id.my_profile_layout:
+                if (userID == 0)
+                    showSnackBar();
+                else
                 startActivity(new Intent(getContext(), ProfileActivity.class));
                 break;
 
@@ -176,6 +182,9 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
                 break;
 
             case R.id.my_order_layout:
+                if (userID == 0)
+                showSnackBar();
+                else
                 startActivity(new Intent(getContext(), OrdersActivity.class));
                 break;
 
@@ -184,10 +193,17 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
                 break;
 
             case R.id.wish_list_layout:
-                startActivity(new Intent(getContext(), WishListActivity.class));
+                if (userID == 0)
+                showSnackBar();
+                else
+                    startActivity(new Intent(getContext(), WishListActivity.class));
+
                 break;
 
             case R.id.notifications_layout:
+                if (userID == 0 )
+                    showSnackBar();
+                else 
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
                 break;
             case R.id.language_layout:
@@ -219,5 +235,21 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
 
         orderCountsTv.setText(userCounts.getOrders().getOrdersCount() + "");
         wishListCountsTv.setText(userCounts.getWishList().getWishListCount() + "");
+    }
+
+
+    public void showSnackBar(){
+
+        Snackbar snackbar = Snackbar
+                .make(getView(), "Please login first to see this page content", Snackbar.LENGTH_LONG)
+                .setAction("Login", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        getActivity().finish();
+                    }
+                });
+
+        snackbar.show();
     }
 }

@@ -37,7 +37,7 @@ import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.helpers.Utilities;
 import com.android.dev.ahmed.collections.models.ApiResponse;
-import com.android.dev.ahmed.collections.models.CartItem;
+import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.models.PaymentResponse;
 import com.android.dev.ahmed.collections.models.TopOffer;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
@@ -60,7 +60,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     private Unbinder unbinder;
     private MayLikeAdapter mayLikeAdapter;
     private CartPresenter presenter;
-    private int userId, paymentType = 0, promoCode;
+    private int paymentType = 0, promoCode;
 
     @BindView(R.id.cart_rv)
     RecyclerView cartRv;
@@ -80,10 +80,6 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     ConstraintLayout noItemsCl;
     @BindView(R.id.cart_items_cl)
     ConstraintLayout cartItemsCl;
-    @BindView(R.id.user_name_tv)
-    TextView userNameTv;
-    @BindView(R.id.user_phone_number_tv)
-    TextView userPhoneNumberTv;
     @BindView(R.id.payment_method_rg)
     RadioGroup paymentMethodRg;
     @BindView(R.id.webview)
@@ -106,11 +102,10 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         initCartRv();
         initMayLikeRv();
 
-        userId = SharedPreferencesManager.getIntValue(getContext(), Constants.USER_ID);
 
-        presenter = new CartPresenter(this, this);
-        presenter.getCartItems(userId);
-        presenter.getProductsLikeMe(userId);
+        presenter = new CartPresenter(this, this,getContext());
+        presenter.getCartItems();
+
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -203,7 +198,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
                     return;
                 }
 
-                presenter.paymentCheckout(userId, paymentType, promoCode);
+                presenter.paymentCheckout(paymentType, promoCode);
 
                 break;
 
@@ -231,17 +226,19 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     }
 
     @Override
-    public void displayCartItems(ApiResponse<List<CartItem>> response) {
+    public void displayCartItems(CartItems items) {
 
 
-        cartAdapter.setCartItemList(response.getData());
+        Log.e(TAG, "displayCartItems: "+items.getItemList().size() );
+        cartAdapter.setCartItemList(items.getItemList());
+        mayLikeAdapter.setData(items.getDataLiked());
         try {
-            subTotalTv.setText(response.getSubTotal() + "");
-            shippingTv.setText(response.getShipping() + "");
-            totalTv.setText(response.getTotal() + "");
+            subTotalTv.setText(items.getSubTotal() + "");
+            shippingTv.setText(items.getShipping() + "");
+            totalTv.setText(items.getTotal() + "");
         }catch (Exception e){}
 
-        if (response.getData().size() > 0) {
+        if (items.getItemList().size() > 0) {
             cartItemsCl.setVisibility(View.VISIBLE);
             noItemsCl.setVisibility(View.INVISIBLE);
         } else {
@@ -251,10 +248,6 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
     }
 
-    @Override
-    public void displayProductsLikeMe(List<TopOffer> data) {
-        mayLikeAdapter.setData(data);
-    }
 
     @Override
     public void checkoutResponse(ApiResponse<PaymentResponse> response) {
@@ -269,12 +262,12 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     @Override
     public void onDeleteIconClicked(int cartId) {
 
-        presenter.removeItemFromCart(cartId, userId);
+        presenter.removeItemFromCart(cartId);
 
     }
 
     @Override
-    public void updateItemQuantity(CartItem item) {
-        presenter.updateItemQuantity(userId, item.getID(), item.getQuantity(), item.getSizeId(), item.getColorId());
+    public void updateItemQuantity(CartItems.CartItem item) {
+        presenter.updateItemQuantity(item.getID(), item.getQuantity(), item.getSizeId(), item.getColorId());
     }
 }

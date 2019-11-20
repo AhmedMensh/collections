@@ -43,7 +43,7 @@ public class OrdersActivity extends AppCompatActivity implements PublicViewInf ,
         initToolbar();
 
         presenter = new OrdersPresenter(this ,this);
-        presenter.getMyOrders(SharedPreferencesManager.getIntValue(this, Constants.USER_ID));
+        presenter.getMyOrders();
     }
 
     private void initToolbar() {

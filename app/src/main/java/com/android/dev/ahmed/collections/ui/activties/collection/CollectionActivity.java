@@ -30,7 +30,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
     private Unbinder unbinder;
     private CollectionAdapter collectionAdapter;
     private CollectionPresenter presenter;
-    private int branchId=0 , userId;
+    private int branchId=0;
     private NewArrivalsAdapter newArrivalsAdapter;
     @BindView(R.id.new_arrival_rv) RecyclerView newArrivalRv;
 
@@ -47,12 +47,12 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
         unbinder = ButterKnife.bind(this);
         presenter = new CollectionPresenter(this);
 
-        userId =SharedPreferencesManager.getIntValue(this,Constants.USER_ID);
+
         branchId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
         if (branchId == 0){
-            presenter.getNewArrivals(userId,"en",1);
+            presenter.getNewArrivals("en",1);
         }else {
-            presenter.getProductsByCategory(branchId ,userId);
+            presenter.getProductsByCategory(branchId );
             collectionNameTv.setText(getIntent().getStringExtra(Constants.PRODUCT_NAME));
 
         }

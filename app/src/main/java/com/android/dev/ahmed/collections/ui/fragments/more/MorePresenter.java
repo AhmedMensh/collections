@@ -25,7 +25,7 @@ public class MorePresenter {
     }
 
     public void getUserCounts(){
-        Service.Fetcher.getInstance().getUserCounts(SharedPreferencesManager.getIntValue(context, Constants.USER_ID))
+        Service.Fetcher.getInstance().getUserCounts(SharedPreferencesManager.getIntValue(context,Constants.USER_ID))
                 .enqueue(new Callback<ApiResponse<UserCounts>>() {
                     @Override
                     public void onResponse(Call<ApiResponse<UserCounts>> call, Response<ApiResponse<UserCounts>> response) {

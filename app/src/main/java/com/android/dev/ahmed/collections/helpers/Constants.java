@@ -2,6 +2,8 @@ package com.android.dev.ahmed.collections.helpers;
 
 import com.android.dev.ahmed.collections.R;
 
+import org.jetbrains.annotations.Nullable;
+
 public class  Constants {
 
     public final static int FLASH_SALE_LAYOUT =  R.layout.flash_sale_item;
@@ -14,4 +16,5 @@ public class  Constants {
     public static final String LANGUAGE = "language";
     public static final String ENGLISH = "en";
     public static final String ARABIC = "ar";
+    public static final String MAC_ADDRESS = "mac_address";
 }

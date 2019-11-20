@@ -21,8 +21,8 @@ public class ProfilePresenter {
         this.viewInf = viewInf;
     }
 
-    public void getUserProfile(int userId){
-        Service.Fetcher.getInstance().getUserProfile(userId,"en").enqueue(new Callback<ApiResponse<User>>() {
+    public void getUserProfile(){
+        Service.Fetcher.getInstance().getUserProfile("en").enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 

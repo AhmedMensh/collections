@@ -26,7 +26,7 @@ public class NotificationsPresenter {
 
         publicViewInf.showProgressBar();
 
-        Service.Fetcher.getInstance().getNotifications(0,"ar").enqueue(new Callback<List<Notification>>() {
+        Service.Fetcher.getInstance().getNotifications("ar").enqueue(new Callback<List<Notification>>() {
             @Override
             public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
 

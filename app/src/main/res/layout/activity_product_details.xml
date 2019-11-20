@@ -117,6 +117,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:text="@string/size"
+
                 android:textColor="@color/orange"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/hsv"
@@ -130,9 +131,9 @@
                 android:text="@string/color"
                 android:textStyle="bold"
                 android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_14sdp"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@id/view1"
+                app:layout_constraintBottom_toTopOf="@id/quantityLL"
                 app:layout_constraintStart_toStartOf="parent"
                android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/size_btn"/>
@@ -142,7 +143,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/view1"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/quantityLL"
 
                 app:layout_constraintStart_toEndOf="@id/color_label"
                 app:layout_constraintTop_toBottomOf="@id/size_btn">
@@ -161,6 +163,77 @@
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
+
+            <LinearLayout
+                android:id="@+id/quantityLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@+id/view1"
+                app:layout_constraintTop_toBottomOf="@+id/hsv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="start|center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/order_quantity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="@string/quantity"
+                    app:layout_constraintStart_toEndOf="@id/order_size_tv"
+
+                    app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_minus"
+                    android:padding="@dimen/_5sdp"
+                    android:tint="@color/orange"
+                    android:elevation="@dimen/_4sdp"
+                    android:id="@+id/order_decrement_iv"
+                    android:textSize="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:textColor="@color/orange"/>
+                <TextView
+                    android:id="@+id/order_quantity_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="@dimen/_14sdp"
+                    android:text="1"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/dots2"
+                    app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/order_increment_iv"
+                    android:tint="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_add"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                  android:padding="@dimen/_5sdp"
+                    android:elevation="@dimen/_4sdp"
+                    android:textSize="@dimen/_25sdp"
+                    android:textColor="@color/orange"
+
+
+
+                    />
+
+            </LinearLayout>
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
@@ -169,7 +242,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/hsv" />
+                app:layout_constraintTop_toBottomOf="@+id/quantityLL" />
 
             <TextView
                 android:id="@+id/product_details_label"

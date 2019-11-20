@@ -13,17 +13,6 @@ data class ApiResponse<T>(
         @SerializedName("status")
         @Expose
         val success: Boolean? = null,
-
-        //case of cart items only
-        @SerializedName("sub_total")
-        @Expose
-        var subTotal: Int? = null,
-        @SerializedName("shipping")
-        @Expose
-        var shipping: Int? = null,
-        @SerializedName("total")
-        @Expose
-        var total: Int? = null,
         //case check payment only
         @SerializedName("url_payment")
         var paymentUrl: String  = ""
