@@ -4,6 +4,7 @@ package com.android.dev.ahmed.collections.network;
 import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
+import com.android.dev.ahmed.collections.models.Address;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.models.Category;
@@ -165,6 +166,28 @@ public interface Service {
             @Query("promo_code") int promoCode,
             @Query("currency_id") int currencyId);
 
+    @POST("get_address.php")
+    Call<ApiResponse<List<Address>>> getUserAddress(@Query("lang") String language,
+                                                    @Query("isregister") boolean isregister,
+                                                    @Query("mac_address") String macAddress);
+
+
+    @POST("add_edit_address.php")
+    Call<RegisterResponse> addNewAddress(@Query("full_name") String fullName,
+                                         @Query("country") String country,
+                                         @Query("city") String city,
+                                         @Query("Building_no") String Building_no,
+                                         @Query("floor_no") String floorNo,
+                                         @Query("mobile") String mobile,
+                                         @Query("address_name") String addressName,
+                                         @Query("address_id") int addressId,
+                                         @Query("type") String type,
+                                         @Query("default_address") String defaultAddress,
+                                         @Query("lang") String lang,
+                                         @Query("isregister") boolean isRegister,
+                                         @Query("mac_address") String mac_address,
+                                         @Query("latitude") double latitude,
+                                         @Query("longitude") double longitude);
 
     class Fetcher {
 

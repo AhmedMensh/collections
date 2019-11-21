@@ -40,8 +40,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:textDirection="locale"
                 android:layout_marginEnd="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
 
                 />
             <View
@@ -51,11 +55,16 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@color/gray"/>
             <TextView
-                android:id="@+id/person_mobile_tv"
+                android:id="@+id/user_mobile_tv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:textDirection="ltr"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
                 />
 
 
@@ -71,6 +80,11 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:textDirection="locale"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
                 />
 
             <View

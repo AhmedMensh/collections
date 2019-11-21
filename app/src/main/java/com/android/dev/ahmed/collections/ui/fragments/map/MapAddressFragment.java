@@ -1,6 +1,7 @@
 package com.android.dev.ahmed.collections.ui.fragments.map;
 
 
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.dev.ahmed.collections.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +38,7 @@ public class MapAddressFragment extends DialogFragment {
     private static final String TAG = "MapAddressFragment";
 
     private MapView mapView;
-
+    private FusedLocationProviderClient fusedLocationClient;
     public MapAddressFragment() {
         // Required empty public constructor
     }
@@ -48,14 +57,28 @@ public class MapAddressFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getContext()));
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(mapboxMap ->
                 mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-//                    Log.e(TAG, "onViewCreated: "+mapboxMap.getLocationComponent().getLastKnownLocation().getLatitude());
-//                    Log.e(TAG, "onViewCreated: "+mapboxMap.getLocationComponent().getLastKnownLocation().getLongitude());
+                                    // Logic to handle location object
+
+                                    double lat = 29.323265;
+                                    double lng = 32.32326;
+
+                                    CameraPosition old = mapboxMap.getCameraPosition();
+                                    CameraPosition pos = new CameraPosition.Builder()
+                                            .target(new LatLng(lat,lng))
+                                            .zoom(12)
+                                            .tilt(old.tilt)
+                                            .build();
+
+                                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(pos),1000);
+
+
                 }));
     }
 
