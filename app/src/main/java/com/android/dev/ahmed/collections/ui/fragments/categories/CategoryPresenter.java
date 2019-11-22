@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.fragments.categories;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.Category;
@@ -26,7 +27,7 @@ public class CategoryPresenter {
 
     public void getMainCategories(){
 
-        Service.Fetcher.getInstance().getMainCategories("en").enqueue(new Callback<ApiResponse<List<Category>>>() {
+        Service.Fetcher.getInstance().getMainCategories(CollectionApp.getLanguage(),CollectionApp.getUserId()).enqueue(new Callback<ApiResponse<List<Category>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Category>>> call, Response<ApiResponse<List<Category>>> response) {
                 if (response.body().getSuccess()){

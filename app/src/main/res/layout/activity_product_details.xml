@@ -47,7 +47,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/product_images_rv"
@@ -193,7 +194,7 @@
 
                 <ImageView
                     android:layout_width="@dimen/_25sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
                     app:srcCompat="@drawable/ic_minus"
                     android:padding="@dimen/_5sdp"
                     android:tint="@color/orange"
@@ -216,7 +217,7 @@
 
                 <ImageView
                     android:layout_width="@dimen/_25sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
                     android:id="@+id/order_increment_iv"
                     android:tint="@color/orange"
                     app:layout_constraintEnd_toEndOf="parent"

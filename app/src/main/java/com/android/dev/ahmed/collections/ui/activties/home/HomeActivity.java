@@ -1,18 +1,15 @@
 package com.android.dev.ahmed.collections.ui.activties.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.android.dev.ahmed.collections.MyApp;
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.R;
-import com.android.dev.ahmed.collections.helpers.Constants;
-import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
-import com.android.dev.ahmed.collections.models.UserCounts;
+import com.android.dev.ahmed.collections.ui.activties.search.SearchActivity;
 import com.android.dev.ahmed.collections.ui.fragments.cart.CartFragment;
 import com.android.dev.ahmed.collections.ui.fragments.categories.CategoriesFragment;
 import com.android.dev.ahmed.collections.ui.fragments.home.HomeFragment;
@@ -20,15 +17,13 @@ import com.android.dev.ahmed.collections.ui.fragments.more.MoreFragment;
 import com.android.dev.ahmed.collections.ui.fragments.trend.TrendFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -46,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar_title) TextView appBarTitle;
+    @BindView(R.id.searchView)
+    ImageView searchView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -88,6 +85,12 @@ public class HomeActivity extends AppCompatActivity {
         attachHomeFragment();
 
 
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this , SearchActivity.class));
+            }
+        });
 
     }
 
@@ -99,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public static void setLocale(Locale locale){
-        Context context = MyApp.getContext();
+        Context context = CollectionApp.getContext();
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale.setDefault(locale);

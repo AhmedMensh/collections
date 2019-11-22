@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.fragments.trend;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.NewTrend;
@@ -28,7 +29,7 @@ public class TrendPresenter {
 
 
     public void getSliderImages(){
-        Service.Fetcher.getInstance().getSliderImages("en","home",0).enqueue(new Callback<ApiResponse<List<Slider>>>() {
+        Service.Fetcher.getInstance().getSliderImages(CollectionApp.getLanguage(),"home",0).enqueue(new Callback<ApiResponse<List<Slider>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Slider>>> call, Response<ApiResponse<List<Slider>>> response) {
                 try{
@@ -52,7 +53,7 @@ public class TrendPresenter {
 
     public void getTrends(){
 
-        Service.Fetcher.getInstance().getNewTrends("en",0).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
+        Service.Fetcher.getInstance().getNewTrends(CollectionApp.getLanguage(),CollectionApp.getUserId(),0).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewTrend>>> call, Response<ApiResponse<List<NewTrend>>> response) {
 

@@ -1,5 +1,7 @@
 package com.android.dev.ahmed.collections.helpers;
 
+import android.content.Context;
+
 import com.android.dev.ahmed.collections.R;
 
 import org.jetbrains.annotations.Nullable;
@@ -17,4 +19,5 @@ public class  Constants {
     public static final String ENGLISH = "en";
     public static final String ARABIC = "ar";
     public static final String MAC_ADDRESS = "mac_address";
+    public static final String IS_REGISTERD = "is_registerd";
 }

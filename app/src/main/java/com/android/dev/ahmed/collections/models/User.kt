@@ -6,8 +6,13 @@ import com.google.gson.annotations.SerializedName
 data class User(
     @SerializedName("email")
     var email: String? = null,
+
     @SerializedName("img")
     var img: String? = null,
+
+    @SerializedName("birthday")
+    var birthday: String? = null,
+
     @SerializedName("user_mobile")
     var userMobile: String? = null,
     @SerializedName("user_pass")
@@ -15,3 +20,9 @@ data class User(
     @SerializedName("username")
     var username: String? = null
 )
+
+
+
+
+
+

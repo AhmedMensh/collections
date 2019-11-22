@@ -37,6 +37,9 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 
@@ -52,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //vars
     private static final String TAG = "LoginActivity";
     private static final String EMAIL = "email";
+    private String deviceToken="";
     private static final int RC_SIGN_IN = 58;
     private Unbinder unbinder;
     private LoginPresenter presenter;
@@ -92,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setViewsListener();
 
         initToolbar();
+        getDeviceToken();
 
         LoginManager.getInstance().logOut();
         callbackManager = CallbackManager.Factory.create();
@@ -135,6 +140,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    public void getDeviceToken(){
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "getInstanceId failed", task.getException());
+                        return;
+                    }
+
+                    // Get new Instance ID token
+                    deviceToken = task.getResult().getToken();
+                });
+    }
     private void googleSignIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -163,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400).toString();
 //                        }
                         String name = firstName + " " + lastName;
-                        presenter.loginWithFacebook(name, email, loginResult.getAccessToken().getToken(), "");
+                        presenter.loginWithFacebook(name, email, deviceToken, "");
 
                         //TODO put your code here
                     } catch (JSONException e) {
@@ -209,21 +227,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void handleGmailSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-
-            Log.e(TAG, "display name: " + acct.getDisplayName());
 
             String personName = acct.getDisplayName();
             String personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
 
-            Log.e(TAG, "Name: " + personName + ", email: " + email
-                    + ", Image: " + personPhotoUrl);
 
-
+            presenter.loginWithGoogle(personName,email,deviceToken,personPhotoUrl);
         } else {
             // Signed out, show unauthenticated UI
         }
@@ -282,7 +296,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (!isEmptyEmail && !isEmptyPassword) return;
 
-        presenter.login(userEmailEt.getText().toString(), userPasswordEt.getText().toString(), "", "en");
+        presenter.login(userEmailEt.getText().toString(), userPasswordEt.getText().toString(), deviceToken);
     }
 
     @Override
@@ -313,4 +327,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
 }

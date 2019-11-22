@@ -25,6 +25,7 @@
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         tools:text="Wedding Dress"
+        android:layout_marginStart="@dimen/_8sdp"
         android:textColor="@color/orange"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintStart_toEndOf="@id/order_iv"
@@ -90,7 +91,8 @@
         android:id="@id/layout1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_8sdp"
         app:layout_constraintStart_toEndOf="@id/order_iv"
         app:layout_constraintTop_toBottomOf="@id/layout"
         android:orientation="horizontal">
@@ -120,16 +122,16 @@
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:srcCompat="@drawable/ic_minus"
             android:paddingStart="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:id="@+id/order_decrement_iv"
-            android:textSize="@dimen/_20sdp"
+            android:tint="@color/orange"
             android:layout_marginEnd="@dimen/_6sdp"
-            android:textColor="@color/orange"/>
+            />
         <TextView
             android:id="@+id/order_quantity_tv"
             android:layout_width="wrap_content"
@@ -142,16 +144,14 @@
             app:layout_constraintStart_toEndOf="@id/dots2"
             app:layout_constraintTop_toBottomOf="@id/order_desc_tv" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             android:id="@+id/order_increment_iv"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="+"
-            android:layout_marginTop="@dimen/_2sdp"
+            app:srcCompat="@drawable/ic_add"
             android:paddingStart="@dimen/_5sdp"
-            android:textSize="@dimen/_20sdp"
-            android:textColor="@color/orange"
+           android:tint="@color/orange"
             app:layout_constraintStart_toEndOf="@+id/order_quality_tv"
             app:layout_constraintTop_toBottomOf="@+id/order_desc_tv"
 
@@ -167,6 +167,7 @@
         android:layout_margin="@dimen/_8sdp"
         android:textSize="@dimen/_14sdp"
         android:text="@string/color"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/order_iv"
         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
@@ -187,6 +188,7 @@
         android:textSize="@dimen/_14sdp"
         android:text="Black"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dots3"
         app:layout_constraintTop_toBottomOf="@id/layout1" />
 

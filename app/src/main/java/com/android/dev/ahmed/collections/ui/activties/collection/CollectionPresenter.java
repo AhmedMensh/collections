@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.activties.collection;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.NewArrival;
 import com.android.dev.ahmed.collections.network.Service;
@@ -24,10 +25,10 @@ public class CollectionPresenter {
 
 
 
-    public void getNewArrivals(String lang , int currencyId){
+    public void getNewArrivals(int currencyId){
 
 
-        Service.Fetcher.getInstance().getNewArrivals(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getNewArrivals(CollectionApp.getLanguage(),CollectionApp.getUserId(),currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 
@@ -50,7 +51,7 @@ public class CollectionPresenter {
     }
     public void getProductsByCategory(int branchId){
 
-        Service.Fetcher.getInstance().getProductsByCategory(branchId ,"en").enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getProductsByCategory(CollectionApp.getUserId(),branchId , CollectionApp.getLanguage()).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 

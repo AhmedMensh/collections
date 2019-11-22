@@ -90,9 +90,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView orderIv , deleteIv;
-        TextView orderTypeTv , orderDescTv , orderSizeTv , orderQuantityTv , orderColorTv, orderPriceTv ,
-                orderIncrementIv,orderDecrementIv;
+        ImageView orderIv , deleteIv, orderIncrementIv,orderDecrementIv;
+        TextView orderTypeTv , orderDescTv , orderSizeTv , orderQuantityTv , orderColorTv, orderPriceTv ;
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 

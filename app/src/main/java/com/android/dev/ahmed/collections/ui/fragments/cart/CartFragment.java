@@ -2,11 +2,7 @@
 package com.android.dev.ahmed.collections.ui.fragments.cart;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,26 +20,21 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.adapters.CartAdapter;
 import com.android.dev.ahmed.collections.adapters.MayLikeAdapter;
-import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
-import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.helpers.Utilities;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.CartItems;
 import com.android.dev.ahmed.collections.models.PaymentResponse;
-import com.android.dev.ahmed.collections.models.TopOffer;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
-
-import java.util.List;
-import java.util.Locale;
+import com.android.dev.ahmed.collections.ui.activties.shipping_address.ShippingAddressActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +75,9 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
     RadioGroup paymentMethodRg;
     @BindView(R.id.webview)
     WebView webView;
+    @BindView(R.id.editAddressImgV)
+    ImageView editAddressImg;
+    @BindView(R.id.shipping_address_tv) TextView shippingAddressTV;
 
 
     public CartFragment() {
@@ -104,7 +98,7 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
 
 
         presenter = new CartPresenter(this, this,getContext());
-        presenter.getCartItems();
+
 
 
         WebSettings webSettings = webView.getSettings();
@@ -119,11 +113,18 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getCartItems();
+        presenter.getUserDefaultAddress();
+    }
 
     private void initViews() {
 
         codeBtn.setOnClickListener(this::onClick);
         checkOutBtn.setOnClickListener(this::onClick);
+        editAddressImg.setOnClickListener(this);
     }
 
     private void initMayLikeRv() {
@@ -197,14 +198,16 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
                             , "Please select payment", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 presenter.paymentCheckout(paymentType, promoCode);
-
                 break;
 
             case R.id.done_btn:
                 startActivity(new Intent(getContext(), HomeActivity.class));
                 getActivity().finish();
+                break;
+
+            case R.id.editAddressImgV:
+                startActivity(new Intent(getContext(), ShippingAddressActivity.class));
                 break;
         }
     }
@@ -257,6 +260,12 @@ public class CartFragment extends Fragment implements View.OnClickListener, Publ
             webView.loadUrl(response.getPaymentUrl());
             webView.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void getDefaultAddress(String address) {
+
+        shippingAddressTV.setText(address);
     }
 
     @Override

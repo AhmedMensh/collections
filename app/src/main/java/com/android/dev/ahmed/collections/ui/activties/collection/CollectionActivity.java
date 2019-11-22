@@ -50,7 +50,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionV
 
         branchId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
         if (branchId == 0){
-            presenter.getNewArrivals("en",1);
+            presenter.getNewArrivals(1);
         }else {
             presenter.getProductsByCategory(branchId );
             collectionNameTv.setText(getIntent().getStringExtra(Constants.PRODUCT_NAME));

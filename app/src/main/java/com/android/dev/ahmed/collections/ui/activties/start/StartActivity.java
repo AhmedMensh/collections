@@ -91,6 +91,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.skip_login_tv:
+                SharedPreferencesManager.setBooleanValue(this ,Constants.IS_REGISTERD,false);
                 SharedPreferencesManager.setIntValue(this,Constants.USER_ID,0);
                 startActivity(new Intent(this , HomeActivity.class));
 

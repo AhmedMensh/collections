@@ -1,5 +1,8 @@
 package com.android.dev.ahmed.collections.ui.activties.profile;
 
+import android.util.Log;
+
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.User;
@@ -21,8 +24,27 @@ public class ProfilePresenter {
         this.viewInf = viewInf;
     }
 
+    public void updateProfile(String userName,String mobile ,String birthday,String pass,String email){
+        Service.Fetcher.getInstance().updateProfile(CollectionApp.getUserId(),userName,mobile,birthday,pass,email)
+                .enqueue(new Callback<ApiResponse<User>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                        try{
+                            publicViewInf.showMessage(response.body().getMessage());
+                        }catch (Exception e){
+                            Log.e(TAG, "onResponse: "+e.getLocalizedMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                        Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
+                    }
+                });
+    }
     public void getUserProfile(){
-        Service.Fetcher.getInstance().getUserProfile("en").enqueue(new Callback<ApiResponse<User>>() {
+
+        Service.Fetcher.getInstance().getUserProfile(CollectionApp.getUserId(),CollectionApp.getLanguage()).enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
 

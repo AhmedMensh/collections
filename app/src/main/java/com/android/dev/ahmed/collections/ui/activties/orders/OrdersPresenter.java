@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.activties.orders;
 
 import android.content.Context;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.Order;
@@ -28,7 +29,7 @@ public class OrdersPresenter {
 
     public void getMyOrders(){
 
-        Service.Fetcher.getInstance().getMyOrders("en").enqueue(new Callback<ApiResponse<List<Order>>>() {
+        Service.Fetcher.getInstance().getMyOrders(CollectionApp.getUserId(),CollectionApp.getLanguage()).enqueue(new Callback<ApiResponse<List<Order>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Order>>> call, Response<ApiResponse<List<Order>>> response) {
 

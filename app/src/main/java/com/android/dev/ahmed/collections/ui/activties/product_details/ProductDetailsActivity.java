@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -74,6 +75,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
         unbinder = ButterKnife.bind(this);
         productId = getIntent().getIntExtra(Constants.PRODUCT_ID,0);
+        Log.e(TAG, "onCreate: "+productId );
         presenter = new ProductDetailsPresenter(this ,this);
         presenter.getProductDetails(productId);
         sizeBtn.setOnClickListener(this::onClick);

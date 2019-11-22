@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.activties.product_details;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.ProductDetails;
@@ -27,7 +28,8 @@ public class ProductDetailsPresenter {
 
     public void addToCart(int productId  ,int quantity ,int sizeId ,int colorId){
 
-        Service.Fetcher.getInstance().addToCart(productId,quantity,sizeId,colorId)
+        Service.Fetcher.getInstance().addToCart(productId, CollectionApp.getUserId(),quantity,sizeId,colorId,
+                CollectionApp.isIsRegisterd(),CollectionApp.getMacAddress())
                 .enqueue(new Callback<ApiResponse>() {
                     @Override
                     public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -46,7 +48,7 @@ public class ProductDetailsPresenter {
                 });
     }
     public void getProductDetails(int productId){
-        Service.Fetcher.getInstance().getProductDetails(productId,"en").enqueue(new Callback<ProductDetails>() {
+        Service.Fetcher.getInstance().getProductDetails(productId,CollectionApp.getUserId(),CollectionApp.getLanguage()).enqueue(new Callback<ProductDetails>() {
             @Override
             public void onResponse(Call<ProductDetails> call, Response<ProductDetails> response) {
 
@@ -69,7 +71,7 @@ public class ProductDetailsPresenter {
 
     public void addToFavorite(int productId){
 
-        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,"like").enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,CollectionApp.getUserId(),"like").enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 

@@ -3,7 +3,6 @@ package com.android.dev.ahmed.collections.ui.fragments.more;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.dev.ahmed.collections.MyApp;
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
@@ -173,6 +170,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener, More
             case R.id.log_out_layout:
                 startActivity(new Intent(getContext(), StartActivity.class));
                 SharedPreferencesManager.setIntValue(getContext(), Constants.USER_ID, 0);
+                SharedPreferencesManager.setBooleanValue(getContext(),Constants.IS_REGISTERD,false);
                 LoginManager.getInstance().logOut();
                 getActivity().finish();
                 break;

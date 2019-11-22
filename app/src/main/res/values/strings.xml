@@ -79,5 +79,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">save</string>
     <string name="skip_login">Skip Login</string>
+    <string name="notice">Notice</string>
+    <string name="building_number">Building Number</string>
+    <string name="floor_number">Floor Number</string>
+    <string name="street_name">Street Name</string>
+    <string name="address_name">Address Name</string>
+    <string name="set_address_default">Set Address Default</string>
+    <string name="birthday">Birthday</string>
 
 </resources>

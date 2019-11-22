@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.activties.wish_list;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.Favorite;
@@ -28,7 +29,7 @@ public class WishListPresenter {
 
     public void getWishList(){
 
-        Service.Fetcher.getInstance().getFavoriteList("en").enqueue(new Callback<ApiResponse<List<Favorite>>>() {
+        Service.Fetcher.getInstance().getFavoriteList(CollectionApp.getUserId(),CollectionApp.getLanguage()).enqueue(new Callback<ApiResponse<List<Favorite>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Favorite>>> call, Response<ApiResponse<List<Favorite>>> response) {
 
@@ -49,7 +50,7 @@ public class WishListPresenter {
 
     public void removeFromFavorite(int productId){
 
-        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,"dislike").enqueue(new Callback<ApiResponse>() {
+        Service.Fetcher.getInstance().addAndDeleteFromFavorite(productId,CollectionApp.getUserId(),"dislike").enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 

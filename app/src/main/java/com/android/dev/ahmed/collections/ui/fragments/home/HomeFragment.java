@@ -79,9 +79,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Publ
 
         presenter = new HomePresenter(this,this);
 //        presenter.getFlashSale(1,"ar",1);
-        presenter.getTopOffers("ar",1);
+        presenter.getTopOffers(1);
 //        presenter.getNewTrends(1,"ar",1);
-        presenter.getNewArrivals("ar",1);
+        presenter.getNewArrivals(1);
         presenter.getSliderImages();
         setListenerToViews();
 //        initFlashSaleRv();

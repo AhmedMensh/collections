@@ -14,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.dev.ahmed.collections.R;
+import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
+import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.helpers.Utilities;
 import com.android.dev.ahmed.collections.ui.activties.home.HomeActivity;
 import com.android.dev.ahmed.collections.ui.activties.login.LoginActivity;
@@ -42,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText userNameEt;
     @BindView(R.id.email_et)
     EditText userEmailEt;
+    @BindView(R.id.birthday_et)
+    EditText userBirthDayEt;
     @BindView(R.id.mobile_et)
     EditText userMobileEt;
     @BindView(R.id.password_et)
@@ -102,14 +106,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         boolean isEmptyEmail = Utilities.isEmptyText(this,userEmailEt);
         boolean isEmptyPassword = Utilities.isEmptyText(this,userPasswordEt);
         boolean isEmptyMobile = Utilities.isEmptyText(this,userMobileEt);
+        boolean isEmptyBirthDay = Utilities.isEmptyText(this,userBirthDayEt);
 
-        if (!isEmptyEmail && !isEmptyMobile && !isEmptyName && !isEmptyPassword) return;
+        if (!isEmptyEmail && !isEmptyMobile && !isEmptyName && !isEmptyPassword && isEmptyBirthDay) return;
         if (!userPasswordEt.getText().toString().trim().equals(userPasswordConfirmEt.getText().toString().trim())){
             Utilities.showToast(this,"Password and confirmation password must be the same!!");
             return;
         }
-        presenter.register(userNameEt.getText().toString(),userMobileEt.getText().toString(),
-                userPasswordEt.getText().toString(),userEmailEt.getText().toString(),deviceToken,"ar");
+        presenter.register(userNameEt.getText().toString(),userMobileEt.getText().toString(),userBirthDayEt.getText().toString(),
+                userPasswordEt.getText().toString(),userEmailEt.getText().toString(),deviceToken);
     }
     @Override
     public void showMessage(String m) {
@@ -131,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void startHomeActivity() {
+        SharedPreferencesManager.setBooleanValue(this , Constants.IS_REGISTERD,true);
         startActivity(new Intent(this, HomeActivity.class));
         finish();
     }

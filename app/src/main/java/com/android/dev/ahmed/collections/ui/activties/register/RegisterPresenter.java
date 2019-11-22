@@ -2,7 +2,10 @@ package com.android.dev.ahmed.collections.ui.activties.register;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
+import com.android.dev.ahmed.collections.helpers.Constants;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
+import com.android.dev.ahmed.collections.helpers.SharedPreferencesManager;
 import com.android.dev.ahmed.collections.models.RegisterResponse;
 import com.android.dev.ahmed.collections.network.Service;
 
@@ -23,10 +26,10 @@ public class RegisterPresenter {
 
 
 
-    public void register(String userName,String userMobile,String userPass,String userEmail,String fmcToken,String language){
+    public void register(String userName,String userMobile,String userBirthday,String userPass,String userEmail,String fmcToken){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().register(userName ,userMobile ,userPass , userEmail,fmcToken,language)
+        Service.Fetcher.getInstance().register(userName ,userMobile ,userBirthday,userPass , userEmail,fmcToken, CollectionApp.getLanguage())
                 .enqueue(new Callback<RegisterResponse>() {
                     @Override
                     public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
@@ -36,6 +39,7 @@ public class RegisterPresenter {
 
                                 publicViewInf.showMessage(response.body().getMessage());
                                 if (response.body().getStatus()){
+
                                     registerViewInf.startHomeActivity();
                                 }
                         }catch (Exception e){

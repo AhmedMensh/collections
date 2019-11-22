@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -26,10 +28,20 @@ public class ProfileActivity extends AppCompatActivity  implements ProfileViewIn
     Toolbar toolbar;
     @BindView(R.id.user_pic_iv)
     ImageView userPicIv;
-    @BindView(R.id.user_email_et) EditText userEmailEt;
-    @BindView(R.id.user_password_et) EditText userPasswordEt;
-    @BindView(R.id.user_name_et) EditText userNameEt;
-    @BindView(R.id.user_phone_et) EditText userPhoneEt;
+    @BindView(R.id.name_et)
+    EditText userNameEt;
+    @BindView(R.id.email_et)
+    EditText userEmailEt;
+    @BindView(R.id.birthday_et)
+    EditText userBirthDayEt;
+    @BindView(R.id.mobile_et)
+    EditText userMobileEt;
+    @BindView(R.id.password_et)
+    EditText userPasswordEt;
+    @BindView(R.id.confirm_password_et)
+    EditText userPasswordConfirmEt;
+    @BindView(R.id.editBtn)
+    Button editBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +53,27 @@ public class ProfileActivity extends AppCompatActivity  implements ProfileViewIn
 
         presenter = new ProfilePresenter(this ,this);
         presenter.getUserProfile();
+        editBtn.setOnClickListener(view -> {
+            updateProfile();
+        });
     }
 
+    private void updateProfile(){
+
+        boolean isEmptyName = Utilities.isEmptyText(this,userNameEt);
+        boolean isEmptyEmail = Utilities.isEmptyText(this,userEmailEt);
+        boolean isEmptyPassword = Utilities.isEmptyText(this,userPasswordEt);
+        boolean isEmptyMobile = Utilities.isEmptyText(this,userMobileEt);
+        boolean isEmptyBirthDay = Utilities.isEmptyText(this,userBirthDayEt);
+
+        if (!isEmptyEmail && !isEmptyMobile && !isEmptyName && !isEmptyPassword && isEmptyBirthDay) return;
+        if (!userPasswordEt.getText().toString().trim().equals(userPasswordConfirmEt.getText().toString().trim())){
+            Utilities.showToast(this,"Password and confirmation password must be the same!!");
+            return;
+        }
+        presenter.updateProfile(userNameEt.getText().toString(),userMobileEt.getText().toString(),userBirthDayEt.getText().toString(),
+                userPasswordEt.getText().toString(),userEmailEt.getText().toString());
+    }
 
     @Override
     public void showMessage(String m) {
@@ -66,7 +97,8 @@ public class ProfileActivity extends AppCompatActivity  implements ProfileViewIn
         userEmailEt.setText(user.getEmail());
         userNameEt.setText(user.getUsername());
         userPasswordEt.setText(user.getUserPass());
-        userPhoneEt.setText(user.getUserMobile());
+        userMobileEt.setText(user.getUserMobile());
+        userBirthDayEt.setText(user.getBirthday());
 
         Glide.with(this).load(user.getImg()).placeholder(R.drawable.ic_user_profile).into(userPicIv);
     }

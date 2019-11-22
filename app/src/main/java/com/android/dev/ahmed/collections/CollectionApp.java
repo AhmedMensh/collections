@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -17,11 +19,14 @@ import com.google.firebase.FirebaseApp;
 
 import java.util.Locale;
 
-public class MyApp extends Application {
+public class CollectionApp extends Application {
 
-    private static final String TAG = "MyApp";
+    private static final String TAG = "CollectionApp";
     private static Context context;
-    private String language;
+    private static String language;
+    private static String macAddress;
+    private static boolean isRegisterd = false;
+    private static int userId;
 
     @Override
     public void onCreate() {
@@ -29,36 +34,41 @@ public class MyApp extends Application {
 
         new WebView(this).destroy();
         context = this;
-//        FirebaseApp.initializeApp(getApplicationContext());
 
         language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE);
+        userId = SharedPreferencesManager.getIntValue(this, Constants.USER_ID);
 
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wInfo = wifiManager.getConnectionInfo();
+         macAddress = wInfo.getMacAddress();
 
+         isRegisterd =  SharedPreferencesManager.getBooleanValue(this , Constants.IS_REGISTERD);
 
-//        if( Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            //Wrapping the configuration to avoid Activity endless loop
-//            Configuration config = new Configuration(configuration);
-//            config.locale = sLocale;
-//            Resources res = app.getBaseContext().getResources();
-//            res.updateConfiguration(config, res.getDisplayMetrics());
-//        }
-
-
-//        if (language.equals(Constants.ENGLISH)) {
-//            setLanguage(Constants.ENGLISH);
-////                Constants.WEBSERVICE_LANGUAGE = Constants.ENGLISH;
-//        } else {
-//            setLanguage(Constants.ARABIC);
-////                Constants.WEBSERVICE_LANGUAGE = Constants.ARABIC;
-//        }
-
+        Log.e(TAG, "onCreate: "+macAddress );
     }
 
+    public static boolean isIsRegisterd(){
+        return isRegisterd;
+    }
     public static Context getContext() {
         return context;
     }
 
-//    @Override
+    public static String getUserId() {
+        return userId+"";
+    }
+
+    public static String getLanguage(){
+
+        if (language.equals(""))
+            return "en";
+        return language;
+    }
+
+    public static String getMacAddress() {
+        return macAddress;
+    }
+    //    @Override
 //    public void onConfigurationChanged(Configuration newConfig) {
 //        super.onConfigurationChanged(newConfig);
 //        language = SharedPreferencesManager.getStringValue(this, Constants.LANGUAGE);

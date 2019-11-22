@@ -2,6 +2,7 @@ package com.android.dev.ahmed.collections.ui.fragments.home;
 
 import android.util.Log;
 
+import com.android.dev.ahmed.collections.CollectionApp;
 import com.android.dev.ahmed.collections.helpers.PublicViewInf;
 import com.android.dev.ahmed.collections.models.ApiResponse;
 import com.android.dev.ahmed.collections.models.FlashSale;
@@ -28,10 +29,10 @@ public class HomePresenter {
         this.homeViewInf = homeViewInf;
     }
 
-    public void getTopOffers( String lang , int currencyId){
+    public void getTopOffers(int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getTopOffers(lang,currencyId).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
+        Service.Fetcher.getInstance().getTopOffers(CollectionApp.getLanguage(),currencyId).enqueue(new Callback<ApiResponse<List<TopOffer>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<TopOffer>>> call, Response<ApiResponse<List<TopOffer>>> response) {
 
@@ -57,10 +58,10 @@ public class HomePresenter {
     }
 
 
-    public void getFlashSale(String lang , int currencyId){
+    public void getFlashSale( int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getFlashSale(lang,currencyId).enqueue(new Callback<ApiResponse<List<FlashSale>>>() {
+        Service.Fetcher.getInstance().getFlashSale(CollectionApp.getLanguage(),CollectionApp.getUserId(),currencyId).enqueue(new Callback<ApiResponse<List<FlashSale>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<FlashSale>>> call, Response<ApiResponse<List<FlashSale>>> response) {
 
@@ -86,10 +87,10 @@ public class HomePresenter {
     }
 
 
-    public void getNewTrends(String lang , int currencyId){
+    public void getNewTrends( int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getNewTrends(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
+        Service.Fetcher.getInstance().getNewTrends(CollectionApp.getLanguage(),CollectionApp.getUserId(),currencyId).enqueue(new Callback<ApiResponse<List<NewTrend>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewTrend>>> call, Response<ApiResponse<List<NewTrend>>> response) {
 
@@ -114,10 +115,10 @@ public class HomePresenter {
         });
     }
 
-    public void getNewArrivals(String lang , int currencyId){
+    public void getNewArrivals(int currencyId){
 
         publicViewInf.showProgressBar();
-        Service.Fetcher.getInstance().getNewArrivals(lang,currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
+        Service.Fetcher.getInstance().getNewArrivals(CollectionApp.getLanguage(),CollectionApp.getUserId(),currencyId).enqueue(new Callback<ApiResponse<List<NewArrival>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<NewArrival>>> call, Response<ApiResponse<List<NewArrival>>> response) {
 
@@ -143,7 +144,7 @@ public class HomePresenter {
     }
 
     public void getSliderImages(){
-        Service.Fetcher.getInstance().getSliderImages("en","home",0).enqueue(new Callback<ApiResponse<List<Slider>>>() {
+        Service.Fetcher.getInstance().getSliderImages(CollectionApp.getLanguage(),"home",0).enqueue(new Callback<ApiResponse<List<Slider>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Slider>>> call, Response<ApiResponse<List<Slider>>> response) {
                 try{

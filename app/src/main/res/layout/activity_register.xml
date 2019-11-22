@@ -124,6 +124,41 @@
 
 
             <TextView
+                android:id="@+id/birthday_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/birthday"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+            <EditText
+                android:id="@+id/birthday_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@android:color/transparent"
+                android:hint="@string/birthday"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_4sdp"
+                app:layout_constraintTop_toBottomOf="@+id/birthday_label" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/birthday_et" />
+            <TextView
                 android:id="@+id/mobile_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,7 +167,10 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3" />
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+
 
             <EditText
                 android:id="@+id/mobile_et"

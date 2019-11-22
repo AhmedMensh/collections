@@ -12,4 +12,6 @@ public interface CartViewInf {
     void displayCartItems(CartItems cartItems);
 
     void checkoutResponse(ApiResponse<PaymentResponse> response);
+
+    void getDefaultAddress(String address);
 }

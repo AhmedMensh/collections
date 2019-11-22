@@ -27,11 +27,8 @@ class SplashActivity : AppCompatActivity() {
             setLanguage(Constants.ENGLISH)
         }
 
-        var wifiManager = getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
-        var wInfo = wifiManager.connectionInfo
-        var macAddress = wInfo.macAddress
 
-        SharedPreferencesManager.setStringValue(this,Constants.MAC_ADDRESS,macAddress)
+        jump()
 
         startVideo()
 
