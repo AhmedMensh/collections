@@ -78,13 +78,17 @@
     <string name="top_offer">أفضل العروض</string>
     <string name="change_language">تغير اللغه الى</string>
     <string name="address_details">تفاصيل العنوان</string>
-    <string name="save">save</string>
-    <string name="skip_login">Skip Login</string>
-    <string name="notice">Notice</string>
-    <string name="building_number">Building Number</string>
-    <string name="floor_number">Floor Number</string>
-    <string name="street_name">Street Name</string>
-    <string name="address_name">Address Name</string>
-    <string name="set_address_default">Set Address Default</string>
-    <string name="birthday">Birthday</string>
+    <string name="save">حفظ</string>
+    <string name="skip_login">تخطى</string>
+    <string name="notice">إشعار</string>
+    <string name="building_number">رقم المبنى</string>
+    <string name="floor_number">رقم الدور</string>
+    <string name="street_name">اسم الشارع</string>
+    <string name="address_name">اسم العنوان</string>
+    <string name="set_address_default">تعين كعنوان افتراضى</string>
+    <string name="birthday">تاريخ الميلاد</string>
+    <string name="choose_address_hint">لديك خياران لاضافه شحن عنوانك,من ادخال حقل النص او الخريطه</string>
+    <string name="map">الخريطه</string>
+    <string name="text_field">حقول النص</string>
+    <string name="cancel">إلغاء</string>
 </resources>

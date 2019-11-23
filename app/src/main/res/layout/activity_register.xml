@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/orange"
 
             android:theme="?actionBarTheme">
 
@@ -31,7 +31,7 @@
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:gravity="center"
                 android:text="@string/sign_up"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>

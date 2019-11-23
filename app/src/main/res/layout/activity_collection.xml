@@ -14,7 +14,7 @@
         android:id="@+id/toolbar"
         android:elevation="@dimen/_2sdp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"
+        android:background="@color/orange"
         android:layout_width="match_parent"
 
         android:layout_height="?attr/actionBarSize">
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="@string/collections"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="@dimen/_16sdp"/>
     </androidx.appcompat.widget.Toolbar>

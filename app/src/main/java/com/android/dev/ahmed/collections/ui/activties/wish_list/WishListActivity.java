@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.dev.ahmed.collections.R;
 import com.android.dev.ahmed.collections.adapters.FavoriteAdapter;
@@ -73,6 +74,10 @@ public class WishListActivity extends AppCompatActivity implements PublicViewInf
     @Override
     public void displayWishList(List<Favorite> wishList) {
 
+        for (Favorite favorite:wishList) {
+
+            Log.e(TAG, "displayWishList: "+favorite.getName());
+        }
         favoriteAdapter.setFavoriteList(wishList);
     }
 

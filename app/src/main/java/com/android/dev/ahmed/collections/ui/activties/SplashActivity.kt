@@ -27,9 +27,6 @@ class SplashActivity : AppCompatActivity() {
             setLanguage(Constants.ENGLISH)
         }
 
-
-        jump()
-
         startVideo()
 
     }
@@ -45,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startVideo() {
-        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.video)
+        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.lunch_screen)
         videoView.setVideoURI(videoUri)
         videoView.setZOrderOnTop(true)
         videoView.setOnCompletionListener { jump() }

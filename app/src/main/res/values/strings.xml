@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">collections</string>
+    <string name="app_name">Collections</string>
     <string name="facebook_app_id" translatable="false">695623054255517</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb695623054255517</string>
 
@@ -86,5 +86,9 @@
     <string name="address_name">Address Name</string>
     <string name="set_address_default">Set Address Default</string>
     <string name="birthday">Birthday</string>
+    <string name="choose_address_hint">You have two choices to add your address shipping from text field input or map.</string>
+    <string name="map">Map</string>
+    <string name="text_field">Text Field</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
